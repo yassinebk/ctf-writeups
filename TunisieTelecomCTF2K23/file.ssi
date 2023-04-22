@@ -1,0 +1,5 @@
+<!--#echo var="REQUEST_METHOD" -->
+<!--#echo var="QUERY_STRING" -->
+<!--#include virtual="request.php" -->
+
+<!-- 

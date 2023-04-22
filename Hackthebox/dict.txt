@@ -1,0 +1,4 @@
+; whoami 
+ ; id ;#
+&& whoami
+; echo "Hi there" ;#"

