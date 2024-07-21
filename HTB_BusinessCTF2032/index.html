@@ -1,0 +1,172 @@
+<!-- Last updated Tue 20 Jun 2023 02:39:53 PM by galen-->
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Travel to Planet Red</title>
+    <link rel="canonical" href="https://codepen.io/vedpanse/pen/GRmrdrz" />
+  
+  
+  
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+</head>
+
+<body translate="no">
+  <!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            font-family: "ABeeZee";
+            background-image: url("https://i.pinimg.com/originals/d8/d7/05/d8d705bfd0cd2b1e6a20beabb0f0546a.jpg");
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+        }
+
+        .header {
+            overflow: hidden;
+            background-color: transparent;
+            padding: 20px 10px;
+            margin-left: 7%;
+            margin-right: 7%;
+        }
+
+        .header a {
+            float: left;
+            color: white;
+            text-align: center;
+            padding-right: 50px;
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 25px;
+            border-radius: 4px;
+        }
+
+        .header a.logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .header-right {
+            float: right;
+        }
+
+        @media screen and (max-width: 500px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+
+            .header-right {
+                float: none;
+            }
+        }
+
+        .title {
+            font-size: 100px;
+        }
+
+        #opening-div {
+            position: absolute;
+            left: 37%;
+            margin: 0 auto 0 auto;
+            padding-left: 20px;
+            top: 30%;
+        }
+
+        .triangle-right {
+            width: 0;
+            height: 0;
+            border-top: 6.25px solid transparent;
+            border-left: 12.5px solid aqua;
+            border-bottom: 6.25px solid transparent;
+        }
+
+        .modal {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            color: #333;
+            font-family: sans-serif;
+            line-height: 1.5;
+            max-width: 50%;
+            padding: 1rem 2rem;
+        }
+
+        @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+            .modal {
+                -webkit-backdrop-filter: blur(10px);
+                backdrop-filter: blur(10px);
+                background-color: rgba(255, 255, 255, 0.5);
+            }
+
+            .warning {
+                display: none;
+            }
+        }
+
+        .container {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <a class="active logo" href="#home">Planet Red</a>
+        <div class="header-right">
+            <a class="active" href="#home">Home</a>
+            <a class="active" href="#home">Our Mission</a>
+            <a class="active" href="#home">About Planet Red</a>
+            <a class="active" href="#home">Gallery</a>
+            <a class="active" href="#home">Contact Us</a>
+            <a class="active" href="#home"><i class="fa fa-search"></i></a>
+        </div>
+    </div>
+
+    <div id="opening-div">
+        <p style="position: absolute; top: 17%; left: 73%; width: 100%; font-size: 15px;">Science is a beautiful gift to
+            humanity.</p>
+        <h1 class="title">Planet Red</h1>
+        <p style="font-size: 20px; position: absolute; bottom: 10%;">Explore &#8594;</p>
+        <div class="container" style="position: absolute; right: 100%; top: 50%;">
+            <div class="modal" style="border-radius: 1400px;">
+                <div class="triangle-right"></div>
+            </div>
+        </div>
+        <p style="position: absolute; right: 35%; top: 93%; width: 100%;">Watch our mission</p>
+    </div>
+
+</body>
+
+</html>
+  
+  
+  
+  
+</body>
+
+</html>

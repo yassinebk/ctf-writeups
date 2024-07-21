@@ -1,0 +1,62 @@
+                          LEMONLDAP::NG INSTALLATION
+
+Lemonldap::NG is a modular Web-SSO based on Apache::Session modules. It
+simplifies the build of a protected area with a few changes in the application.
+It manages both authentication and authorization and provides headers for
+accounting. So you can have a full AAA protection.
+
+See README file to known how it works.
+
+----------------------
+I - QUICK INSTALLATION
+----------------------
+
+The proposed example use a protected site named test.example.com. Non
+authenticated users are redirected to auth.example.com.
+
+1.1 - PREREQ
+------------
+
+1.1.1 - Software
+
+To use Lemonldap::NG, you have to run a LDAP server and of course an Apache
+server compiled with mod-perl (version 1.3 or 2.x). Generaly, the version of
+Apache proposed with your Linux distribution match, but some distributions used
+an experimental version of mod_perl with Apache2 (mod_perl-1.99) which does
+not work with Lemonldap::NG. With such distributions (like Debian-3.1), you
+have to use Apache-1.3 or to use a mod_perl backport (www.backports.org
+package for Debian works fine).
+
+1.1.2 - Perl prereq
+
+Perl modules: use `perl scripts/dependencies-list.pl` to see needed list
+
+With Debian:
+  apt-get build-dep lemonldap-ng
+
+1.2 - BUILDING
+--------------
+
+1.2.1 - Complete install
+
+  $ tar xzf lemonldap-ng-*.tar.gz
+  $ cd lemonldap-ng-*
+  $ make && make test
+  $ sudo make install
+
+By default, all is installed in /usr/local/lemonldap-ng except Perl libraries
+which are installed in a directory included in @INC.
+
+Documentation is then available in /usr/local/lemonldap-ng/doc
+
+1.2.2 - Install on Debian
+
+  $ tar xzf lemonldap-ng-*.tar.gz
+  $ cd lemonldap-ng-*
+  $ debuild
+  $ sudo dpkg -i ../*lemonldap-ng*.deb
+
+Here, all is installed in /var/lib/lemonldap-ng, /etc/lemonldap-ng except Perl
+libraries which are installed in /usr/share/perl5/Lemonldap/NG/
+
+Documentation is then available in /usr/share/doc/lemonldap-ng

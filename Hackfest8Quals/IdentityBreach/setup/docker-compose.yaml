@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  database:
+    build: database
+    networks:
+      default:
+        ipv4_address: 172.16.0.6
+    restart: always
+    command: --sql_mode=""
+    environment:
+        - MYSQL_DATABASE=intelDB
+        - MYSQL_USER=hackfestcaptain
+        - MYSQL_ROOT_PASSWORD=forgetaboutit
+        - MYSQL_PASSWORD=forgetaboutit
+        
+  webserver:
+    build: webserver
+    ports:
+      - "7500:80"
+    networks:
+      default:
+        ipv4_address: 172.16.0.4
+    restart: always
+
+networks:
+  default:
+    external:
+      name: sql-identity-breach

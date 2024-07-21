@@ -1,0 +1,8 @@
+POST /displaydetails HTTP/1.1
+Host: web.csaw.io:5800
+Content-Length: 14
+Origin: http://web.csaw.io:5800
+Content-Type: application/x-www-form-urlencoded
+Connection: close
+
+passType=FUZZ

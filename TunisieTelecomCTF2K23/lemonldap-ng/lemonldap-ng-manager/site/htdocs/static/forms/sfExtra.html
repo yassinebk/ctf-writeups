@@ -1,0 +1,70 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{currentNode.title}}</h3>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th trspan="name"></th>
+        <th trspan="type"></th>
+        <th trspan="registerextra"></th>
+        <th trspan="label"></th>
+        <th trspan="logo"></th>
+        <th trspan="level"></th>
+        <th trspan="rule"></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <input class="form-control" ng-model="currentNode.title" />
+        </td>
+        <td>
+          <select class="form-control" ng-model="currentNode.data.type">
+            <option ng-repeat="item in _findContainer().select" ng-selected="item.k===currentNode.data.type" value="{{item.k}}">{{item.v}}</option>
+          </select>
+        </td>
+        <td class="form-horizontal">
+          <input type="checkbox" class="form-control checkbox-inline" ng-model="currentNode.data.register" />
+        </td>
+        <td>
+          <input class="form-control" ng-model="currentNode.data.label" />
+        </td>
+        <td>
+          <input class="form-control" ng-model="currentNode.data.logo" />
+        </td>
+        <td>
+          <input class="form-control" ng-model="currentNode.data.level" />
+        </td>
+        <td>
+            <input class="form-control" ng-model="currentNode.data.rule" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h4 trspan="overPrm"></h4>
+  <table class="table">
+    <tr ng-repeat="t in currentNode.data.over">
+      <td>
+        <input class="form-control" ng-model="t[0]" />
+      </td>
+      <td>
+        <input class="form-control" ng-model="t[1]" />
+      </td>
+      <td>
+        <span class="link text-danger glyphicon glyphicon-minus-sign" ng-click="del(currentNode.data.over,$index)"></span>
+        <span ng-if="$last" class="link text-success glyphicon glyphicon-plus-sign" ng-click="menuClick({title:'newSfOver'})"></span>
+      </td>
+    </tr>
+  </table>
+</div>
+<script type="text/menu">
+[{
+  "title": "newSfOver",
+  "icon": "plus-sign"
+},{
+  "title": "deleteEntry",
+  "icon": "minus-sign"
+}]
+</script>

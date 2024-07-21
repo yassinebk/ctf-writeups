@@ -1,0 +1,16 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+
+<div class="center">
+    <div class="login-container">
+        <h3>User log-in</h3>
+        <hr>
+        <form action="/panel/login" method="post">
+            <input class="w-100" id="username" type="text" placeholder="Username" name="username">
+            <input class="w-100 mt-2" id="password" type="password" placeholder="password" name="password">
+            <button class="search-btn mt-2" id="login-btn" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

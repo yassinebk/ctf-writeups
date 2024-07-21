@@ -1,0 +1,2988 @@
+lemonldap-ng (2.0.15.1) jammy; urgency=medium
+
+  * Bugs:
+    * #2796: "Internal Server Error" during MFA flow when using LDAP as UserDB in 2.0.15
+
+ -- Clément <clem.oudot@gmail.com>  Thu, 15 Sep 2022 15:58:47 +0200
+
+lemonldap-ng (2.0.15) jammy; urgency=medium
+
+  * Bugs:
+    * #2615: Redirection issue with Issue SAML + ForceAuthn=true + Kerberos authentication
+    * #2650: Empty SCRIPT_NAME breaks the portal
+    * #2690: Second factor logo/label not used on registration screen
+    * #2708: Auth::OpenIDConnect redirects in a loop when invalid JSON metadata is provided
+    * #2712: 2fSelfRegistration == 0 + 2fActivation == 1 leads to registrable second factor being presented every time
+    * #2714: Session upgrade link in 2FA manager not working
+    * #2716: 2FA registration does not auto-redirect to only available provider after deleting an existing 2FA
+    * #2724: one importMetadata Script default option isn't correct
+    * #2733: Allowing ALL special characters does not work with reset password form
+    * #2742: convertConfig no error but nothing converted
+    * #2758: [CVE-2022-37186] Session destroyed on portal but still valid on handlers while there is activity
+    * #2760: Userinfo does not show updated attributs when using Offline sessions
+    * #2769: missing handler logs with default Nginx + LemonLDAP
+    * #2772: translation overrides from skin json files are not used when sending emails
+    * #2773: translation override from skin bypasses llng.ini
+    * #2785: Invalid <Organization> in SAML metadata can crash portal startup
+    * #2787: Status: Unknown command line during OIDC flow
+    * #2789: $portal->templateDir causes skin mix-up
+    * #2791: After token timeout during 2FA flow,  login form is left in broken state
+    * #2793: samlGotAuthnRequest cannot modify $login->request when signature validation is enabled
+
+  * New features:
+    * #2491: Use environment variables placeholder in lemonldap json configuration
+    * #2713: handle refresh tokens in Auth::OpenIDConnect
+    * #2737: remember previous authentication choice
+    * #2763: Install LL::NG on EL9
+
+  * Improvements:
+    * #2607: bypass OIDC logout confirmation
+    * #2674: Add HSTS as new security parameter in the Manager
+    * #2692: New API for CAPTCHA plugins
+    * #2719: importMetadata should handle conflicts between multiple federations
+    * #2720: importMetadata should be configurable
+    * #2723: Cannot specify custom urn:oasis:names:tc:SAML:2.0:assertion:AuthnContextClassRef values for LemonLDAP IdPs
+    * #2725: Add session data to oidcGenerateUserInfoResponse
+    * #2726: Add a session variable for used 2F module
+    * #2732: Add userLogger event when a specific 2FA is selected
+    * #2739: Provide a specific package to install LLNG FastCGI client
+    * #2745: portalEnablePasswordDisplay is not used in password change form
+    * #2746: SAML metadata without SingleLogoutService leads to error at logout
+    * #2753: Add IDP selection rules for CAS and OIDC
+    * #2755: OIDC : issue on token endpoint with method client_secret_basic
+    * #2756: Allow customization of portal JS code with jQuery events
+    * #2757: Allow admins to change the 2FA timeout
+    * #2759: Append a go-back-to-top button
+    * #2761: Append an option to customize Manager CSS
+    * #2762: Add re-send option to code-based OTPs
+    * #2768: Add new hooks on Access Token refresh
+    * #2775: Notification process can not be continued with JSON response
+    * #2780: New lemonldap-ng-cli subcommand: merge
+    * #2782: Notifications are not sorted by sessions explorer and epoch is  not converted into local date
+    * #2784: Allow history fields to be translated in templates
+
+  * Templates:
+    * #2690: Second factor logo/label not used on registration screen
+    * #2714: Session upgrade link in 2FA manager not working
+    * #2737: remember previous authentication choice
+    * #2745: portalEnablePasswordDisplay is not used in password change form
+    * #2750: Option to define the favicon
+    * #2759: Append a go-back-to-top button
+    * #2761: Append an option to customize Manager CSS
+
+ -- Clément <clem.oudot@gmail.com>  Fri, 09 Sep 2022 10:13:43 +0200
+
+lemonldap-ng (2.0.14) focal; urgency=medium
+
+  * Bugs:
+    * #2519: first authentication returns 500 code after inactivity period
+    * #2566: No configuration available in fresh LemonLDAP 2.0.12
+    * #2594: Double slashes in _pdata->{_url} when LLNG is OIDC RP
+    * #2595: Portal does not run correctly with portalRequireOldPassword=0
+    * #2596: [security:low] open redirect in CAS gateway mode
+    * #2597: External password reset URL is called with skin= and url= parameters
+    * #2600: RESTProxy authentication does not work with AuthChoice-enabled internal Portal
+    * #2603: Saving configuration drops OIDC scope rules
+    * #2606: FindUser plugin: SpoofId field is not updated if a value has been already set before the Ajax request
+    * #2612: [Security: low, CVE-2021-40874] RESTServer pwdConfirm always returns true with Combination + Kerberos
+    * #2613: ProxyAuth cookie name can not be modified
+    * #2616: Login is not remembered when password is incorrect
+    * #2618: DevOps handler does not work if RULES_URL uWSGI/FastCGI parameter is set
+    * #2620: Net::LDAP::Control::PasswordPolicy is not always loaded
+    * #2622: Fail oauth2 grants when resulting scope is empty
+    * #2626: Portal fatal errors cause "Conflict detected between 2 extensions, aborting 1 route" message to appear in logs
+    * #2632: Handler::Server::Nginx does not use logger config from lemonldap-ng.ini
+    * #2637: Error with default locationRules
+    * #2645: importMetadata does not set NameIDFormat to "persistent" for new providers
+    * #2648: "Authentication module succeed but has not set $req->user" when using SAML Artifact mode with some, but not all IDPs
+    * #2655: 'afterData' plugins loaded after Impersonation will be never executed
+    * #2656: CAS: multiple proxies is not correctly implemented
+    * #2658: Macros based on '_XXX' and authenticationLevel attributes are not computed by refresh function
+    * #2660: Combination is not compatible with LDAP password policies
+    * #2663: Radius authentication fails when radius used as authentication module
+    * #2671: xss attack detected on a relayState parameter
+    * #2675: Auth::Custom calls module init twice
+    * #2676: UserDB::Custom and Password::Custom loads module twice and calls init three times
+    * #2677: *::Custom do not allow config overrides
+    * #2678: Auth::Custom getDisplayType is broken with choice
+    * #2682: Fails to create password-protected X509 certificates with OpenSSL 3.0
+    * #2689: REST server: 400 bad request with DELETE /session/my
+    * #2691: Error when using has2f in a manager rule
+    * #2693: "Status: Unknown command line -> " log line for each SKIP and EXPIRED accesses
+    * #2703: OIDC RP menu attributes name do not refresh live
+
+  * New features:
+    * #1411: Web Authentication API (webauthn)
+    * #2325: "Warn on new network location" plugin
+    * #2679: CheckDevOps: Append an option to check if used attributes are existing
+    * #2686: Web service for application list
+
+  * Improvements:
+    * #1714: Check logLevel value
+    * #2277: pdata cookie is not removed if SAML flow fails
+    * #2457: Do not translate OIDC RP exported attributes
+    * #2476: $groups is not initialize  for  at least LDAP authentication
+    * #2508: Look configuration timestamp to dismiss cache
+    * #2558: Add a new portal error code for Auth::OIDC issues
+    * #2565: Adding per-request information in logs
+    * #2570: RGAA: Adding a role attribute into messages
+    * #2577: RGAA: placeholder only should not be used as label
+    * #2591: stayconnected plugin: allow to disable browser fingerprint check and update documentation
+    * #2593: Contextual / Adaptive authentication / Risk-based authentication
+    * #2599: Certificate reset templates are not translated
+    * #2601: RESTProxy authentication does not support Impersonation
+    * #2602: Export OIDC grant type in rules
+    * #2604: Append an option to normalize HTTP headers with CheckDevOps plugin
+    * #2605: llnglanguage cookie will be rejected if sameSite attribute is not set
+    * #2609: Better history management for plugins
+    * #2614: display precise error while sending direct SOAP SAML message
+    * #2617: SafeJail must be enabled with CheckDevOps plugin
+    * #2619: Brazilian translation
+    * #2621: SAML: HTTP-Artifact mode should be discouraged
+    * #2625: Add an option to encrypt TOTP secrets
+    * #2627: Append an option in Manager to be able to set RULES_URL param
+    * #2638: Redirect to 2fregisters is missing a slash
+    * #2644: No error displayed in logs in DevOps Handler when rules file can't be downloaded
+    * #2646: bruteForceProtectionMaxAge and bruteForceProtectionMaxLockTime missing from manager
+    * #2647: Display logins history with CheckUser plugin
+    * #2649: Portal plugins should not require an "init" method
+    * #2651: Hebrew Translation
+    * #2654: CAS temporary tickets should have a short expiration time
+    * #2657: Hidden attributes, custom functions and plugins declarations are inconsistent
+    * #2662: CheckUser plugin: Append a rule to allow some users to display hidden attributes
+    * #2664: impossible to use getModule in the Password modules
+    * #2667: Add RP confkey to oidcGenerateUserInfoResponse plugin hook
+    * #2668: CheckDevOps: prevent portal crash/loop if a bad rules.json file is provided
+    * #2672: DBI password hash list is too restrictive
+    * #2673: Allow to configure multiple service URL per CAS application
+    * #2679: CheckDevOps: Append an option to check if used attributes are existing
+    * #2683: Possibility to set an activation rule for "remember me" option
+    * #2685: DevOps handler uses default HTTPS redirection if no VH is defined
+    * #2694: Chrome warns about compromised data when using form replay
+    * #2698: Avoid useless warning messages in log
+
+  * Templates:
+    * #2325: "Warn on new network location" plugin
+    * #2570: RGAA: Adding a role attribute into messages
+    * #2577: RGAA: placeholder only should not be used as label
+    * #2597: External password reset URL is called with skin= and url= parameters
+
+ -- Clément <clem.oudot@gmail.com>  Sat, 19 Feb 2022 17:49:18 +0100
+
+lemonldap-ng (2.0.13) focal; urgency=medium
+
+  * Bugs:
+    * #2428: Correctly report the number of purged sessions when using deleteIfLowerThan
+    * #2566: No configuration available in fresh LemonLDAP 2.0.12
+    * #2567: CORS headers not sent in userinfo endpoint error response
+    * #2568: SafeJail does not report errors correctly
+    * #2573: convertConfig does not work when target backend is empty
+    * #2589: FindUser plugin: minor improvements and several issues
+
+  * Improvements:
+    * #2558: Add a new portal error code for Auth::OIDC issues
+    * #2564: Missing options to use text emails for some features
+    * #2585: RGAA: to use autocomplete when possible
+    * #2589: FindUser plugin: minor improvements and several issues
+    * #2592: Bad error reporting during portal init
+
+  * Templates:
+    * #2585: RGAA: to use autocomplete when possible
+    * #2589: FindUser plugin: minor improvements and several issues
+
+ -- Clément <clem.oudot@gmail.com>  Fri, 20 Aug 2021 18:30:23 +0200
+
+lemonldap-ng (2.0.12) focal; urgency=medium
+
+  * Bugs:
+    * #2153: logout forward url pointing to a protected application cause infinite redirection (pdata)
+    * #2439: Unable to configure oidcOPMetaDataJSON and oidcOPMetaDataJWKS trough lemonldap-ng-cli
+    * #2453: Manager API: missing doc and array handling of additional audiences
+    * #2455: llng-fastcgi-server exited with signal 13
+    * #2459: Debian packages: missing dependency to gsfonts may break Captcha
+    * #2460: "Underlying object can't load conf" in v2.0.11
+    * #2463: Portal plugin hooks triggered multiple times after reload
+    * #2469: mySessionAuthorizedRWKeys causes internal server error when removing OIDC consent
+    * #2474: OAuth2 endpoints should return an error when multiple client authentication methods are used
+    * #2475: OIDC: Invalid error code returned in badAuthRequest
+    * #2477: [security:low] Wildcard in virtualhost allows being redirected to untrusted domains
+    * #2480: Set an authLevel and disable ReAuthentication plugin leads to an endless loop
+    * #2481: missing _utime in OIDC Client Credential sessions
+    * #2482: unexpected persistent sessions appear since 2.0.10
+    * #2483: Second factor removal does not work when hiding session ids from manager
+    * #2487: Incorrect error reporting in convertSessions
+    * #2489: Do not grant the openid scope during Resource Owner Password Grant
+    * #2493: Unable to register a new configuration attribute with CLI when option force is enabled and backend is RDBI
+    * #2495: [security:medium] XSS on register form
+    * #2498: convertSessions does not filter sessionKind correctly
+    * #2503: REST/SOAP exported attributes are not sent by REST server
+    * #2509: Local password policy: Allowing ALL special characters does not work
+    * #2511: expires_in in token response has the wrong JSON type in some cases
+    * #2513: LLNG 2.0.11 : SAML SLO from IDP to SP with POST Binding blocked by browser
+    * #2518: SAML: persistent NameID is empty when using "unspecified" format on SP side
+    * #2520: Missing translations for DBI configuration
+    * #2525: Gracefully handle invalid perl expression in CAS/SAML/OIDC
+    * #2529: [bug] OIDC userinfo as jwt not readable
+    * #2531: calling to_json with hash containing file handle fails
+    * #2534: CDA does not work with wildcard vhosts
+    * #2535: [security:low] Incorrect regexp construction in isTrustedUrl lets attacker steal session on CDA application
+    * #2539: [security:high, CVE-2021-35472] session cache corruption can lead to authorization bypass or spoofing
+    * #2541: Misleading TOTP options
+    * #2543: [security:low] 2FA bypass with sfOnlyUpgrade and totp2fDisplayExistingSecret
+    * #2547: Parameter oidcRPMetaDataOptionsUserInfoSignAlg is missing in Manager
+    * #2548: OpenID Connect ACR value can't be configured with something else than 'loa-...'
+    * #2549: [security:low, CVE-2021-35473] OAuth2 handler does not verify access token validity
+    * #2550: Token endpoint should only emit ID token when scope contains "openid"
+
+  * New features:
+    * #1976: FindUser plugin
+    * #2451: CrowdSec plugin to query Crowdsec server
+    * #2458: CheckDevOps plugin
+    * #2510: Hook on password change
+    * #2532: add oidcGenerateCode hook
+    * #2554: Remove OIDC checksession iframe from metadata
+
+  * Improvements:
+    * #2260: Missing elements in sphinx documentation (mongodb)
+    * #2419: Support JWT as OAuth 2.0 Bearer Access Tokens
+    * #2424: Feature: Scope Rules
+    * #2454: Append a Show/Hide password button into login form
+    * #2456: Prevent DevOps handler to send hidden session attributes
+    * #2462: Use timezone provided in input dates in extended function "checkDate"
+    * #2465: Force OIDC error messages to use JSON
+    * #2472: Loading metadata can be slow due to parsing of default certificate bundle
+    * #2484: Hook for populating client credential session
+    * #2488: Allow selection of AssertionConsumerServiceURL in IDP-Initiated SAML login
+    * #2496: Add new option to ignore undeclared OIDC scopes
+    * #2499: add key mapper for convertSession
+    * #2502: Resource Owner Password fails with PE_FIRSTACCESS when using Auth::Choice
+    * #2506: CAS: add an option to forbid host-based matching
+    * #2521: Avoid browsers parameter hide placeholder
+    * #2533: add hooks for CAS issuer
+    * #2536: optimize SingleSession to avoid unneeded session fetches
+    * #2544: Default 2FA register timeout is too low
+    * #2557: Avoid browsers to store new, old and confirmed password during update process
+    * #2562: Add --user/--group options to lmConfigEditor and lemonldap-ng-cli (user:group hardcoded to apache may not work correctly)
+
+  * Templates:
+    * #1976: FindUser plugin
+    * #2454: Append a Show/Hide password button into login form
+    * #2458: CheckDevOps plugin
+    * #2495: [security:medium] XSS on register form
+    * #2521: Avoid browsers parameter hide placeholder
+    * #2541: Misleading TOTP options
+    * #2557: Avoid browsers to store new, old and confirmed password during update process
+
+ -- Clément <clem.oudot@gmail.com>  Thu, 22 Jul 2021 17:41:44 +0200
+
+lemonldap-ng (2.0.11) focal; urgency=medium
+
+  * Bugs:
+    * #2445: lmAuth param sent to protected application
+    * #2446: Incorrect MIME type on /psgi.js
+    * #2448: Adaptative Authentication rule triggered several times
+    * #2449: SAML SLO using Redirect/POST binding does not work with multiple SP
+
+  * New features:
+    * #1987: add grant_type=client_credentials in OIDC
+
+  * Improvements:
+    * #2397: OAuth2 handler should make client_id and scopes of the access token available to rules and headers
+    * #2436: CheckUser displays headers as they have been defined in conf intead of how they are sent
+    * #2444: set oidcServiceKeyIdSig by default
+
+ -- Clément <clem.oudot@gmail.com>  Sat, 30 Jan 2021 18:33:37 +0100
+
+lemonldap-ng (2.0.10) stable; urgency=medium
+
+  * Bugs:
+    * #1978: can't configure variables to post in virtual host's form replay with lemonldap-cli
+    * #2245: Manager API  does not call reloadUrls
+    * #2262: SAML: SP-initiated logout does not propagate to external authentication modules
+    * #2267: LDAP timeout does not apply to search/bind/etc
+    * #2293: LL:NG 2.0.8 Manager test for external/working SMTP fails @ SSL handshake, terminates connections
+    * #2304: Error when using SMTP over SSL in CentOS 7
+    * #2310: Misspelled parameter in call to ldap->search()
+    * #2315: CheckUser plugin: option rules rely on checked user rather than  connected user
+    * #2318: Manager API:  translate JSON booleans to int
+    * #2332: [security:low] removal of registrable 2F does not test the current authn level
+    * #2340: lemonldap-ng-cli restore does not work if the config backend is empty
+    * #2342: Calling logout page for unauthenticated user forces login
+    * #2344: Enable keepalive on LDAP connections
+    * #2347: [Manager API] postLogoutRedirectUris should be an array
+    * #2348: [Manager API] Bad URL in documentation
+    * #2352: skipRenewConfirmation and skipUpgradeConfirmation options do not work
+    * #2354: Lemonldap::NG::Common::Conf::msg is never reset and grows indefinitely
+    * #2355: Password policy checker broken in password reset by mail template
+    * #2357: CDA query parameter not parsed when query params are reordered
+    * #2361: Cannot remove OIDC consent from session explorer
+    * #2364: llngconnexion cookie in the StayConnected-Plugin rejected
+    * #2365: Check my last logins option does not work with StayConnected plugin
+    * #2366: StayConnected plugin does not work with 2FA
+    * #2367: skip rule doesn't work with DevOps handler
+    * #2369: Memory leak in Issuer::_redirect
+    * #2373: Remove spaces from generated login when user register account
+    * #2374: Missing form-check-input class in form groups
+    * #2375: Refresh session plugin: refresh result is not checked before returning JSON answer
+    * #2377: Reset expired password process does not work without _whatToTrace macro or if old password is not required
+    * #2378: Error in inGroup expansion
+    * #2383: Vhost with wildcard with % sign, configuration not loaded in manager
+    * #2387: logout does not clear handler cache
+    * #2399: Local password policy check should be disabled when clicking on "generate password" checkbox
+    * #2401: Selinux policy blocks cache after restorecon
+    * #2403: Missing Ldap attribute in CAS ticket if equals 0
+    * #2410: LDAP connectivity issues on startup cause fatal initialization error when passwordDB=LDAP
+    * #2411: Javascript error when local password policy configured and password tab disabled in menu
+    * #2413: checkstate returns error 500 with user parameter
+    * #2417: Error in cookie name used by lemonldap regexp
+    * #2420: Auth::SAML should handle missing NameID
+    * #2425: "Configuration error: xxx SAML metadata has no EntityID" when updating SAML sp in manager API
+    * #2426: twitter auth fails when coming from oidc/saml/cas service
+    * #2429: SAML sessions fill up with logout sessions that do not expire
+    * #2430: Password not updated in session after password change
+    * #2440: OIDC api: redirect URI not handled at top level during get/update operations
+
+  * New features:
+    * #2336: Adaptative Authentication Plugin
+    * #2391: Add extended function to test for registered second factor
+    * #2408: Add Chinese (Taiwan) translation
+
+  * Improvements:
+    * #714: Make password change compatible with Combination
+    * #716: Make password reset work with Combination
+    * #2232: lmAttrOrMacro test in Manager is too restrictive
+    * #2266: local password policy conflicts with LDAP password policy
+    * #2301: password reset page(s) CSS issues
+    * #2309: Unintialized $app in CAS Issuer during test
+    * #2314: CheckUser plugin: Append an option to display computed sessions data
+    * #2316: "New keys" in saml security configuration should generate a certificate
+    * #2317: Combination and fail2ban logs
+    * #2319: Allow the SAML signature alg to be set per-provider
+    * #2321: Can't save configuration with 2 CAS applications sharing the same hostname
+    * #2322: Support for SHA384 and SHA512 saml signatures
+    * #2329: Display a warning if password module is enabled without password backend
+    * #2330: Allow to configure OIDC claims type
+    * #2331: Warning in default Nginx configuration
+    * #2334: GlobalLogout plugin can sometimes found some non-SSO or corrupted sessions
+    * #2335: apache handler: allow users to override the port/scheme for redirections
+    * #2339: Plugins refactoring
+    * #2341: Make SHA256 the default signature method for SAML
+    * #2345: RGAA recommand alt tags to be empty for decoration images
+    * #2350: [security:low] Hiding session ids from the manager
+    * #2356: RGAA 5.4 requires arrays to have defined captions
+    * #2359: plugin engine for issuers
+    * #2360: Avoid assignment in expressions
+    * #2368: StayConnected-Plugin: when user-agent changes login is only possible after deleting cookies
+    * #2372: Add a domain whitelist to Auth::Kerberos
+    * #2380: CORS headers not sent by sendError
+    * #2381: Append a hook to be able to overwrite access log
+    * #2386: CheckUser does not resolve vhost aliases
+    * #2388: Allow custom SSL logos when using choice
+    * #2393: All messages printed in userLogger should use whatToTrace value to log user name
+    * #2398: CheckUser: Append an option to hide specific headers value depending on tested VHost
+    * #2404: Force deletion of corrupted sessions in DBI and LDAP backends
+    * #2406: Possibility to use a different mail for 2FA and password reset
+    * #2409: Update Spanish translation
+    * #2414: Manager evaluates macros with Safe Jail whereas useSafeJail has been disabled
+    * #2422: Missing alt attributes in mail HTML templates
+    * #2427: Make AssertionConsumerServiceURL available to SAML rules
+    * #2438: Add a confirmation when deleting second factor
+
+  * Templates:
+    * #2301: password reset page(s) CSS issues
+    * #2355: Password policy checker broken in password reset by mail template
+    * #2356: RGAA 5.4 requires arrays to have defined captions
+    * #2365: Check my last logins option does not work with StayConnected plugin
+    * #2366: StayConnected plugin does not work with 2FA
+    * #2374: Missing form-check-input class in form groups
+    * #2422: Missing alt attributes in mail HTML templates
+    * #2438: Add a confirmation when deleting second factor
+
+  * WebServer Confs:
+    * #2331: Warning in default Nginx configuration
+    * #2434: [security:medium] Headers are not deleted for unprotected or skip locations with nginx handler
+
+ -- Clément <clem.oudot@gmail.com>  Sun, 17 Jan 2021 16:52:38 +0100
+
+lemonldap-ng (2.0.9) stable; urgency=medium
+
+  * Bugs:
+    * #1659: RESTProxy doesn't fully work as a UserDB module
+    * #1980: Refresh my rights causes error 500 with OIDC provider
+    * #2190: 2.0.6 -> 2.0.8 sends "ARRAY (xxxx)" instead of Groups
+    * #2196: Unable do display integer field with other fields in Manager
+    * #2199: StayConnected plugin not working due to error in fingerprint javascript
+    * #2200: Bad default value for portalDisplayOidcConsents
+    * #2211: Setting yubikey verification URL to an empty value does not fallback to Yubikey_Webclient URL
+    * #2212: Captcha or OTT is not renewed if Impersonation process failed
+    * #2215: CheckUser idRule is checked only if session is computed
+    * #2217: Error "Value must be BASE64 encoded" with some specific URL when Handler redirects on portal
+    * #2221: Bad error message when conf backend fails to load
+    * #2222: Errors in lemonldap-ng.ini are not correctly reported
+    * #2223: Misleading error reporting when failing to save conf in lemonldap-ng-cli
+    * #2224: regression in redirection to SAML urls with query string after #2085
+    * #2229: Impersonation plugin: real_hGroup value is overwritten when specified groups are merged
+    * #2230: LLNG 2.0.8 - Error on portal.js with IE 11
+    * #2234: Prevent browser caching in sendJSONresponse
+    * #2237: SAML SP error with auth kerberos
+    * #2250: [CVE-2020-16093] Peer certificate not checked when using LDAPS
+    * #2253: clearing oidcRPMetaDataOptionsLogoutUrl leads to Bad URL error
+    * #2254: Local session cache and systemd PrivateTmp
+    * #2256: Multivalued attributes are not returned as array in OpenID Connect userinfo endpoint
+    * #2257: Missing country in OpenID Connect Address Claim
+    * #2258: Error when using lougout_app_sso
+    * #2261: Refresh my rights fails when Auth=SAML and UserDB=LDAP
+    * #2263: Incorrect SOAP Content-Type
+    * #2271: Labels are not working in auth form
+    * #2272: Secure flag missing on lemonldappdata cookie and during logout
+    * #2274: pdata cookie with SameSite value not equal to NONE is not removed and logout request leads to an internal server error with federate flow on SP side
+    * #2275: sgRequired option does not work when global storage is enabled for token
+    * #2287: LL:NG-provided lua-header snippet -> "writing a global lua variable ('i') which may lead to race conditions between concurrent requests"
+    * #2288: LL:NG 2.0.8  manager missing doc-referenced "Login History" tab
+    * #2289: Special chars password policy is not displayed if password is expired
+    * #2290: [security:high, CVE-2020-24660] Lack of URL normalization by Nginx may lead to authorization bypass when URL access rules are used
+    * #2296: skippedGlobalTests / skippedUnitTests have no effect (again)
+    * #2305: Error in call to _launch in Lemonldap::NG::Common::Conf delete() method
+    * #2306: ldapGroupDecodeSearchedValue does not apply to recursive group search
+    * #2307: Password form not displayed when "password change after reset" is returned by LDAP ppolicy and Combination used for authentication
+
+  * New features:
+    * #1646: integrate documentation into the codebase
+    * #2124: use 2FA only if and when needed
+    * #2205: Add a session command line (CLI) tool
+
+  * Improvements:
+    * #1598: Proxy Backend support for Password Module (passwordDB)
+    * #2188: Declare vhost with wildcard and prefix/suffix
+    * #2189: Make externally-provisionned yubikeys easier to configure
+    * #2193: Polish translation
+    * #2195: Manager - Configuration's Author IP address field should honor $ipAddr
+    * #2201: Avoid Portal to crash with bad GrantSession rule
+    * #2203: Retrieve GPG keys and SSH keys in GitHub authentication module
+    * #2207: Append an "Unrestricted users" rule to CheckUser, ContextSwitching and Impersonation plugins
+    * #2214: add option to make convertConfig easier in most cases
+    * #2225: REST ression server is too intolerant of clock drift (2)
+    * #2233: Error/Warnings id not replaced with CLI
+    * #2239: Mail reset token should not be deleted at first page access
+    * #2240: Add tests for CAS service URL and OIDC client ID (presence/unicity) when configuration is saved
+    * #2241: Add CAS App management to the manager API
+    * #2242: Display new supported grant_types in OIDC discovery page
+    * #2244: Use configuration key in user log messages for all Issuer modules
+    * #2249: Check password policy on the client side when changing password
+    * #2251: Add a parameter for Syslog options
+    * #2252: No host in logs to use with Fail2ban
+    * #2265: increase log level for mail sending and password reset
+    * #2273: URL is not set to Portal URL after ContextSwitching
+    * #2276: Using bruteForceProtectionIncrementalTempo lock user at first attempt
+    * #2278: Display instance name when prompting a message
+    * #2280: User attribute based on local macro in Openid rp
+    * #2281: Manage SameSite default behavior
+    * #2283: Improve Notifications explorer to display done notifications content
+    * #2284: Improve serviceToken debug logs
+    * #2292: request "do not minify" json config option
+    * #2295: Erroneous use of NTLM should be explicitely reported to the user
+    * #2299: healthcheck endpoint for manager API
+    * #2302: correct usage of invalid vs unvalid in code & messaging
+    * #2303: Add del method to lemonldap-ng-cli
+
+ -- Clément <clem.oudot@gmail.com>  Sun, 06 Sep 2020 19:59:22 +0200
+
+lemonldap-ng (2.0.8) stable; urgency=medium
+
+  * Bugs:
+    * #1314: Workaround for memory Leak in perl-fcgi with Perl < 5.18
+    * #1659: RESTProxy doesn't fully work as a UserDB module
+    * #1776: Manager breaks when moving a newly created category or application
+    * #1939: expired issuer context is not reset when starting new authentication
+    * #1990: [warn] Route xxx redefined when using the fastCGI server
+    * #1992: Memory leak issue on CentOS 7 / perl 5.16
+    * #2048: t/32-OIDC-Refresh-Token.t fails randomly
+    * #2049: Unable to display notifications marked as done (DBI)
+    * #2050: Wrong message displayed by CheckUser plugin
+    * #2051: SAML Service Provider Macros are incorrectly displayed/saved by the manager
+    * #2057: Log in request without captcha returns an internal server error
+    * #2058: Use of configuration cache can mix global and local configuration parameters
+    * #2059: Error in Manager / CLI / Editor when an attribute is not defined
+    * #2061: pdata not cleaned with Kerberos authentication
+    * #2063: Javascript error: window.datas is undefined
+    * #2072: Configuration comparator error on application menu "order"
+    * #2074: Portal menu : display condition with sp: does not work for SAML SP
+    * #2080: SAML POST to SP becomes GET when an info is displayed
+    * #2081: Parameter added to external redirect URL when info.tpl is used
+    * #2082: SSLVarIf cannot be set in manager
+    * #2085: OIDC provider doesn't work when info is displayed during the login process
+    * #2086: LDAP notifications backend does not work
+    * #2089: Old format notifications with file backend don t work
+    * #2090: Session creation mixup when supplying an existing _session_id
+    * #2097: Error after activating userLogger (Apache)
+    * #2099: Error 500 when SAML Session is expired
+    * #2101: Wildcard in virtualhost names : URL contains a non protected host
+    * #2104: Sessions are not well computed by CheckUser plugin
+    * #2105: Using RS* ID Token signature algorithm without a RSA key causes ID Token to be returned as "null"
+    * #2111: Bad translation tag for password policy remaining grace message
+    * #2113: Password policy warning before password expiration is badly displayed
+    * #2116: Missing goToPortal translation for mails
+    * #2118: Multivalued attributes received from CAS server stored as string "ARRAY" in session
+    * #2120: OIDC: hybrid flow does not issue ID token
+    * #2123: Rest2F does not transmit session attributes to Verify URL
+    * #2127: Cache reload throw an error if status enabled
+    * #2128: Manager with CDA issue
+    * #2133: Issues with removed second factors notification system
+    * #2138: logout forward doesn't work anymore
+    * #2141: Auth Combination SSL/LDAP + VHOSTTYPE AuthBasic broken
+    * #2142: OIDC consent validation fails after second factor form or redirection from external IDP
+    * #2143: Enable redirection on forbidden access with self protected Portal URLs leads to an endless loop
+    * #2144: OTT is not sent if SSL authentication fails with Choice
+    * #2148: Bad request with Notification SPA
+    * #2151: Session upgrade does not work with multiple second factors
+    * #2152: Nginx configuration files do not work with IPv6
+    * #2159: Single session module configuration
+    * #2165: Server error with rule on Combination
+    * #2167: OAuth2 handler should return 401 when access token is missing or invalid
+    * #2168: LLNG is too strict on OIDC scope syntax
+    * #2169: duplicates in _oidcConsents when scope is updated
+    * #2171: Introspection endpoint does not recognize refreshed Access Tokens
+    * #2179: refresh my rights downgrades authentication level set by 2FA
+    * #2180: SingleSession plugin does not work if history is displayed
+
+  * New features:
+    * #2033: Manager API to reset 2FA
+    * #2034: Manager API to manage SAML and OIDC clients
+    * #2069: Manage Cookie SameSite value
+    * #2136: Possibility to override language with a parameter in URL
+    * #2154: Github authentication backend
+
+  * Improvements:
+    * #1598: Proxy Backend support for Password Module (passwordDB)
+    * #1877: Option to run setMacros after setGroups
+    * #1902: Configuration is saved even with errors with lemonldap-ng-cli
+    * #1957: Provide packages for CentOS 8
+    * #2046: compactConf is confusing
+    * #2064: Do not show action buttons on portal when displaying waiting message (Kerberos or SSL Ajax call)
+    * #2065: Improve diff.html templates to display Author, Date and Summary of both configurations
+    * #2068: Append an option to set CSP frame ancestors header
+    * #2070: LemonLDAP session cookie - SameSite attribute
+    * #2071: Allow users to see and display theirs accepted notifications
+    * #2073: Improve notifications SPA
+    * #2076: Possibility to configure a custom CSS file
+    * #2084: Make "error" the default log level for lasso
+    * #2088: BruteForce module: increase delay between each login attempt
+    * #2091: Better look for buttons in 2FA choice screen
+    * #2093: CheckUser - Remove persistent session attributes if required
+    * #2096: Improve introspection endpoint
+    * #2102: Bad  Autologin rule lead to error 500 and crash the portal
+    * #2103: Add a rollback option to lemonldap-ng-cli
+    * #2106: CheckUser: Append an option to hide empty headers
+    * #2108: "Underlying object can't load conf" is a bad error message
+    * #2109: Securing the new API endpoints for 2.0.8 release
+    * #2114: Improve adaptive display and show instance name
+    * #2115: Possibility to select choice tab, as for menu tab
+    * #2117: Remove warning messages "uninitialized value $encryption_mode"
+    * #2119: Rely on "isRequired" XML field in importMetadata script to mark SAML attributes as mandatory
+    * #2121: Prevent Portal to crash if Custom Functions module is not found
+    * #2125: Internal Server Error when REST backend does not return a JSON Object
+    * #2126: Prevent Portal to crash if a bad rule is used for enabling a plugin
+    * #2129: AuthenticationLevel based macros and groups should be updated with second factor
+    * #2130: Append password policy options to define and require special characters
+    * #2131: Make json does nothing if only a Portal constant is appended
+    * #2132: Application icons are displayed with real sizes by the Manager and It is not particularly convenient
+    * #2135: Remove 'underscore' in notification reference
+    * #2140: Append an option to define applications tooltip
+    * #2145: Display  a custom param with GlobalLogout plugin
+    * #2149: Add an easy way to set level of additional second factors
+    * #2155: Implement Resource Owner Password Credentials Grant
+    * #2156: "Require 2FA" should be renamed
+    * #2161: DBI should test that "table" is set
+    * #2164: Make SingleSession options configurable by a rule
+    * #2166: Configuration parser does not check validity of SAML/OIDC/CAS/vhost options
+    * #2173: Make CheckUser options configurable by a rule
+    * #2175: Reorganize OIDC RP options in manager
+    * #2177: OIDC: Allow additional audiences for ID Token
+    * #2178: Make require old password option configurable by a rule
+    * #2182: Append a Show/Hide password button into  change password form
+    * #2184: SAML logout request returns 400 error code if session is not found
+    * #2185: Append a rule to display sfaManager link
+
+ -- Clément <clem.oudot@gmail.com>  Mon, 04 May 2020 22:43:29 +0200
+
+lemonldap-ng (2.0.7) stable; urgency=medium
+
+  * Bugs:
+    * #1893: Issuer urldc is lost after error in 2F flow
+    * #1909: Reset password by email issue
+    * #1943: [Security: medium, CVE-2019-19791] Apache access rules and SOAP/REST endpoints
+    * #1945: passwordpolicy.tpl contains wrong tag
+    * #1948: Tranlation menu does not work with Diff.html
+    * #1949: Don't Store Password shows password in cleartext
+    * #1952: "Attributes and macros" session keys should not be translated
+    * #1953: Outgoing emails are missing a Date: field
+    * #1954: zimbra preauth not working
+    * #1955: Redirection lost after notification validation
+    * #1960: REST config service not working
+    * #1961: IDP selection rule regression in 2.0.0
+    * #1963: Server Error with OpenID Connect register endpoint
+    * #1964: Diff.html does not work with minified JS
+    * #1966: Configuration reload does not apply changes to location rules
+    * #1968: skippedUnitTests/skippedGlobalTests have no effect
+    * #1969: Force password reset with LDAP password policy does not work if macro _whatToTrace is not defined
+    * #1974: ServiceToken handler TTL value always set to default
+    * #1984: Reset expired password doesn't trigger when using Combination
+    * #2005: Error in portal "refresh my rights" feature when whatToTrace value is not equal to login
+    * #2009: Display authentication error on login form with Combination Kerberos + LDAP
+    * #2010: Kerberos not working with session upgrade
+    * #2012: Several issues with notification system
+    * #2013: Handler, yum install
+    * #2018: After temporary ldap failure, ldap connections stop working forever
+    * #2038: Missing type attribute in 2FA HTML inputs
+    * #2045: Authenticating with external OpenID Connect Provider fails because of special chars in user name
+
+  * New features:
+    * #813: Provide refresh tokens in OpenID Connect
+    * #1605: certificate reset by mail
+    * #1956: DecryptValue plugin
+    * #1999: Possibility to view/close other sessions opened for the same user
+    * #2006: Create a web service for "refresh my rights"
+
+  * Improvements:
+    * #1590: Possibility to configure new plugins in Manager
+    * #1905: Append overScheme for persistent sessions
+    * #1941: After logged out from SP we are always redirected to IdP - Unable to go back to SP Portal
+    * #1947: Highlight active module with Diff.html
+    * #1967: allow differents type of managerDN
+    * #1983: The script purgeCentralCache should be more fault tolerant
+    * #1988: Append a requiredAuthenticationLevel option for each uri
+    * #1989: Main logo and lang icons are missing with upgradesession template
+    * #1991: Some user logs not using whatToTrace for username
+    * #1993: Same issue like (#1884) occures with Issuer redirection
+    * #1994: Append varInUri extended function
+    * #1995: Add an option to force claims in ID token
+    * #1996: REQUEST_URI env variable is not set by CheckUser plugin
+    * #1997: Enable checkTime option by default
+    * #1998: Misleading token ID format
+    * #2003: Possibility to set attributes and extra claims in OIDC registration endpoints
+    * #2007: Password change prompt displayed even if initial auth fails
+    * #2008: Specific message and error code for 2F failure
+    * #2011: Create a function to test if a value belongs to a list
+    * #2012: Several issues with notification system
+    * #2014: New script to convert sessions between backends
+    * #2019: Renew Captcha button
+    * #2024: Change default value for cspFormAction
+    * #2042: Add per-service macros
+
+ -- Clément <clem.oudot@gmail.com>  Sat, 21 Dec 2019 16:59:22 +0100
+
+lemonldap-ng (2.0.6) stable; urgency=medium
+
+  * Bugs:
+    * #1834: Use base64 URL for JWT generation
+    * #1838: Return claims from scope values in ID token if no access token requested
+    * #1852: SAML request lost after notification
+    * #1853: Adding a second notification with same reference is not refused
+    * #1856: Unable to validate more than one notification (JSON format)
+    * #1857: Message "session is expired" if a notification is  refused
+    * #1861: Persistent data and notification validation
+    * #1863: Duplicate Set-Cookie header when sending lemonldappdata and lemonldap cookies
+    * #1864: incorrect loading of SAML metadata when entityID containts html-encoded characters
+    * #1865: Dependencies missing in RPM
+    * #1866: Skin parameter is lost in second factor choice
+    * #1867: Bad error template with Combination and OTT timeout
+    * #1868: Yubikey enrolment failed on Internet Explorer
+    * #1869: [Security:low] psessions case sensitivity might impact security of 2FA when using case-insensitive auth backends
+    * #1874: OTT not regenerated after submitting TOTP form with an expired OTT
+    * #1875: Variables from Users module DBI is not used when Authentication module is LDAP (chain: [LDAP,DBI]
+    * #1876: $_ no longer works in macros, rules and headers since 2.0
+    * #1878: Pdata cookie not cleared after cross domain Auth request
+    * #1880: [Security:low] Restricted users can edit conf by using default route
+    * #1881: [Security:high] oidc authorization codes are not tied to their RP
+    * #1883: Infinite loop when displaying sessions by IP address
+    * #1889: No changes detected by Manager when removing CAS/OIDC attributes from a CAS application / OIDC RP or provider
+    * #1890: LinkedIn v1 API is not available anymore
+    * #1891: GET parameter "cancel" with Choice and CAS authentication
+    * #1897: Emails are sometimes sent in the wrong language
+    * #1898: Handler SecureToken is not working anymore
+    * #1901: Handler error if a header definition is empty
+    * #1903: Mail password reset and Combination with LDAP does not work
+    * #1906: Missing MAIN_LOGO variable in redirect.tpl
+    * #1910: Issue with "force password change on next login" feature with LDAP
+    * #1915: Skin selected by rule is lost in 2FA process
+    * #1922: Accentuated UTF-8 value of header is UTF-8 encoded again by handler
+    * #1925: AuthBasic handler does not work with AuthChoice
+    * #1933: [Security:low] nginx portal example file does not filter REST urls
+    * #1935: [Security:medium] AuthSlave does not check credential headers
+
+  * New features:
+    * #993: Define a local password policy
+    * #1783: ContextSwitching plugin
+    * #1843: OAuth2 introspection endpoint
+    * #1847: Radius 2F module
+    * #1860: Multiple instances of 2F modules
+
+  * Improvements:
+    * #1619: Support IBM Tivoli Directory Server (ITDS)
+    * #1702: Improve log generated by lemonldap
+    * #1825: Possibility to disable persistent sessions
+    * #1829: Redirection lost between SSL/Ajax and SAML
+    * #1831: Warning in lemonldap-ng-cli
+    * #1832: Add save/restore in CLI help message and control restore parameters
+    * #1833: Show cli errors on file access
+    * #1835: [Security:improvement] Do not accept a "none" signature in JWT if we enforce signature verification
+    * #1842: Merge userLogger notice with logger debug
+    * #1844: CheckUser plugin does not compute real session attributes if Impersonation is enabled
+    * #1846: Adapt response_types_supported / grant_types_supported attributes in OpenID Connect metadata depending on configured flows
+    * #1849: CDA is not compatible with Handler::PSGI::Try
+    * #1850: No "Session granted" log if grantSession plugin not enabled
+    * #1851: Append notification REST services
+    * #1862: When displaying notifications, sort them by date and references
+    * #1870: REST Api endpoint "error"
+    * #1873: Labels for 2FA choices
+    * #1879: [security:low] Access token expiration time is not enforced on userinfo or OAuth handler
+    * #1882: Confusing default OIDC issuer setting
+    * #1884: Force Upgrade tokens to be stored into global storage if auth and authssl are served by different load balancers
+    * #1885: Append an option to log an extra parameter
+    * #1888: Javascript error on textContent method with .Net framework and WPF
+    * #1896: Add _session_kind to default SOAP/REST exported attributes
+    * #1899: Fix portal and manager display for Internet Explorer
+    * #1904: Append an option "don t compact conf" + debug log + compact CAS parameters if not enabled
+    * #1908: Complete blackout probably due to uncontroled SQL connexion timeout
+    * #1913: Append an option to allow / forbid browsers to store users password
+    * #1916: Issuer OTT timeout
+    * #1919: Customizable error message when a required SAML attribute is missing
+    * #1923: REST ression server is too intolerant of clock drift
+    * #1927: Implement  CORS preflight request
+    * #1928: Option to hide password generation checkbox in mail password reset plugin
+    * #1929: Custom functions are not imported into Safe Jail
+    * #1930: Display password change form after a password policy error in mail reset password plugin
+    * #1931: Disable password input field until font is fully downloaded by browser
+    * #1932: REST session server should return both session and _httpSession id
+    * #1936: Append an option to display Slave logo
+    * #1938: CheckUser plugin : include search parameters
+
+ -- Clément <clem.oudot@gmail.com>  Tue, 24 Sep 2019 11:13:39 +0200
+
+lemonldap-ng (2.0.5) stable; urgency=medium
+
+  * Bugs:
+    * #1521: The manager renames the id of applications created by lemonldap-ng-cli
+    * #1655: Can't delete notifications from the manager
+    * #1717: Warnings "Devel::StackTrace" when using unnative Perl functions
+    * #1746: Impersonation does not work with double cookies authentication
+    * #1749: Authentication with "Double Cookies for a single session" (securedCookie==3) does not work
+    * #1753: Logout with CASv2 is not working (Bad URL)
+    * #1754: Configuration caching issue when overriding globalStorage in lemonldap-ng.ini
+    * #1755: CheckUser plugin fails if OTT globalStrorage is enabled
+    * #1759: Server Error when OpenID Connect provider enabled without any RP
+    * #1762: CDA sessions are not removed when handler uses SOAP
+    * #1775: Authentication with double cookies fails when uniq session is enabled
+    * #1777: Server Error with SAML SLO and expired SSO session
+    * #1779: Go to portal message not translated in register confirmation mail
+    * #1795: [Security: low] CAS 3.0 Logout does not validate redirect URL
+    * #1800: Auth::Slave is unusable with Choice
+    * #1802: No error returned if no code provided on OpenID Connect token endpoint
+    * #1805: Auth::LDAP unusable in combination if UserDB::LDAP isn't called
+    * #1809: UserDB::DBI with Auth::LDAP seems to not work properly
+    * #1810: [Security: low] llng-fastcgi-server could fail to setgid
+    * #1811: Lua-headers file is missing
+    * #1813: searchOn* does not work when a portal uses REST session backend
+    * #1814: Local cache not fully purged
+    * #1818: [Security:low] XXE vulnerability in SOAP notification server
+    * #1819: Portal Notification server unusable with old XML format
+    * #1821: Pdata not cleared after session upgrade
+    * #1822: Session upgrade does not work with 2FA
+    * #1824: lmConfigEditor does not work anymore
+    * #1826: Race condition on SSL login form button
+
+  * New features:
+    * #1796: Display a message if an expired 2f device is removed
+
+  * Improvements:
+    * #1706: html not interpreted for translated messages
+    * #1723: Real authentication is masked when using proxy authentication module
+    * #1732: Sessions explorer and Browseable::Postgres
+    * #1734: RPM version uses JSON::PP instead of JSON::XS
+    * #1747: Logging out from portal cause an error with doubleCookie after refreshing rights
+    * #1750: Wrong version / author / IP / log in lemonldap-ng-cli
+    * #1758: Warnings in Viewer.pm when saving configuration
+    * #1763: Transmission of Authorization header should probably be on by default
+    * #1764: Set choosen language in user session
+    * #1765: Better CORS handling
+    * #1766: Warning in logs with SAML
+    * #1767: Append startTime overScheme to display sessions to avoid browser crash
+    * #1769: CSRF token is not automatically regenerated after a failed login with Auth::Choice
+    * #1770: Add save/restore commands in cli
+    * #1771: SSO sessions _updateTime value is not updated after a refresh request
+    * #1773: Append option to modify service Token handler TTL
+    * #1774: CheckUser plugin does not work with SAML
+    * #1782: Append an option to set 2FA TTL
+    * #1791: Append an option in Manager to merge only specified SSO groups with Impersonation
+    * #1797: Allow ServiceToken to send service headers
+    * #1799: StorePassword in session not working when using session REST server
+    * #1827: Using lemonldap-ng-cli info gives warning with default configuration
+    * #1828: 2F plugins and method loadTemplate are not using skin rules
+    * #1830: [Security:improvement] Improved use of cryptography
+
+ -- Clément <clem.oudot@gmail.com>  Sat, 29 Jun 2019 22:25:02 +0200
+
+lemonldap-ng (2.0.4) stable; urgency=high
+
+  * Bugs:
+    * #1684: UI manager: boolean values do not appears in configuration forms with Yaml config format
+    * #1709: ViewDiff template not displayed
+    * #1710: Configuration keys not displayed in Viewer
+    * #1716: [Security:minor] Update jQuery
+    * #1720: Duplicate session opening when using multiple Kerberos instances in Combination
+    * #1724: CAS 1.0 /validate endpoint does not return username
+    * #1726: Deb package: missing dependency IO::String
+    * #1733: Invalid default crontab in RPM
+    * #1736: Configuration version in Manager is different from software version
+    * #1738: Error not well catched with Ext2F
+    * #1741: Deleted category is not detected as a change when saving conf.
+    * #1742: [Security: high] Setting tokenUseGlobalStorage allows unauthenticated users to access the portal (and applications without rules)
+    * #1743: [Security: low] register_token used for account creation can be used as a valid session identifier
+    * #1746: Impersonation does not work with double cookies authentication
+
+  * New features:
+    * #1146: Allow Handler to read OAuth2 access token instead of browser cookie
+    * #1722: [Security: improvement] PKCE to secure OIDC Authorization Code flow
+
+  * Improvements:
+    * #1703: Fix faulty headers on a null value
+    * #1711: Return Session ID when authentication is done via REST
+    * #1712: Display idpChoice cancel button only if AuthChoice is enabled
+    * #1713: CAS : Allow per application CAS login override
+    * #1714: Check logLevel value
+    * #1725: Allow unauthenticated clients on OIDC token endpoint
+    * #1728: Improve redirect page
+    * #1729: Display error if SAML service is enabled without private and public keys signature
+    * #1730: Sort real and spoofed attributes in CheckUser and Session explorer
+    * #1735: Highlight valid SSO sessions in sessions explorer
+    * #1739: Improve log in Grant Session plugin
+
+ -- Clément <clem.oudot@gmail.com>  Sun, 12 May 2019 16:17:01 +0200
+
+lemonldap-ng (2.0.3) stable; urgency=medium
+
+  * Bugs:
+    * #1543: Redirection lost with CAS RP -> Choice -> SAML Discovery Protocol -> SAML IDP
+    * #1654: Password must change on AD still not fully working
+    * #1656: No IP shown in history logon
+    * #1667: [Security:medium] Option userControl is not applied anymore in standard login process
+    * #1671: Error in SP-initiated saml logout with multiple SP
+    * #1672: In SAML Issuer, environment variables to store current SP are not filled
+    * #1673: Application list display and specific rules
+    * #1675: [Security:minor] Using /logout instead of /?logout=1 does not work
+    * #1676: Active Directory connection information not saved
+    * #1679: Default jQuery URL in form replay has changed
+    * #1680: In form replay, POST data keys are not URL encoded
+    * #1682: LinkedIn OAuth2 authentication is not available in combination modules list
+    * #1683: Changing configuration option cspScript has no effect
+    * #1684: UI manager: boolean values do not appears in configuration forms with Yaml config format
+    * #1686: SOAP Portal WSDL file is invalid
+    * #1691: Password policy can't display messages
+    * #1692: Parameter base64 is ignored in setHiddenFormValue
+    * #1693: Information is not displayed in logout process
+    * #1698: Invalid pdata causes SAML login to fail after logout
+    * #1703: Fix faulty headers on a null value
+    * #1708: lmerror page loops on url parameter
+
+  * New features:
+    * #1632: Optionally let Ext2F module handle code generation
+    * #1658: CheckUser plugin
+    * #1661: Configuration viewer module
+    * #1664: Impersonation plugin
+    * #1697: Command-line tool to delete session for specific user(s)
+
+  * Improvements:
+    * #1549: Option to override IDP entityID
+    * #1595: Possibility to override message with a custom JSON file in template
+    * #1651: Disable cache on portal page
+    * #1653: Allow failback to default skin when a template is not found in custom theme
+    * #1660: Restore possibility to hide message in portal template
+    * #1666: Display errors on login form
+    * #1668: As IDP SAML, do not try to send SLO response if no SLO endpoint defined in SP metadata
+    * #1670: Display "authentication in progress" when using Ajax with Kerberos
+    * #1681: Change behavior with SAML mandatory/optional attributes in SAML Issuer
+    * #1687: Add granted log for user and connexion informations
+    * #1694: Disable CSRF token with AuthBasic
+    * #1696: Remove unnecessary antiframe protection in portal javascript
+    * #1699: Authentication level for REST and GPG authentication
+    * #1700: Update AuthBasic handler doc : REST server is required
+    * #1704: Append parameter to sort IDP, OP and CAS servers in Auth menu loop
+
+ -- Clément <clem.oudot@gmail.com>  Thu, 11 Apr 2019 10:09:35 +0200
+
+lemonldap-ng (2.0.2) stable; urgency=medium
+
+  * Bugs:
+    * #1574: "Manager is unprotected" message when whatToTrace value is not the default
+    * #1603: Warnings with confirmation required don't work
+    * #1604: Manager unit tests randomly failed
+    * #1607: Safe errors when saving configuration with lmConfigEditor
+    * #1610: Unable to save empty value for cookie expiration time in Manager
+    * #1613: handler https redirection does not work
+    * #1614: Accents not well displayed in Portal
+    * #1618: Version in server signature is wrong
+    * #1623: ADPwdExpireWarning and ADPwdMaxAge parameters are missing in Manager
+    * #1627: Display issue with GrantSession plugin
+    * #1628: [Security:minor] GrantSession plugin discloses its message to unlogged users
+    * #1630: [Security:minor] SSO cookie is sent to protected applications with Nginx-based ReverseProxy
+    * #1636: SSL and Kerberos Auth Modules don t work with choice
+    * #1639: User must change password on AD is broken
+    * #1642: Unable to select skin from URL
+    * #1643: Portal CSS is sent with empty background when portalSkinBackground is not defined
+    * #1644: error while reseting password with ppolicy enabled
+    * #1648: ldapAuthnLevel and dbiAuthnLevel are ignored
+    * #1649: Error about Handler when saving configuration in lmConfigEditor
+
+  * New features:
+    * #1569: GPG authentication module
+    * #1629: Email-based two-factor module
+    * #1631: Allow to display "env" as template variables
+
+  * Improvements:
+    * #1486: Portal starts even if init() has failed
+    * #1600: Improve e2e tests
+    * #1601: Create LDAP option to decode DN value
+    * #1608: Date and comment not updated with lemonldap-ng-cli
+    * #1609: add autocomplete="off" to 2F form fields
+    * #1611: Improve apache configuration
+    * #1622: Display delete button in 2FAManager only if action is allowed
+    * #1625: "Use rule" option in issuer modules seem not to be used anymore
+    * #1633: Better random generation
+    * #1634: Improve management of template parameters
+    * #1635: SAML attribut default value is not set
+    * #1637: Add display options for SAML IDP like OIDC and CAS providers
+
+ -- Clément <clem.oudot@gmail.com>  Tue, 12 Feb 2019 08:57:14 +0100
+
+lemonldap-ng (2.0.1) stable; urgency=medium
+
+  * Bugs:
+    * #1564: Function authLogout is missing in package "Lemonldap::NG::Portal::Auth::SSL"
+    * #1572: Error when saving in manager (mongoDB as ConfigurationBackend)
+    * #1576: Browser doesn t select Portal appropriate language
+    * #1579: SOAP Backend error for empty collection
+    * #1582: MongoDB Conf backend looses sub hash keys
+    * #1586: Portal message override do not work on plugins and mails templates
+    * #1587: Captcha is not displayed in Register form if mail already exists
+    * #1588: Captcha is validated with additional letters
+    * #1589: Error in MailReset when asking to resend confirmation mail
+    * #1592: Cannot select a menu tab with ?tab=<tab id> in URL
+    * #1594: Cannot select oidcConsents tab in menu
+
+  * Improvements:
+    * #1565: OpenId - Default CSP value cause breakdown in OpenId authentification form
+    * #1578: Fix fcgi/psgi extensions in documentation
+    * #1583: Append parameter to configure number of allowed failed logins before brute force protection activation
+    * #1584: Browser doesn t select Manager appropriate language
+    * #1585: Fix main logo and langs icons display & double slash in lmerror 403 error URL
+    * #1591: $req->user not available in plugins authenticated routes
+    * #1593: Bad userinfo response: Unauthorized
+    * #1596: Possibility to define new tabs in Menu
+    * #1599: Usage of OpenID Connect with bad scope value result in unlimited session grow
+
+ -- Clément <clem.oudot@gmail.com>  Fri, 21 Dec 2018 15:12:13 +0100
+
+lemonldap-ng (2.0.0) stable; urgency=medium
+
+  * Bugs:
+    * #757: "Attempt to free unreferenced scalar" in Lemonldap::NG::Common::Session
+    * #789: Apache reloading breaks SAML authentication
+    * #804: Uncomplete logout in Issuer modules
+    * #856: LemonLDAP loses exportedVars conf randomly
+    * #863: get_url function builds wrong Portal URL
+    * #918: Env variables are searched in backends
+    * #998: encode_base64 can be udefined after a reload by URL
+    * #1061: Multiple segfault using ModPerl::Registry with Apache2.4
+    * #1113: OIDC Provider to SAML SP does not work
+    * #1150: Can't get captcha to work with LDAP as backend
+    * #1171: Session explorer freezes when session number is high
+    * #1327: Facebook module not working due to API changes in Facebook
+    * #1420: Answering to CAS proxy requests as CAS Provider
+    * #1468: Enabling both Auth::SAML and Issuer::SAML breaks SLO
+
+  * New features:
+    * #575: Display differences between 2 conf
+    * #782: Node.js handler
+    * #819: Support of FIDO Alliance (multi-factor authentication)
+    * #826: Tab in portal to manage OpenID Connect consent
+    * #852: Possibility to reload/refresh his session without logout and relogin
+    * #970: REST API for Portal
+    * #971: Server-to-Server Handler
+    * #1015: Two-Factor Authentication with OTP for portal user logins
+    * #1019: Evaluate custom template parameters
+    * #1091: Handler for DevOps (SSOaaS)
+    * #1131: Portal plugin to "Stay connected on this device"
+    * #1138: Generate Content-Security-Policy headers and related
+    * #1148: U2F - Universal 2nd Factor Authentication
+    * #1151: Replace Multi by a Combination parser
+    * #1161: Manage access rules for CAS, SAML and OpenID Connect clients
+    * #1162: Capability to use Log4Perl (and other log backends)
+    * #1174: Auth and UserDB REST (delegation by web-service)
+    * #1188: Custom auth/userDB/password/register modules
+    * #1196: Auth::PAM module
+    * #1204: Propose reauthentication if higher access level is requested
+    * #1206: TLS support for mails
+    * #1208: YAML configuration backend
+    * #1212: Propose SSL authentication by Ajax
+    * #1318: Auto-Signin based on $env rules
+    * #1330: Menu rules for applications using SAML/CAS/OIDC
+    * #1359: TOTP plugin
+    * #1379: Feature: External Second Factor over REST API
+    * #1391: Mixed TOTP/U2F second factor plugin
+    * #1397: Plack servers support
+    * #1399: Yubikey as second factor
+    * #1419: Dispatch logger
+    * #1427: Alternative FastCGI-Client handler for Apache2
+    * #1438: Build trunk debian repository (nightly build)
+    * #1458: Local conf backend
+    * #1478: SAML Discovery Protocol (WAYF)
+    * #1500: Possibility to override parameters in Choice modules
+    * #1503: RENATER metadata download script
+    * #1512: Option to choose which SAML attribute will be used as "user" key
+    * #1535: Append Portal parameter to modify Handler Internal Cache
+    * #1539: Option to enable / disable languages choice display
+
+  * Improvements:
+    * #354: Session Explorer: possibility to order sessions by date
+    * #587: Selecting language while connecting to LemonLDAP
+    * #595: Portal powered by FastCGI (using Plack)
+    * #651: Common::CGI::abort should return 500 as HTTP status code
+    * #673: Split conf/session/flags management from the Portal $self object
+    * #713: Request management to handle sessions
+    * #803: AuthSSL : Ability to choose SSLvar or UserDB depending of the CA
+    * #868: Replace XML format by JSON for notifications
+    * #1033: Translate mail subject - forgotten password
+    * #1044: Adapt FastCGI server to be able to use an event Plack engine
+    * #1065: Provide SSL options for AuthBasic
+    * #1118: Manage unicode in session and configuration backends
+    * #1133: Translation system for mails
+    * #1137: Avoid using inline Javascript and CSS
+    * #1140: Add CSRF protection to login and password change forms
+    * #1160: Reorganize handler architecture
+    * #1173: Performance: minimize Apache::Session access
+    * #1181: Make Debian packages autopkgtestable
+    * #1183: Rewrite CAS authentication module
+    * #1201: IPv6 support
+    * #1220: Vietnamese translation
+    * #1222: Arabic translation
+    * #1232: Italian translation
+    * #1247: Support RSA SHA256 signature in SAML
+    * #1267: Allow custom regexp for vhost display
+    * #1302: Move all HTML fragments into templates
+    * #1317: Wildcard in virtualhost names
+    * #1322: Get user attributes in Auth module for external authentication
+    * #1388: Auto-generation of parameters list in doc
+    * #1400: CLUSTER - Status page who check the working state of LLNG
+    * #1418: Sentry Logger (experimental)
+    * #1427: Alternative FastCGI-Client handler for Apache2
+    * #1428: Provide better logs with Nginx
+    * #1429: Use cached configuration when configuration database isn't available
+    * #1442: Last logins not shown when second factors are enabled
+    * #1443: Hide countdown block when stopped
+    * #1445: Let's stop french manager doc translation
+    * #1448: Full status for Nginx
+    * #1461: Remember Choice and other context settings before redirecting user to an external service
+    * #1473: Complex nodes  not well displayed in manager
+    * #1488: Be tolerant with whitespaces in ini file
+    * #1490: Be able to use DBD::MariaDB
+    * #1499: CSP prevents to submit OIDC consents form
+    * #1501: Improve Login history module
+    * #1504: Upgrade to bootstrap 4
+    * #1515: Possibility to configure main logo on portal page
+    * #1522: Notifications with checkbox does not work
+    * #1526: Portal menu application and categorie logos not displayed
+    * #1542: Provide sessions attributes in template
+    * #1546: Configuration comparator does not work
+    * #1550: Error when enables "SSL, Custom " Auth modules with Choice
+
+lemonldap-ng (2.0.0~beta1) testing; urgency=low
+
+lemonldap-ng (2.0.0~alpha3) testing; urgency=low
+
+lemonldap-ng (2.0.0~alpha2) testing; urgency=low
+
+lemonldap-ng (2.0.0~alpha1) testing; urgency=low
+
+lemonldap-ng (1.9.19) oldstable; urgency=high
+
+  * Bugs:
+    * #1509: InactivityTimeout for applications don't work
+    * #1520: lemonldap-ng-cli adds a new item when deleting an item that does not exist.
+    * #1567: Captcha session id is too weak
+    * #1580: Error when saving in manager (mongoDB as ConfigurationBackend)
+    * #1662: id_token validity not correctly evaluated
+    * #1744: [Security: low] register_token used for account creation can be used as a valid session identifier
+
+  * Improvements:
+    * #1516: All IDP conf not usable if only one IDP misconfigured
+    * #1519: Cross domain authentication, ajax request and same origin policy
+
+lemonldap-ng (1.9.18) stable; urgency=high
+
+    * #1479: App Category order - Cannot save
+    * #1476: Unescaped left brace generates a warning with Perl-5.28
+    * #1474: OAuth2 token_type is case insensitive
+    * #1514: Aliases not respecting redirect settings
+    * #1494: Manage applications with the lemonldap-ng-cli
+    * #1470: Warning when using CLI to set value which does not exists before
+    * #1469: SMTP timeout breaks Manager configuration save
+
+lemonldap-ng (1.9.17) stable; urgency=high
+
+    * #1416: Attribute encoding in CAS responses
+    * #1426: Error with mod_auth_openidc when kid is set in JWKS
+    * #1423: "samlServicePrivateKeySig: Bad PEM encoding" on manager when
+      saving config with some valid certificates
+    * #1415: Improve test pages
+    * #1413: Possibility to add conditions to display Choice tabs
+    * #1407: Remote MYSQL - mysql_enable_utf8 not applied?
+    * #1403: Parameter to ignore some tests during saving
+
+lemonldap-ng (1.9.16) stable; urgency=high
+
+    * #1390: Choice module allows XSS attack
+    * #1389: Kerberos ticket revalidated in Multi mode
+    * #1382: Kerberos - Username / Session uncorrectly set
+    * #1378: lemonldap-ng-doc unable to install on Debian 7
+    * #1372: Action "update-cache" in lemonldap-ng-cli does not work
+    * #1371: incompatibility between 1.4 portal and 1.9/2.0 handler : _utime
+      not defined
+    * #1368: Impossible to configure IssuerDB Get Parameters with RDBI backend
+    * #1366: Problem with kerberos and ajax and ldap ...
+    * #1363: Bad equality operator in Handler::Main::Jail
+    * #1362: Allow CAS 3.0 endpoints (/p3/serviceValidate and
+      /p3/proxyValidate)
+    * #1360: Using "force" and "cfgNum" with lemonldap-ng-cli does not work
+    * #1063: lemonldap-ng-fastcgi-server has a hard dependency on nginx
+    * #1253: Default values not saved by Manager (complex nodes)
+
+lemonldap-ng (1.9.15) stable; urgency=high
+
+    * #1358: Encoding issues with LDAP configuration backend
+    * #1357: Wrong return status for processLogoutRequestMsg in SAML module
+    * #1356: Prevent infinite loop in LDAP group recursive search
+    * #1355: local session storage not being cleaned up
+    * #1352: Encoding issues with MySQL configuration backend
+    * #1351: missing dependency LWP::Protocol::https on CentOS 7 packaging
+    * #1349: Initial url lost during reset password workflow
+    * #1347: Do not allow "/" or ".." in skin parameter to avoid directory
+      traversal attack
+    * #1346: Check that skin directory exists before trying to open it
+    * #1345: Autoredirect does not work after session expiration
+    * #1343: Captcha code not removed after successful verification
+    * #1341: llng-fastcgi-server: Allow to listen on TCP
+    * #1337: mailFrom and mailReplyTo directives : bad default address
+    * #1281: purgeLocalCache should use conf from manager
+
+lemonldap-ng (1.9.14) stable; urgency=high
+
+    * #707: Kerberos authentication module
+    * #1308: make saml work with POST sso binding and multiple authentication
+    * #1310: Form replay javascript generates error for fields with a dot
+    * #1315: Missing Mouse dependency in Debian packages
+    * #1316: In docs, for Alfresco, said they need to add an exclusion for
+      ressources path
+    * #1324: Allow SAML with Office365 multidomains
+    * #1326: SessionIndex should not be mandatory in SAML SingleLogoutRequest
+    * #1328: Value 0 can not be set in hidden field
+    * #1329: No need to 'warn' if no IDP or SP is present in configuration
+    * #1331: Manage UTF-8 values in HTTP headers
+
+lemonldap-ng (1.9.13) stable; urgency=high
+
+    * [LEMONLDAP-1209] - [UTF8-Enconding] Issues with mysql backend and saml attributes
+    * [LEMONLDAP-1303] - Debian 9 and JSON parsing error - OpenID Connect
+    * [LEMONLDAP-1304] - make saml tolerant to issuerDBSAMLPath
+
+lemonldap-ng (1.9.12) stable; urgency=high
+
+    * [LEMONLDAP-1293] - Unable to delete "Exported Attributes" in SAML SP
+    * [LEMONLDAP-1294] - Debian - JSON - Apache::Session module failed
+    * [LEMONLDAP-1295] - Bad UserInfo response wihen attribute values are Perl references
+    * [LEMONLDAP-1297] - Restrict reload url to the localhost
+    * [LEMONLDAP-1299] - Unable to use LemonLDAP on Debian Stretch - Portal issue
+    * [LEMONLDAP-1298] - CAS logout redirect service
+
+lemonldap-ng (1.9.11) stable; urgency=high
+
+    * [LEMONLDAP-1244] - CGIPassAuth not usable in CentOS 7.3.1611 because of old Apache version
+    * [LEMONLDAP-1255] - Issue with openid-configuration.pl when updating Perl
+    * [LEMONLDAP-1262] - Session expired on Handler
+    * [LEMONLDAP-1277] - Missing screen shot in documentation
+    * [LEMONLDAP-1288] - Empty hash configuration parameters are converted to empty scalar trough SOAP
+    * [LEMONLDAP-1289] - Proxy authentication module does not catch authentication error
+    * [LEMONLDAP-1245] - adding salt feature for database backend
+    * [LEMONLDAP-1254] - APT warning on weak digest algo on lemonldap repository
+    * [LEMONLDAP-1256] - Avoid 'forcedSAML' in Choice module
+    * [LEMONLDAP-1261] - SAML SessionIndex may leak SSO data and cause interoperability issues
+    * [LEMONLDAP-1263] - No error message when backend is in ReadOnly
+    * [LEMONLDAP-1270] - Logout_*
+    * [LEMONLDAP-1243] - LinkedIn authentication module
+    * [LEMONLDAP-1286] - httpd dependency
+
+lemonldap-ng (1.9.10) stable; urgency=high
+
+    * [LEMONLDAP-1202] - CSS an JS not correctly loaded in FR offline doc
+    * [LEMONLDAP-1203] - NginX handler and CDA does not work
+    * [LEMONLDAP-1207] - GUI Error (HTTP 500) on Issuer module "GET"
+    * [LEMONLDAP-1214] - No display type selected when session expired and authentication done via Mutli or Choice
+    * [LEMONLDAP-1218] - Warning on expired session can break transparent authentication
+    * [LEMONLDAP-1231] - debian wheezy doc package not working
+    * [LEMONLDAP-1233] - redirect_uri parameter validity should be checked first to avoid unwanted redirections
+    * [LEMONLDAP-1211] - Provide error page / error message for error 404 and 502
+    * [LEMONLDAP-1219] - Reject same SAML EntityID for Service Providers
+    * [LEMONLDAP-1225] - Lost Password error message
+
+lemonldap-ng (1.9.9) stable; urgency=high
+
+    * [LEMONLDAP-1081] - SAML artifact server double encode UTF-8 characters
+    * [LEMONLDAP-1193] - entityID not found in metadata if value is between simple quotes instead of double quotes
+    * [LEMONLDAP-1195] - JS error when clicking on export configuration
+    * [LEMONLDAP-1197] - CSP errors in Manager
+    * [LEMONLDAP-1199] - Compilation error in IssuerDBOpenIDConnect.pm
+    * [LEMONLDAP-1187] - Make crypto functions available in safe jail
+    * [LEMONLDAP-1191] - Brute force protection for OIDC
+    * [LEMONLDAP-1200] - Force AllowCreate in NameIDPolicy for broken SAML clients
+
+lemonldap-ng (1.9.8) stable; urgency=high
+
+    * [LEMONLDAP-1121] - Fail to require customNginxHandler
+    * [LEMONLDAP-1130] - SOAP request fail (FCGI) - missing path info
+    * [LEMONLDAP-1136] - Mail reset form allows email enumaration
+    * [LEMONLDAP-1139] - Errors "Session cannot be tied"
+    * [LEMONLDAP-1141] - Bad encoding in reset password emails
+    * [LEMONLDAP-1145] - Missing user identifier in mail reset log messages
+    * [LEMONLDAP-1147] - SAML session ID
+    * [LEMONLDAP-1149] - lemonldap-ng-fastcgi-server not working on CentOS7
+    * [LEMONLDAP-1152] - jquery-ui.min.js not found
+    * [LEMONLDAP-1155] - Typo in OIDC OP for keeping acr_values parameter
+    * [LEMONLDAP-1159] - Session concurrency issue with SAML + OpenID Connect flow
+    * [LEMONLDAP-1166] - Typo in bootstrap footer.tpl
+    * [LEMONLDAP-1170] - Browse sessions by ip address duplicates entries
+    * [LEMONLDAP-1179] - Bad session count in sessions explorer multi IP tab
+    * [LEMONLDAP-1086] - Make Debian packages autopkgtestable
+    * [LEMONLDAP-1120] - Add public pages concept in LemonLDAP::Portal
+    * [LEMONLDAP-1122] - Enclose expressions
+    * [LEMONLDAP-1125] - Avoid using unsafe eval Javascript
+    * [LEMONLDAP-1127] - SAML: Reject same entityID on different Metadata
+    * [LEMONLDAP-1132] - Warn users about session expired in portal
+    * [LEMONLDAP-1135] - Warnings in unit tests
+    * [LEMONLDAP-1143] - Manage doc indexing using robots.txt to avoid indexing old doc
+    * [LEMONLDAP-1144] - Add vhost in reject log message
+    * [LEMONLDAP-1156] - Export OpenIDConnect request parameters in %ENV
+    * [LEMONLDAP-1158] - Export CAS request parameters in %ENV
+    * [LEMONLDAP-1129] - Extract CN field from SSL certificate (authSSL)
+    * [LEMONLDAP-1177] - Custom skin lost when submitting login form
+
+lemonldap-ng (1.9.7) stable; urgency=high
+
+    * [LEMONLDAP-1097] - invalid base64 encoding on openidconnect key2jwks
+    * [LEMONLDAP-1099] - FCGI: reload method return Internal Server Error
+    * [LEMONLDAP-1101] - SAML IDP-initiated : Federation not found on login
+    * [LEMONLDAP-1102] - Random access denied
+    * [LEMONLDAP-1105] - Broken openidconect oidcRPMetaDataOptionsExtraClaims parsing (or saving) when using sql datastore
+    * [LEMONLDAP-1107] - Use of uninitialized value in pattern match...Simple.pm line 1561
+    * [LEMONLDAP-1109] - Notification DBI backend has compilation error
+    * [LEMONLDAP-1117] - Corrupted persistent session when value has accentued characters and storage is LDAP
+    * [LEMONLDAP-1096] - Use manager libraries for doc with "external" hook
+    * [LEMONLDAP-1098] - Allow access tokens to be gathered as parameters too
+    * [LEMONLDAP-1100] - Create custom lltype for custom handler
+    * [LEMONLDAP-1104] - Allow the parameters for the reload url to contain basic credentials
+    * [LEMONLDAP-1106] - returnJSONError on _OpenIDConnect.pm should return a 400 status not a 200
+    * [LEMONLDAP-1108] - caFile/caPathc options should be available for LDAPS, not only for LDAP+TLS
+    * [LEMONLDAP-1110] - Provide autopkgtest tests
+    * [LEMONLDAP-1114] - Missing DirectoryIndex in offline documentation
+    * [LEMONLDAP-1116] - Change how we check signatures on SAML messages
+    * [LEMONLDAP-173]  - Token for cross domain authentication
+    * [LEMONLDAP-1115] - Documentation error
+
+lemonldap-ng (1.9.6) stable; urgency=high
+
+    * [LEMONLDAP-1058] - Timeout on save conf
+    * [LEMONLDAP-1060] - Missing reload target for nginx
+    * [LEMONLDAP-1064] - getApacheSession not working with id
+    * [LEMONLDAP-1068] - Error in logout request
+    * [LEMONLDAP-1069] - start-stop-daemon warning in lemonldap-ng-fastcgi-server init script
+    * [LEMONLDAP-1071] - OpenID Connect discovery: LLNG does not use booleans
+    * [LEMONLDAP-1075] - Unable to add rule or header in a vhost using lemonldap-ng-cli
+    * [LEMONLDAP-1076] - IDP resolution rule is no more available in Manager
+    * [LEMONLDAP-1078] - CryptoJS URL have changed
+    * [LEMONLDAP-1079] - Security options for SAML are set to Off by default
+    * [LEMONLDAP-1080] - Typo is URL matching for Auth OpenID
+    * [LEMONLDAP-1093] - /run/llng-fastcgi-server is deleted on reboot
+    * [LEMONLDAP-1094] - typo in error_pt.al
+    * [LEMONLDAP-1001] - Possibility to configure the update interval used for timeout activity
+    * [LEMONLDAP-1065] - Provide SSL options for AuthBasic
+    * [LEMONLDAP-1082] - Return explicit error if no token endpoint auth method is set
+    * [LEMONLDAP-1083] - Create an option to not store SAML/OIDC tokens in session
+    * [LEMONLDAP-1084] - Disable SAML SLO request when LL::NG configured as SP and IDP does not support SLO
+    * [LEMONLDAP-1087] - Allow to check audience and time conditions separately in SAML flow
+    * [LEMONLDAP-1088] - Allow relayState to be a redirection URI
+    * [LEMONLDAP-1089] - Option to bypass consent in OpenID Connect Issuer
+    * [LEMONLDAP-1067] - Authbasic handler for Nginx
+
+lemonldap-ng (1.9.5) stable; urgency=high
+
+    * [LEMONLDAP-966] - RSA Keys generated from Manager are incomplete
+    * [LEMONLDAP-1028] - SAML SP SOAP logout does not happen
+    * [LEMONLDAP-1046] - Default value for samlIDPMetaDataOptionsSSOBinding should be undef
+    * [LEMONLDAP-1047] - SAML SLO from IDP does not work when SP is LL::NG
+    * [LEMONLDAP-1048] - Unable to upgrade a configuration from 1.4 to 1.9 using lmConfigEditor
+    * [LEMONLDAP-1049] - Unable to read LDAP session in 1.4 format with 1.9 version
+    * [LEMONLDAP-1050] - signing in to chrome devices via sso is broken
+    * [LEMONLDAP-1054] - test_config not found in lemonldap-ng-fastcgi-server init script
+    * [LEMONLDAP-1059] - Portal disconnection warning
+    * [LEMONLDAP-1043] - Display total number of sessions
+    * [LEMONLDAP-1045] - Wrong SAML attributes encoding issued by IDP
+    * [LEMONLDAP-1052] - Use Lasso 'thin-sessions'
+    * [LEMONLDAP-1055] - Remove network access attempts during tests
+    * [LEMONLDAP-1057] - Change displayed message when sending confirmation mail after password reset
+    * [LEMONLDAP-1056] - SAML SLO relay URL not catched
+
+lemonldap-ng (1.9.4) stable; urgency=high
+
+    * [LEMONLDAP-1034] - Missing dependencies in documentation
+    * [LEMONLDAP-1036] - LDAP sessions are not purged
+    * [LEMONLDAP-1037] - Using LDAP as conf backend, IssuerDBGetParameters with wrong value inserted after conf save
+    * [LEMONLDAP-1038] - All information is lost when vhost or SAML/OIDC partner is renamed in Manager
+    * [LEMONLDAP-1039] - Error not displayed correctly for notification browsing
+    * [LEMONLDAP-1040] - Session browsing not working if _whatToTrace is missing
+    * [LEMONLDAP-1041] - ldapAttributeId not used everywhere in _LDAPGKFAS
+    * [LEMONLDAP-1035] - Manage Plack engines in FastCGI server
+    * [LEMONLDAP-1042] - Some information are lost when renaming OIDC/SAML partner
+
+lemonldap-ng (1.9.3) stable; urgency=low
+
+    * [LEMONLDAP-985] - authForce is not well called trough AuthMulti
+    * [LEMONLDAP-997] - Circular dependency for liblemonldap-ng-handler-perl package
+    * [LEMONLDAP-1003] - Replace Mouse by Moose if ModPerl::Registry is used with Perl 5.22
+    * [LEMONLDAP-1006] - Typo in Common/Apache/Session.pm on LDAP disconnect
+    * [LEMONLDAP-1008] - Bad comment in lemonldap-ng.ini
+    * [LEMONLDAP-1009] - Version shown in Manager is not the one of the main module
+    * [LEMONLDAP-1010] - Problem with persistent sessions and MongoDB backend
+    * [LEMONLDAP-1012] - AuthTwitter is not working anymore
+    * [LEMONLDAP-1013] - AuthFacebook is not working anymore
+    * [LEMONLDAP-1014] - Example values for LDAP backend configuration are wrong
+    * [LEMONLDAP-1016] - Can't configure OpenID Connect RP Extra claims in lemonldap web manager
+    * [LEMONLDAP-1018] - Slave authentication error (Can't locate object method "checkHeader")
+    * [LEMONLDAP-1020] - Can't define SMTP server with port
+    * [LEMONLDAP-1022] - The path of the request is lost when using the url parameter of a Choice module
+    * [LEMONLDAP-1026] - lemonldap-ng-fastcgi-server is missing libfcgi-procmanager-perl as a dependency
+    * [LEMONLDAP-1029] - Missing images in Debian packaging
+    * [LEMONLDAP-1030] - Cannot start Manager with zero conf in LDAP backend
+    * [LEMONLDAP-983] - Import encrypt in functions
+    * [LEMONLDAP-1004] - Es, it, pt, ne and de translations
+    * [LEMONLDAP-1011] - Option to allow a user to reset an expired password
+    * [LEMONLDAP-1023] - Add documentation to nginx handler
+    * [LEMONLDAP-1025] - provide additional GET parameters while redirecting to handler
+    * [LEMONLDAP-1031] - Be less restrictive on service parameter check in CAS issuer
+
+lemonldap-ng (1.9.2) stable; urgency=low
+
+    * [LEMONLDAP-985] - authForce is not well called trough AuthMulti
+    * [LEMONLDAP-988] - CPAN Tests fails for Lemonldap-NG-Common
+    * [LEMONLDAP-989] - CPAN Tests fails for Lemonldap-NG-Portal
+    * [LEMONLDAP-991] - LDAP TCP connections is still not closed
+    * [LEMONLDAP-992] - LL:NG use wrong variables with Multi auth
+    * [LEMONLDAP-994] - Can't call method "add_output_filter" on an undefined value when I logout
+    * [LEMONLDAP-995] - Encoding problem in menu categories and applications
+    * [LEMONLDAP-996] - logout_app_sso URL rejected
+    * [LEMONLDAP-1000] - Session errors with persistent sessions
+    * [LEMONLDAP-1002] - Show sent headers in debug mode
+    * [LEMONLDAP-986] - Propose packages for SLES 12 SP1
+
+lemonldap-ng (1.9.1) stable; urgency=low
+
+    * [LEMONLDAP-961] - PAUSE indexer report
+    * [LEMONLDAP-962] - Applications logos and portal background not displayed in Manager
+    * [LEMONLDAP-964] - Links to change
+    * [LEMONLDAP-965] - Syntax checking on certificate must be more tolerant
+    * [LEMONLDAP-968] - Headers corrupted when authenticating with HTTP basic authentication on a protected application
+    * [LEMONLDAP-969] - /var/run is a tmpfs so FastCGI pid can't be written after reboot
+    * [LEMONLDAP-972] - Missing test for exportedHeaders
+    * [LEMONLDAP-974] - keyMsgFail are missing in Manager/Attributes.pm
+    * [LEMONLDAP-976] - $ENV is replaced by $datas->{ENV}
+    * [LEMONLDAP-978] - CPAN Tests fails for Lemonldap-NG-Common
+    * [LEMONLDAP-980] - Error "password must be changed" when user not found in AD
+    * [LEMONLDAP-984] - Allow to set replica for MongoDB configuration backend
+    * [LEMONLDAP-973] - Activate maintenance mode if reval() fails
+    * [LEMONLDAP-185] - Check configuration uploaded by lmConfigEditor
+
+lemonldap-ng (1.9.0) stable; urgency=low
+
+    * [LEMONLDAP-176] - POST Handler feature does not work with mod_proxy
+    * [LEMONLDAP-395] - LL::NG::Handler::CGI ignores some config parameters
+    * [LEMONLDAP-729] - Handler Jail may be inconsistent with its attributes
+    * [LEMONLDAP-759] - Cannot store Conf or Sessions in AD (was Storable appears to not work on 64-bit OS)
+    * [LEMONLDAP-767] - future deprecated dependency
+    * [LEMONLDAP-777] - Password fiedls in Manager
+    * [LEMONLDAP-802] - Apache2::Connection remote_ip not supported in Apache 2.4
+    * [LEMONLDAP-825] - Error when session is not in backend but only in cookie
+    * [LEMONLDAP-827] - Error encoding of passwords when using special characters in file lmconf.
+    * [LEMONLDAP-828] - wrong Makefile target for translation
+    * [LEMONLDAP-835] - Interface with unicode
+    * [LEMONLDAP-840] - Auth-User HTTP Header appears even if no HTTP Headers defined on VHost
+    * [LEMONLDAP-854] - Manager returns "Not authorized" with Apache 2.4 and fr-doc not installed
+    * [LEMONLDAP-858] - Error 500 at Save (on virtualHost Rules), when the displayName of one Category Portal Menu contains accentuated Character
+    * [LEMONLDAP-866] - Configuration deletion does not work
+    * [LEMONLDAP-867] - 404 errors in documentation
+    * [LEMONLDAP-870] - _lastSeen should be updated when a issuer module (ex: CAS) is called
+    * [LEMONLDAP-872] - Omegat does not end
+    * [LEMONLDAP-914] - Password expiration interception in Multi mode
+    * [LEMONLDAP-922] - SAML Error on update session
+    * [LEMONLDAP-923] - Error save conf SlaveMasterIp
+    * [LEMONLDAP-948] - openid userinfo endpoints need Authorization header
+    * [LEMONLDAP-954] - GLPI link is broken
+    * [LEMONLDAP-955] - GRR link is broken
+    * [LEMONLDAP-958] - Infinite redirection loop when redirected from Handler for an error (403/500/503)
+    * [LEMONLDAP-428] - Ergonomic items
+    * [LEMONLDAP-534] - splice not necessary to parse @_ in subroutines
+    * [LEMONLDAP-633] - unify var substitution in locationRules and exportedHeaders
+    * [LEMONLDAP-717] - Handler init management
+    * [LEMONLDAP-733] - Form replay refactoring
+    * [LEMONLDAP-776] - Use Bootstrap for Manager
+    * [LEMONLDAP-787] - [UserDB][LDAP] Allow alias dereferencing in search
+    * [LEMONLDAP-790] - Portal should not return HTML for AJAX requests
+    * [LEMONLDAP-794] - Default values must be set before storing in local cache
+    * [LEMONLDAP-795] - Propose JSON serialization in Apache::Session to be able to access to sessions with other languages
+    * [LEMONLDAP-796] - Replace our own serializer by JSON in Conf/File.pm
+    * [LEMONLDAP-798] - Avoid opening local cache when root
+    * [LEMONLDAP-815] - Improve the cookie name regexp
+    * [LEMONLDAP-821] - JSON File as new default configuration backend
+    * [LEMONLDAP-824] - autocomplete=off does not prevent anymore password manager use
+    * [LEMONLDAP-833] - Manager - Multi : display only the selected modules
+    * [LEMONLDAP-865] - Check conditions in AuthSlave and UserDBSlave
+    * [LEMONLDAP-877] - Replace Storable by JSON to be arch independent
+    * [LEMONLDAP-908] - Replace own minifier by external
+    * [LEMONLDAP-911] - Possibility to set a specific logo for a choice module
+    * [LEMONLDAP-917] - Possibility to define finely sessions timeout activity
+    * [LEMONLDAP-924] - Manager not checking regex before saving
+    * [LEMONLDAP-930] - Scripts must have POD
+    * [LEMONLDAP-946] - Set cfgAuthor to lmConfigEditor
+    * [LEMONLDAP-24] - Browse configuration versions and apply them
+    * [LEMONLDAP-183] - OAuth 2.0 / OpenID Connect authentication module
+    * [LEMONLDAP-184] - OAuth 2.0 / OpenID Connect provider module
+    * [LEMONLDAP-227] - VirtualHost Copy/paste functions in Manager
+    * [LEMONLDAP-287] - Implement HTTP Strict Transport Security
+    * [LEMONLDAP-495] - Persistent sessions Explorer
+    * [LEMONLDAP-583] - Nginx handler
+    * [LEMONLDAP-630] - Modularization of Handler code
+    * [LEMONLDAP-770] - Configuration of portal background
+    * [LEMONLDAP-773] - Implement CAS 3.0 Protocol (attributes exchange)
+    * [LEMONLDAP-800] - MongoDB configuration and session backend
+    * [LEMONLDAP-820] - New Manager interface with AngularJS
+    * [LEMONLDAP-836] - Add Choice to included X509 certificate in Signature of SAML Messages, when LL::NG acts as IDP
+    * [LEMONLDAP-915] - Portal message customization
+    * [LEMONLDAP-925] - New Notification Explorer
+    * [LEMONLDAP-935] - Capability to duplicate virtualhost
+    * [LEMONLDAP-864] - SAML and manager translations(utf8)
+    * [LEMONLDAP-859] - Perl-Digest-SHA is not listed at dependencies documentation
+    * [LEMONLDAP-873] - Change screenshots in doc
+    * [LEMONLDAP-891] - Remove "return to SP link"
+    * [LEMONLDAP-909] - Push French translation into sources
+    * [LEMONLDAP-932] - Packages for RHEL / CentOS
+    * [LEMONLDAP-871] - Manager protection
+    * [LEMONLDAP-874] - Add portal and logout links, add current version
+    * [LEMONLDAP-878] - Button to download file
+    * [LEMONLDAP-879] - Possibility to have a certificate instead of a public key
+    * [LEMONLDAP-880] - Bug in Logs node
+    * [LEMONLDAP-881] - Load metadata from file
+    * [LEMONLDAP-882] - Problem with radio buttons in samlAttributeContainer component
+    * [LEMONLDAP-883] - Bug with choices modules confguration
+    * [LEMONLDAP-884] - Optional URL in AuthChoices module
+    * [LEMONLDAP-885] - Unable to register OpenID Connect metadata
+    * [LEMONLDAP-886] - favicon disappear when using configuration tab
+    * [LEMONLDAP-888] - SAML attributes and other options not saved
+    * [LEMONLDAP-889] - Saving an old configuration leads to "No such file or directory"
+    * [LEMONLDAP-892] - Set OpenID Connect standard attributes in default values
+    * [LEMONLDAP-893] - Unable to download configuration
+    * [LEMONLDAP-894] - Get another default component for nodes
+    * [LEMONLDAP-895] - Associated help is not displayed in SAML SP/IDP
+    * [LEMONLDAP-896] - Labels for samlSP and samlSPName not displayed
+    * [LEMONLDAP-897] - Handler Status does not work
+    * [LEMONLDAP-898] - Handler Menu does not work
+    * [LEMONLDAP-899] - Button to show/hide documentation panel
+    * [LEMONLDAP-900] - Fill the domain when creating a new virtual host
+    * [LEMONLDAP-901] - Propose default names for IDP/SP/OP/RP
+    * [LEMONLDAP-902] - Replace javascript prompts by dialogs/modals
+    * [LEMONLDAP-903] - ZeroConf
+    * [LEMONLDAP-904] - Open IDP/SP node after its creation
+    * [LEMONLDAP-905] - Login is displayed in errors
+    * [LEMONLDAP-906] - Hide inaccessible modules in manager interface
+    * [LEMONLDAP-907] - Deleting a menu entry isn't detected
+    * [LEMONLDAP-913] - XS mode: menu never visible when tree is displayed
+    * [LEMONLDAP-916] - missing semicolons in Makefile
+    * [LEMONLDAP-919] - Choosing Multi module should not lock passwordDB configuration
+    * [LEMONLDAP-920] - Clear cfgLog when using lmConfigEditor
+    * [LEMONLDAP-921] - Implement lemonldap-ng-cli wth new configuration code
+    * [LEMONLDAP-926] - Error is not displayed to user
+    * [LEMONLDAP-927] - Use modal instead of alert
+    * [LEMONLDAP-928] - Bad notification encoding
+    * [LEMONLDAP-929] - Manage other portal CGIs
+    * [LEMONLDAP-934] - LLNG status for Nginx
+    * [LEMONLDAP-936] - Extra headers sent to protected applications
+    * [LEMONLDAP-938] - Can't save conf due to bad custom function name
+    * [LEMONLDAP-940] - Timout for reloadUrls
+    * [LEMONLDAP-941] - Aliases not taken into account
+    * [LEMONLDAP-942] - Session explorer not usable with Apache::Session::Browseable::MySQL
+    * [LEMONLDAP-943] - Zimbra Handler
+    * [LEMONLDAP-944] - Notifications - invalid date
+    * [LEMONLDAP-945] - Auto-protected CGI not working
+    * [LEMONLDAP-947] - Notifications cannot be purged for DBI and LDAP
+    * [LEMONLDAP-949] - Handler PSGI should set LMREMOTE_USER
+    * [LEMONLDAP-950] - spelling
+    * [LEMONLDAP-952] - Errors not displayed in Notifications Explorer
+    * [LEMONLDAP-953] - Notifications are mixed under the same letter
+    * [LEMONLDAP-956] - Custom functions don't work with useSafeJail
+    * [LEMONLDAP-957] - Replace $http.success() by .then()
+
+lemonldap-ng (1.4.11) stable; urgency=low
+
+    * [LEMONLDAP-1068] - Error in logout request
+    * [LEMONLDAP-1080] - Typo is URL matching for Auth OpenID
+    * [LEMONLDAP-1092] - Net::LDAP does not have an uri method in el5
+    * [LEMONLDAP-1001] - Possibility to configure the update interval used for timeout activity
+    * [LEMONLDAP-1052] - Use Lasso 'thin-sessions'
+    * [LEMONLDAP-1083] - Create an option to not store SAML/OIDC tokens in session
+    * [LEMONLDAP-1084] - Disable SAML SLO request when LL::NG configured as SP and IDP does not support SLO
+
+lemonldap-ng (1.4.10) stable; urgency=low
+
+    * [LEMONLDAP-985] - authForce is not well called trough AuthMulti
+    * [LEMONLDAP-1034] - Missing dependencies in documentation
+    * [LEMONLDAP-1047] - SAML SLO from IDP does not work when SP is LL::NG
+    * [LEMONLDAP-1050] - signing in to chrome devices via sso is broken
+    * [LEMONLDAP-1059] - Portal disconnection warning
+    * [LEMONLDAP-1057] - Change displayed message when sending confirmation mail after password reset
+
+lemonldap-ng (1.4.9) stable; urgency=low
+
+    * [LEMONLDAP-1003] - Replace Mouse by Moose if ModPerl::Registry is used with Perl 5.22
+    * [LEMONLDAP-1006] - Typo in Common/Apache/Session.pm on LDAP disconnect
+    * [LEMONLDAP-1022] - The path of the request is lost when using the url parameter of a Choice module
+    * [LEMONLDAP-1027] - Can't locate object method "client_ip" via package "Apache2::Connection"
+    * [LEMONLDAP-1004] - Es, it, pt, ne and de translations
+    * [LEMONLDAP-1031] - Be less restrictive on service parameter check in CAS issuer
+
+lemonldap-ng (1.4.8) stable; urgency=low
+
+    * [LEMONLDAP-985] - authForce is not well called trough AuthMulti
+    * [LEMONLDAP-991] - LDAP TCP connections is still not closed
+    * [LEMONLDAP-992] - LL:NG use wrong variables with Multi auth
+    * [LEMONLDAP-1000] - Session errors with persistent sessions
+    * [LEMONLDAP-986] - Propose packages for SLES 12 SP1
+
+lemonldap-ng (1.4.7) stable; urgency=low
+
+    * [LEMONLDAP-802] - Apache2::Connection remote_ip not supported in Apache 2.4
+    * [LEMONLDAP-842] - manager configuration tree does not display correctly
+    * [LEMONLDAP-866] - Configuration deletion does not work
+    * [LEMONLDAP-958] - Infinite redirection loop when redirected from Handler for an error (403/500/503)
+    * [LEMONLDAP-964] - Links to change
+    * [LEMONLDAP-968] - Headers corrupted when authenticating with HTTP basic authentication on a protected application
+    * [LEMONLDAP-976] - $ENV is replaced by $datas->{ENV}
+    * [LEMONLDAP-980] - Error "password must be changed" when user not found in AD
+
+lemonldap-ng (1.4.6) stable; urgency=low
+
+    * [LEMONLDAP-705] - SAML with Signature Method rsa-sha256
+    * [LEMONLDAP-715] - Multi with # in the module name: error while calling authLogout
+    * [LEMONLDAP-720] - Error with CPAN tests
+    * [LEMONLDAP-823] - duplicated groups when recursive groups enabled
+    * [LEMONLDAP-841] - Error in extract_lang with a value with *
+    * [LEMONLDAP-843] - localStorage replaced by localSessionStorage
+    * [LEMONLDAP-845] - Session activity not updated
+    * [LEMONLDAP-846] - Session cache not purged
+    * [LEMONLDAP-848] - Do not call 'perl' directly (see RT#107205)
+    * [LEMONLDAP-849] - Syntax checking on domain name is too restrictive
+    * [LEMONLDAP-850] - SOAP data not well formatted
+    * [LEMONLDAP-768] - Fixed with for application boxes in menu in bootstrap skin
+    * [LEMONLDAP-771] - Adapt foot size in mobile mode for Bootstrap skin
+    * [LEMONLDAP-822] - checking pwdLastSet in AD is not sufficient
+    * [LEMONLDAP-781] - Lasso package
+    * [LEMONLDAP-785] - Display  password expiration management with Active Directory
+    * [LEMONLDAP-792] - Support for multivaluated attributes in LDAP for groups
+
+lemonldap-ng (1.4.5) stable; urgency=low
+
+    * [LEMONLDAP-816] - Wrong definition of getAttributes in Portal WSDL
+    * [LEMONLDAP-817] - Wrong parameter order for error SOAP operation in Portal WSDL
+    * [LEMONLDAP-818] - Skin rules on mail reset and register page
+
+lemonldap-ng (1.4.4) stable; urgency=low
+
+    * [LEMONLDAP-763] - purgeCentralCache sometimes hangs
+    * [LEMONLDAP-783] - Test error with SOAP::Lite 1.12
+    * [LEMONLDAP-784] - reset password in AD not working
+    * [LEMONLDAP-788] - Captcha not working using multiple backends...
+    * [LEMONLDAP-793] - Common/Conf/File must return an error if file can't be opened
+    * [LEMONLDAP-801] - Multi and Kerberos does not work with a positive LocationMatch
+    * [LEMONLDAP-805] - Update session failure on high load if idle timeout is configured
+    * [LEMONLDAP-806] - ErrorDocument conflicts with CentOS's default apache vhost
+    * [LEMONLDAP-799] - parameter notOnOrAfter should be computed against SAML message emission date
+    * [LEMONLDAP-807] - End of OpenID 2.0 support for Google on April 20, 2015
+
+lemonldap-ng (1.4.3) stable; urgency=low
+
+    * [LEMONLDAP-775] - Cas Service Ticket should be used only once
+    * [LEMONLDAP-772] - Collapse menu on click in mobile mode in Bootstrap skin
+    * [LEMONLDAP-774] - Use portal bootstrap theme for test pages
+    * [LEMONLDAP-765] - Provide packages for CentOS 7
+    * [LEMONLDAP-780] - Remove old captcha dirs
+
+lemonldap-ng (1.4.2) stable; urgency=low
+
+    * [LEMONLDAP-740] - TCP connections never closed on LDAP
+    * [LEMONLDAP-743] - Password reset doesn't work with Apache::Session::MySQL::NoLock
+    * [LEMONLDAP-745] - notifyDeleted ignored with the new bootstrap theme
+    * [LEMONLDAP-747] -  Apache::Session::Postgres.pm
+    * [LEMONLDAP-750] - Exported variable name vs LDAP attr name
+    * [LEMONLDAP-751] - Login page on Bootstrap thème
+    * [LEMONLDAP-752] - Portal URL is treated as Bad URL
+    * [LEMONLDAP-753] - OpenID provider broken
+    * [LEMONLDAP-754] - Error when configuring captcha trough Manager
+    * [LEMONLDAP-758] - SAML metadata are not valid (NameIDFormat not in the rigth place)
+    * [LEMONLDAP-761] - SOAP cannot be used with DBI backend
+    * [LEMONLDAP-762] - Don't call data() on unavailable session
+    * [LEMONLDAP-746] - Doc: update id size for DBI sessions backend
+    * [LEMONLDAP-748] - Possibility to start with empty configuration masks errors loading conf backend
+    * [LEMONLDAP-749] - AuthBasic doesn't support HTTPS with self-signed certificate
+    * [LEMONLDAP-755] - check aliases when computing vhost rules on portal
+    * [LEMONLDAP-760] - Apache2.4-style syntax
+
+lemonldap-ng (1.4.1) stable; urgency=low
+
+    * [LEMONLDAP-719] - AuthBasic handler doesn't check password when using AuthMulti (SSL;LDAP)
+    * [LEMONLDAP-721] - Portal cipher object unavailable with useLocalConf = 1
+    * [LEMONLDAP-722] - Error on session explorer and notification explorer on CentOS
+    * [LEMONLDAP-723] - Error 500 on portal when mpm worker enabled on RHEL6.5
+    * [LEMONLDAP-725] - [Password reset] Reset pwd with pwdReset cause empty $groups
+    * [LEMONLDAP-727] - /status page not working since upgrade
+    * [LEMONLDAP-728] - Skirt header cleaning with unprotect
+    * [LEMONLDAP-730] - lmConfigEditor do not save conf with ldap backend
+    * [LEMONLDAP-731] - convertConfig fail to migrate conf to LDAP from File
+    * [LEMONLDAP-732] - Soap communication broken since upgrade
+    * [LEMONLDAP-734] - lemonldap-ng-cli not working with LDAP conf backend
+    * [LEMONLDAP-735] - IssuerDB modules do not work with Kerberos failback login script
+    * [LEMONLDAP-736] - Do not force default value in SMTPServer
+    * [LEMONLDAP-739] - dpkg error while installing fresh LemonLDAP::NG 1.4.0 on wheezy
+    * [LEMONLDAP-738] - Add a portal button on the Manager
+    * [LEMONLDAP-741] - Store errors in Common session module to display them in logs
+    * [LEMONLDAP-742] - Do not make lock calls when session found in cache
+    * [LEMONLDAP-737] - Possibilty to configure NotOnOrAfter and SessionNotOnOrAfter attributes in SAML messages
+
+lemonldap-ng (1.4.0) stable; urgency=low
+
+    * [LEMONLDAP-663] - Connections to auth backends not closed on errors
+    * [LEMONLDAP-664] - Connections to LDAP not closed with the Multi plugin
+    * [LEMONLDAP-670] - Bootstrap theme
+    * [LEMONLDAP-693] - loginHistory and Session Explorer : Error
+    * [LEMONLDAP-694] - Duplicate entry '1-globalStorage' for key 'PRIMARY' when using RDBI configuration
+    * [LEMONLDAP-695] - Vulnerability on the size of session identifiers.
+    * [LEMONLDAP-698] - error at reading last config number with RDBI config storage
+    * [LEMONLDAP-699] - MySQL config storage lock does not work
+    * [LEMONLDAP-700] - Unable to handle SAML session
+    * [LEMONLDAP-701] - missing debian dependency to Mouse
+    * [LEMONLDAP-704] - Unable to change password with Active Directory backend
+    * [LEMONLDAP-708] - Memory leak in portal when notifications are enabled
+    * [LEMONLDAP-709] - The cipher decrypt method breaks carriage returns
+    * [LEMONLDAP-710] - sessionDatas not reinitialized from request to request in a thread
+    * [LEMONLDAP-711] - Read a session in remote session backend causes an update request
+    * [LEMONLDAP-712] - strange behaviour with session cache
+    * [LEMONLDAP-386] - use LL::NG::Handler instead of custom perl module in apache config
+    * [LEMONLDAP-430] - httpSession and updateSession + deleteSessionFromLocalStorage optimization
+    * [LEMONLDAP-591] - Portal should refresh their configuration cache on expiration
+    * [LEMONLDAP-600] - Rewrite object libs with Moo or Mouse
+    * [LEMONLDAP-636] - Manage exported variables per UserDB module
+    * [LEMONLDAP-648] - Build French documentation in Makefile
+    * [LEMONLDAP-657] - [SAML] NameID format customizable per SP
+    * [LEMONLDAP-658] - Portal keepalive should be desactivable and configurable
+    * [LEMONLDAP-671] - Cache management for configuration and sessions
+    * [LEMONLDAP-675] - Password should not be send trough email
+    * [LEMONLDAP-681] - Add option in SP configuration to specify which query_string method to use.
+    * [LEMONLDAP-683] - Externalize all JS code and use make tidy-js
+    * [LEMONLDAP-686] - Centralize default configuration values
+    * [LEMONLDAP-702] - Possibility to start with empty configuration
+    * [LEMONLDAP-703] - Do not use files for Captcha
+    * [LEMONLDAP-26] - Auto-register page
+    * [LEMONLDAP-208] - Build SAML IDP SSO initiated URL on IDP side for registered SP
+    * [LEMONLDAP-629] - Handler with mpm_event
+
+lemonldap-ng (1.3.3) stable; urgency=low
+
+    * [LEMONLDAP-665] - level parameter not used in userLog with syslog
+    * [LEMONLDAP-684] - syslog: invalid level/facility: warn
+    * [LEMONLDAP-685] - /var/lib/lemonldap-ng/psessions is not created on rpm based install
+    * [LEMONLDAP-687] - 404 error : jquery-1.10.2.min.map is not found
+    * [LEMONLDAP-688] - lemonldap-cli-ng apps-set-* and vhost-del not working properly
+    * [LEMONLDAP-690] - Cannot register more than on POST URL in Manager
+    * [LEMONLDAP-692] - lemonldap-ng-cli config encoding
+    * [LEMONLDAP-689] - Remove compressed js file from Debian distribution
+    * [LEMONLDAP-691] - Manage apache configuration during install
+
+lemonldap-ng (1.3.2) stable; urgency=low
+
+    * [LEMONLDAP-655] - Password change not working for DBI password backend with option "require old password" enabled
+    * [LEMONLDAP-656] - UserDB Multi does not accept any module
+    * [LEMONLDAP-660] - Missing PID in syslog messages
+    * [LEMONLDAP-661] - lemonldap ng dependancy not installed for debian wheezy
+    * [LEMONLDAP-662] - lemonldap ng psession directory not created in package
+    * [LEMONLDAP-665] - level parameter not used in userLog with syslog
+    * [LEMONLDAP-666] - Lemonldap NG (1.2.5) Control XSS problem with logonid have apostrophe
+    * [LEMONLDAP-669] - [LDAP] Authentication process stopped if a user must change its password and expiration warning is displayed
+    * [LEMONLDAP-674] - Remove Facebook script in offline doc
+    * [LEMONLDAP-676] - Privacy break
+    * [LEMONLDAP-677] - Signature Problem using ADFS as SP
+    * [LEMONLDAP-679] - Javascript error in Manager when loading a metadata from URL
+    * [LEMONLDAP-680] - CDA does not work for http with "double cookie for single session"
+    * [LEMONLDAP-682] - Permissions for lemonldap-ng-cli
+    * [LEMONLDAP-647] - Hide message div if no message to display
+    * [LEMONLDAP-650] - logout tab in menu should display by default only if no other tab is present
+    * [LEMONLDAP-654] - DBI authentication not working with Unix passwords in DB
+    * [LEMONLDAP-659] - The user input field in password.tpl should be readonly or hidden
+    * [LEMONLDAP-668] - Performance improvement with DNS cache
+    * [LEMONLDAP-649] - Total rewrite of lemonldap-ng-cli tool
+    * [LEMONLDAP-678] - Provide non minified versions of javascript libraries
+
+lemonldap-ng (1.3.1) stable; urgency=low
+
+    * [LEMONLDAP-635] - Extra tests fails on new install
+    * [LEMONLDAP-637] - Missing XML::Simple dependency in Manager CPAN package
+    * [LEMONLDAP-638] - Lemonldap::NG::Manager::Cli requires perl(feature),
+      which is not available in EL5
+    * [LEMONLDAP-639] - portal/captcha_output directory has 777 permissions
+    * [LEMONLDAP-640] - /var/lib/lemonldap-ng/captcha is not created when
+      installed from RPM
+    * [LEMONLDAP-642] - Captcha directories not installed with DEB packages
+    * [LEMONLDAP-644] - Captcha required in MailReset when asking to resend
+      confirmation mail
+    * [LEMONLDAP-645] - Captcha not displayed in AuthChoice with form based
+      modules
+    * [LEMONLDAP-646] - Manager broken for MSIE-8
+    * [LEMONLDAP-641] - [SAML] Possibility to use IDP Name instead of IDP
+      entityID in URL for IDP selection
+    * [LEMONLDAP-643] - Launch initCaptcha only when needed
+
+lemonldap-ng (1.3.0) stable; urgency=low
+
+    * [LEMONLDAP-471] - Incompatibility with Config::IniFiles 2.72
+    * [LEMONLDAP-499] - purgeLocalCache does not work
+    * [LEMONLDAP-513] - AD password field for userModifyPassword is not
+      userPassword but unicodePwd and must be quoted and unicoded
+    * [LEMONLDAP-520] - Manager requires custom functions to be run with
+      arguments
+    * [LEMONLDAP-590] - Memory Leak in Lemonldap::NG::Common::Conf
+    * [LEMONLDAP-592] - Encoding problems in POD
+    * [LEMONLDAP-593] - Auth Multi getDisplayType error when using # in Multi
+      line configuration
+    * [LEMONLDAP-599] - Missing some dependencies with Debian packaging
+    * [LEMONLDAP-603] - Portal's display broken with MS IE 8
+    * [LEMONLDAP-605] - skin rules are not applied on mail reset page
+    * [LEMONLDAP-611] - Build failure on EL5
+    * [LEMONLDAP-614] - Configuration is broken when adding a form replay node
+      without post data
+    * [LEMONLDAP-616] - logout_sso do not stop on the "you are disconnected"
+      page
+    * [LEMONLDAP-618] - Lasso error with AuthChoice
+    * [LEMONLDAP-625] - remote_ip() not available with some mod_perl and may
+      not be required for LLNG
+    * [LEMONLDAP-626] - Manager's display broken with Internet Explorer 8
+    * [LEMONLDAP-627] - Sessions explorer broken with Browseable backends
+    * [LEMONLDAP-634] - Wrong rights on notifications dir in Debian
+    * [LEMONLDAP-241] - Test for cryptographic functions
+    * [LEMONLDAP-366] - [Notifications] Move Notifications code from Portal to
+      Common
+    * [LEMONLDAP-412] - Passwrd policy expiration warning time not friendly
+      displayed
+    * [LEMONLDAP-493] - Make LL::NG's rpm spec file more portable
+    * [LEMONLDAP-500] - do not burden config in memory with useless things
+    * [LEMONLDAP-524] - minimize weight of relaystate in SAML session backend
+    * [LEMONLDAP-559] - Refine useXForwardedForIP option by setting trusted
+      proxies
+    * [LEMONLDAP-585] - Split SSO sessions and persistent sessions at
+      installation
+    * [LEMONLDAP-586] - Allow mail reset to be tested with Demo backend
+    * [LEMONLDAP-589] - Debug info always printed in
+      Lemonldap::NG::Common::Conf::LDAP
+    * [LEMONLDAP-594] - Remove debian repository from distribution
+    * [LEMONLDAP-596] - compute macros and local groups in a certain order
+    * [LEMONLDAP-607] - Die and add error information if LDAP server is not
+      reachable
+    * [LEMONLDAP-619] - Add AuthFacebook module
+    * [LEMONLDAP-620] - Centralize LWP::UserAgent in one file
+    * [LEMONLDAP-628] - Optimization of configuration reload in Portal
+    * [LEMONLDAP-61] - FastCGI portal
+    * [LEMONLDAP-217] - Captcha in portal
+    * [LEMONLDAP-291] - Support secondary Apache authentication in a "choice"
+      authentication configuration
+    * [LEMONLDAP-409] - Specific AD authentication module
+    * [LEMONLDAP-457] - [Notifications] LDAP backend to store notifications
+    * [LEMONLDAP-503] - vhost aliases
+    * [LEMONLDAP-558] - Vhost alias
+    * [LEMONLDAP-584] - BrowserID authentication module
+    * [LEMONLDAP-588] - Include lemonldap-ng-cli
+    * [LEMONLDAP-604] - Upgrade jQuery and jQuery UI built-in dependencies
+    * [LEMONLDAP-612] - Hide password in logs when password is stored in
+      session
+    * [LEMONLDAP-613] - Log applied rule in debug mode
+    * [LEMONLDAP-615] - Add AuthGoogle module
+    * [LEMONLDAP-617] - [SAML] Allow to skip the IDP selection
+    * [LEMONLDAP-621] - Config storage in JSON file
+    * [LEMONLDAP-623] - WebID authentication and user DB modules
+    * [LEMONLDAP-632] - Rename liblemonldap-ng-conf-perl to
+      lemonldap-ng-common-perl
+    * [LEMONLDAP-631] - Minimize jQuery-UI
+
+lemonldap-ng (1.2.5) stable; urgency=low
+
+    * [LEMONLDAP-532] - SOAP not working with SSL
+    * [LEMONLDAP-597] - Wrong evaluation of $ENV{REMOTE_ADDR} in Auth::Multi
+      when safe jail is enabled
+    * [LEMONLDAP-599] - Missing some dependencies with Debian packaging
+    * [LEMONLDAP-603] - Portal's display broken with MS IE 8
+    * [LEMONLDAP-605] - skin rules are not applied on mail reset page
+    * [LEMONLDAP-608] - Could not configure different config file in Portal
+      thru SharedConf
+    * [LEMONLDAP-609] - case insensitive comparison in vhost
+    * [LEMONLDAP-596] - compute macros and local groups in a certain order
+    * [LEMONLDAP-598] - Sessions Explorer should use the browseable indexes
+    * [LEMONLDAP-607] - Die and add error information if LDAP server is not
+      reachable
+
+lemonldap-ng (1.2.4) stable; urgency=low
+
+    * [LEMONLDAP-590] - Memory Leak in Lemonldap::NG::Common::Conf
+    * [LEMONLDAP-592] - Encoding problems in POD
+    * [LEMONLDAP-593] - Auth Multi getDisplayType error when using # in Multi
+      line configuration
+    * [LEMONLDAP-589] - Debug info always printed in
+      Lemonldap::NG::Common::Conf::LDAP
+    * [LEMONLDAP-594] - Remove debian repository from distribution
+
+lemonldap-ng (1.2.3) stable; urgency=low
+
+    * [LEMONLDAP-316] - Accentued letters in application list raise an error
+      when configuration is stored in LDAP
+    * [LEMONLDAP-536] - Password reset by mail do not work with DBI backend
+    * [LEMONLDAP-537] - Web service deleteNotification do not work with DBI
+      backend
+    * [LEMONLDAP-538] - Bad log level in _DBI.pm
+    * [LEMONLDAP-539] - Add SOAP::Lite dependency for Handler CPAN module
+    * [LEMONLDAP-543] - LL:NG::Handler::AuthBasic fails to manage persistent
+      connections
+    * [LEMONLDAP-544] - Bad indexes in Browseable doc
+    * [LEMONLDAP-545] - "none" target does not work in Handler/CGI.pm
+    * [LEMONLDAP-548] - Error when displaying password policy messages (grace
+      or expiration)
+    * [LEMONLDAP-550] - Cannot use Target Url in Form Replay
+    * [LEMONLDAP-551] - Invalid GET Request after Form Replay
+    * [LEMONLDAP-552] - Error on configuration save if no reloadUrls defined
+    * [LEMONLDAP-553] - SOAP Error: id is required at
+      /usr/share/perl5/Lemonldap/NG/Portal/_SOAP.pm line 165
+    * [LEMONLDAP-555] - Rules field stay in readonly with JQuery 1.7.2
+    * [LEMONLDAP-556] - Cookie sent to untrusted domain with CDA
+    * [LEMONLDAP-557] - Get Key From All Sessions in File backend can fail on
+      corrupted sessions
+    * [LEMONLDAP-561] - SAML transient NameID does not work
+    * [LEMONLDAP-562] - CAS Authn + SAML IDP: authLogout error
+    * [LEMONLDAP-570] - SAML messages signatures are not verified - SECURITY
+      ISSUE
+    * [LEMONLDAP-574] - Local cache purge script does not work
+    * [LEMONLDAP-579] - missing dir in handler debian package
+    * [LEMONLDAP-580] - Mail subject is not correctly encoded
+    * [LEMONLDAP-412] - Passwrd policy expiration warning time not friendly
+      displayed
+    * [LEMONLDAP-512] - free size for cipher key
+    * [LEMONLDAP-554] - Some improvements on lmConfigEditor
+    * [LEMONLDAP-559] - Refine useXForwardedForIP option by setting trusted
+      proxies
+    * [LEMONLDAP-563] - CAS Authn + SAML IDP: Passing request parameters to
+      redirect
+    * [LEMONLDAP-566] - Allow to sort categories in the application list
+    * [LEMONLDAP-568] - Split Test and Handler Apache configuration
+    * [LEMONLDAP-569] - Fix application div height in application list
+    * [LEMONLDAP-572] - Add X-Forwarded-For Header in SOAP request sent by
+      LL::NG::Handler::AuthBasic
+    * [LEMONLDAP-573] - Do not send void HTTP headers
+    * [LEMONLDAP-576] - Hide post form when using Form Replay
+    * [LEMONLDAP-577] - Display "Password changed" in Menu
+    * [LEMONLDAP-549] - Display LL::NG version in Manager
+    * [LEMONLDAP-560] - logging SAML authn response
+    * [LEMONLDAP-578] - Rules to display a skin depending on called URL or IP
+      address
+    * [LEMONLDAP-535] - Force the ip adress when calling the webservice
+      urn:/Lemonldap::NG::Common::CGI::SOAPService
+    * [LEMONLDAP-546] - Form replay: POST request is not sent
+    * [LEMONLDAP-541] - Handler SOAP errors : setAttributes is not an
+      authorized function
+    * [LEMONLDAP-547] - Update Browseable documentation in case of SAML in use
+    * [LEMONLDAP-565] - Update META.yml files
+    * [LEMONLDAP-581] - Clean Perl dependencies
+    * [LEMONLDAP-582] - Update .pm copyrights
+
+lemonldap-ng (1.2.2) stable; urgency=low
+
+    * [LEMONLDAP-436] - LDAP Search error when authenticating and identifying
+      on two LDAP (AD) with Multi modules
+    * [LEMONLDAP-490] - bad error log when user sends wrong login
+    * [LEMONLDAP-497] - CDA not working
+    * [LEMONLDAP-498] - DBI config storage does not use transactions
+    * [LEMONLDAP-506] - When working with 2 LDAP in Multi Mode, LDAP connexion
+      not reinitialized on second LDAP if user not found in first LDAP
+    * [LEMONLDAP-509] - regex for ldapServer on storing in Manager is too
+      string/wrong
+    * [LEMONLDAP-510] - javascript: $('...').attr('checked')==true never neems
+      to evaluate to TRUE
+    * [LEMONLDAP-515] - Parameter portalRequireOldPassword not checked in DBI
+    * [LEMONLDAP-516] - date popup in notification manager
+    * [LEMONLDAP-517] - typo in cookie name in portal WSDL
+    * [LEMONLDAP-518] - SAML session purge
+    * [LEMONLDAP-519] - SOAP webservice getCookies() should work with Auth
+      Multi
+    * [LEMONLDAP-522] - Cross-domain authentication and http cookies
+    * [LEMONLDAP-523] - RelayState is not sent in SAML logout requests by POST
+      method
+    * [LEMONLDAP-527] - Error with CDA when redirecting to other domain with
+      lemon cookie as a get parameter
+    * [LEMONLDAP-528] - With CDA, even if service url is https, cookie secure
+      flag is not set for the second domain
+    * [LEMONLDAP-529] - getDisplayType not well called in Multi backend
+    * [LEMONLDAP-530] - on androïd device, accept language misunderstood
+    * [LEMONLDAP-491] - Don't import all functions of POSIX
+    * [LEMONLDAP-494] - Lemonldap::NG::Portal::_DBI::hash_password and wrong
+      log type
+    * [LEMONLDAP-501] - All sessions browsed at SAML authentication
+    * [LEMONLDAP-505] - Make portal W3C compliant for html validation
+    * [LEMONLDAP-507] - It's better to "warn" the user when we create a fake
+      jail
+    * [LEMONLDAP-508] - Add armel architecture for debian repository
+    * [LEMONLDAP-514] - Enable notifications by default
+    * [LEMONLDAP-521] - arguments of custom functions
+    * [LEMONLDAP-249] - Manage apply key with the manager
+    * [LEMONLDAP-511] - A new SOAP webservice for deleting notifications
+    * [LEMONLDAP-504] - CLONE - Verify that oldPassword is not empty
+
+lemonldap-ng (1.2.1) stable; urgency=low
+
+    * [LEMONLDAP-479] - LDAP groups are not stored in the session anymore
+    * [LEMONLDAP-481] - option --latest doesn't work in script convertConfig
+    * [LEMONLDAP-486] - X Forwarded For option is not used in login history
+    * [LEMONLDAP-487] - lmMigrateConfFiles2ini do not support continuation
+      lines in ini file
+    * [LEMONLDAP-488] - Quote not escaped when converting old application list
+      XML file
+    * [LEMONLDAP-484] - Use CSS3 standard attribute for shadow and rounded
+      corners
+    * [LEMONLDAP-485] - Template inclusion error when sending an HTML mail
+    * [LEMONLDAP-483] - Remove all defined() on @array or %hash of LL::NG code
+
+lemonldap-ng (1.2.0) stable; urgency=low
+
+    * [LEMONLDAP-251] - Error on form based UserDB modules afeter an non
+      formed based Auth module display the form
+    * [LEMONLDAP-320] - Unprotect rule does not delete headers
+    * [LEMONLDAP-367] - Debian package on a fresh install still need upgrade
+      procedure
+    * [LEMONLDAP-368] - user root can't have lmConfigEditor running because of
+      wrong file permissions
+    * [LEMONLDAP-369] - perl error reported in logs when HTTP header
+      "Accept-Language" not defined
+    * [LEMONLDAP-370] - behaviour of tree menu in manager
+    * [LEMONLDAP-371] - custom function declaration doesn't work through
+      management UI
+    * [LEMONLDAP-373] - Field values lost in manager
+    * [LEMONLDAP-375] - empty query string in redirect url
+    * [LEMONLDAP-376] - wrong authentication mode stored in session with
+      authMulti when SSLRequire set to 0
+    * [LEMONLDAP-380] - Mail reset session not destroyed when password is
+      changed
+    * [LEMONLDAP-384] - When force password reset form is incomplete, user is
+      redirected to main authentication screen
+    * [LEMONLDAP-390] - Saml Attribute form not reset in Manager
+    * [LEMONLDAP-391] - [Choice] No choice should return PE_FIRSTACCESS and
+      not PE_FORMEMPTY
+    * [LEMONLDAP-392] - Bad URL error when connected to the menu display the
+      login form instead of the menu
+    * [LEMONLDAP-393] - Can't create samlIDPMetaDataExportedAttributes or
+      samlSPMetaDataExportedAttributes
+    * [LEMONLDAP-394] - RelayState is sometimes not transferred by SAML IdP
+    * [LEMONLDAP-397] - [SAML] server error when SOAP SLO request is sent by
+      IDP, and SOAP access is not possible on SP
+    * [LEMONLDAP-399] - invalid syntax of wsdl made by buildPortalWSDL
+    * [LEMONLDAP-401] - SOAP method getMenuApplications lock the session
+    * [LEMONLDAP-405] - No redirect with impact skin
+    * [LEMONLDAP-407] - Missing dependency Crypt::OpenSSL::Bignum
+    * [LEMONLDAP-410] - Manager should reject vhost value like
+      test.example.com:8080
+    * [LEMONLDAP-411] - LDAP change password as user and extended modify
+      password change are not working
+    * [LEMONLDAP-418] - Typo bug in Debian control file
+    * [LEMONLDAP-420] - Unable to access to http virtualhosts
+    * [LEMONLDAP-425] - Error code: 200, SyntaxError: JSON.parse in Manager
+    * [LEMONLDAP-426] - Unused perl-Apache-AuthNetLDAP dependency in spec file
+    * [LEMONLDAP-427] - _deleteSessionFromLocalStorage should exit directly if
+      no $id given
+    * [LEMONLDAP-429] - links to css and js in html broken if portal url is
+      not a root url
+    * [LEMONLDAP-437] - SAML: redirect binding not working
+    * [LEMONLDAP-441] - Manager do not display a correct error when
+      configuration store fails
+    * [LEMONLDAP-445] - Portal personalized messages are UTF8 doubled encoded
+    * [LEMONLDAP-446] - Server error when a password mail reset session is
+      unavailable and the token is passed to mail.pl
+    * [LEMONLDAP-447] - Bad identifier in grantSession logs
+    * [LEMONLDAP-448] - defined(%hash) is deprecated
+    * [LEMONLDAP-450] - SAML Authn not working with binding HTTP Redirect
+    * [LEMONLDAP-454] - Replace $ip with client IP in forging HTTP headers
+      doesn't work
+    * [LEMONLDAP-455] - Notification error because text is not valid UTF-8
+    * [LEMONLDAP-464] - LL::NG::Handler::AuthBasic displays login / password
+      in error log
+    * [LEMONLDAP-465] - Error messages with portal SOAP services
+    * [LEMONLDAP-466] - SAML logout not working with js redirection
+    * [LEMONLDAP-467] - SAML redirection seen as CDA requests
+    * [LEMONLDAP-469] - No CAS authentication with CDA enabled
+    * [LEMONLDAP-470] - Zimbra PreAuth Handler syntax error
+    * [LEMONLDAP-472] - Debian package not signed
+    * [LEMONLDAP-473] - SOAP items
+    * [LEMONLDAP-478] - CAS Issuer do not work with CAS v1
+    * [LEMONLDAP-276] - Parameters to specify sub directories for portal and
+      manager URL
+    * [LEMONLDAP-377] - Add error cases in mail reset by mail management
+    * [LEMONLDAP-382] - Move session update on password change in the main
+      modifyPassword method
+    * [LEMONLDAP-383] - Update local cache when session is updated
+    * [LEMONLDAP-387] - prompt custom messages when ungrant session
+    * [LEMONLDAP-398] - Old value 'ldap' for authentication is not accepted in
+      Manager
+    * [LEMONLDAP-400] - Reload SAML server cache on new configuration
+    * [LEMONLDAP-403] - Alphabetical order in authentication modules select
+    * [LEMONLDAP-404] - Check only path in the URI instead of full URL to
+      match an IssuerDB action path
+    * [LEMONLDAP-408] - Allow CAS to be on other urls than /cas
+    * [LEMONLDAP-421] - Double cookie but single session
+    * [LEMONLDAP-422] - Telling the authenticated user that he will be
+      redirected
+    * [LEMONLDAP-432] - Check conditions in AuthSlave and UserDBSlave
+    * [LEMONLDAP-438] - User is not informed of SAML single logout success
+    * [LEMONLDAP-453] - Add authentication mode in auth log
+    * [LEMONLDAP-458] - Force FollowSymLinks option in Apache configuration
+    * [LEMONLDAP-468] - optimize default structure of notifications table and
+      requests
+    * [LEMONLDAP-474] - textarea instead of text input
+    * [LEMONLDAP-475] - Text items for session display
+    * [LEMONLDAP-476] - Allow execution of portal's and manager's CGI in shell
+    * [LEMONLDAP-236] - SSO with public/auth Website
+    * [LEMONLDAP-249] - Manage apply key with the manager
+    * [LEMONLDAP-342] - Create a "maintenance" rule target to disallow an
+      application
+    * [LEMONLDAP-378] - Display confirmation mail creation date and expiration
+      date in mail reset screens
+    * [LEMONLDAP-379] - Use session attributes in templates
+    * [LEMONLDAP-385] - Option to send a mail when the password is changed
+    * [LEMONLDAP-389] - store and display login history
+    * [LEMONLDAP-396] - Radius authentication module
+    * [LEMONLDAP-416] - Create Auth/UserDB/PasswordDB Demo
+    * [LEMONLDAP-417] - Apache Fitler to add application panel on protected
+      pages
+    * [LEMONLDAP-424] - keyword 'skip' in access rules, to skip access control
+    * [LEMONLDAP-442] - Keep only current version documentation offline
+    * [LEMONLDAP-443] - Option to bypass XSS checks on fields or URL
+    * [LEMONLDAP-449] - Possibility to set custom template parameters
+    * [LEMONLDAP-456] - Allow to set false value of a customized error message
+      to test it in a template
+    * [LEMONLDAP-459] - Translate cookie domain in internat proxy (lmProxy)
+    * [LEMONLDAP-477] - Refuse authentication if 2 entries match the
+      authentication filter
+    * [LEMONLDAP-406] - missing dependency on a basic portal installation
+    * [LEMONLDAP-413] - Verify that oldPassword is not empty
+    * [LEMONLDAP-435] - Move contribs modules to github
+    * [LEMONLDAP-444] - Reorganize files in SVN repository
+
+lemonldap-ng (1.1.2) stable; urgency=low
+
+    * [LEMONLDAP-355] - The "basic($uid,$_password)" extended function makes an
+      error 500 in Apache
+    * [LEMONLDAP-356] - Wrong language when user has already a session and gets
+      redirected
+    * [LEMONLDAP-357] - CPAN tester report: missing dependency for SecureToken
+      Handler
+    * [LEMONLDAP-358] - [SecureToken] Check if cached connection is alive before
+      using it
+    * [LEMONLDAP-359] - [SecureToken] Add an option to raise error if token
+      could not be generated
+    * [LEMONLDAP-360] - Fix Debian dependencies
+    * [LEMONLDAP-361] - [CAS Issuer] check authorization on CAS service
+    * [LEMONLDAP-362] - Portal grant function returns -1 on undefined vhost. It
+      should return 0.
+    * [LEMONLDAP-363] - Lasso Debian dependency need to be updated
+    * [LEMONLDAP-364] - Configure httpOnly option in Manager
+    * [LEMONLDAP-365] - Log sent headers in debug mode
+
+lemonldap-ng (1.1.1) stable; urgency=low
+
+    * [LEMONLDAP-350] - remote SOAP handlers errors on reload
+    * [LEMONLDAP-351] - Cannot get LDAP groups for DN with '\' into it
+    * [LEMONLDAP-352] - Notifications needs to be accepted twice
+    * [LEMONLDAP-353] - Configure notification filename value separator
+
+lemonldap-ng (1.1.0) stable; urgency=low
+
+    * [LEMONLDAP-303] - Form replay filter is not compatible with recent Safe
+      module version
+    * [LEMONLDAP-314] - [Password Reset] Manage special characters in mail
+      subject
+    * [LEMONLDAP-315] - No error is displayed if configuration is not stored
+    * [LEMONLDAP-317] - Errors "setKeyToH... is not a reference" are not errors
+      but debug information
+    * [LEMONLDAP-318] - Do not toggle opacity between tabs
+    * [LEMONLDAP-319] - Custom functions and SafeLib ignored if Safe jail is
+      disabled
+    * [LEMONLDAP-322] - notificationStorageOptions parameter is ignored
+    * [LEMONLDAP-323] - Undefined subroutine
+      Lemonldap::NG::Portal::SharedConf::newNotification
+    * [LEMONLDAP-324] - SAML IDP does no with Google Apps and Lasso 2.3.5
+    * [LEMONLDAP-325] - Persistent sessions are deleted by portal cron job
+    * [LEMONLDAP-327] - Notifications retrieved from DBI backend are reencoded
+      in UTF8
+    * [LEMONLDAP-329] - Error " Day '00' out of range 1..31" with DBI
+      notifications getDone subroutine
+    * [LEMONLDAP-330] - Syntax check on managerDn is too restrictive
+    * [LEMONLDAP-331] - Reference is not decoded in File notification backend,
+      in function getAll
+    * [LEMONLDAP-333] - Password policy reset password is not possible if
+      password tab is not allowed
+    * [LEMONLDAP-334] - Some LDAP directories do not return password policy
+      control when bind failed
+    * [LEMONLDAP-335] - MIME subject encoding does not work with every mailer
+    * [LEMONLDAP-337] - Target URL is lost in password policy reset workflow
+    * [LEMONLDAP-338] - Handler::Proxy raise error with POST request without
+      content-length
+    * [LEMONLDAP-344] - purgeCentralCache abort if session cannot be deleted
+    * [LEMONLDAP-15] - Reload configuration tree after configuration save in
+      Manager
+    * [LEMONLDAP-203] - Persistent Storage configuration
+    * [LEMONLDAP-222] - Replace old slavePortal.pl example by
+      AuthSlave+UserDBSlave
+    * [LEMONLDAP-238] - Comment in AuthChoice keys
+    * [LEMONLDAP-295] - Add an option to support old application list objects in
+      Menu
+    * [LEMONLDAP-332] - Configure mailSessionKey in Manager
+    * [LEMONLDAP-336] - Create an option to touch the pwdReset attribute if the
+      password was generated on reset form
+    * [LEMONLDAP-339] - Create a category in Sessions explorer for notifications
+      done
+    * [LEMONLDAP-340] - Store URL origin in session
+    * [LEMONLDAP-349] - Specific error message when password form is empty in
+      mail reset workflow
+    * [LEMONLDAP-288] - Secure Token Handler
+    * [LEMONLDAP-296] - Yubikey authentication module
+    * [LEMONLDAP-299] - Default notification for all users
+    * [LEMONLDAP-300] - [Password Reset] Allow other fields than email
+    * [LEMONLDAP-301] - [Password Reset] Allow to resend a confirmation mail
+    * [LEMONLDAP-302] - [Password Reset] Allow to change the password on the
+      portal
+    * [LEMONLDAP-306] - Add a customheader.tpl and customfooter.tpl in skins
+    * [LEMONLDAP-308] - Remeber user password when password reset is required by
+      LDAP server
+    * [LEMONLDAP-309] - [Password Reset] Option to set password reset request
+      timeout
+    * [LEMONLDAP-310] - Test if mail templates are defined in the skin before
+      using the common ones
+    * [LEMONLDAP-311] - [Password Reset] Option to set HTML mail charset
+    * [LEMONLDAP-312] - [Password Reset] Option to set reply to field
+    * [LEMONLDAP-313] - [Password Reset] Include images and CSS in MIME mail
+    * [LEMONLDAP-326] - Allow to set titles and subtitles in notification
+      messages
+    * [LEMONLDAP-328] - Notification explorer
+    * [LEMONLDAP-341] - Notifications with conditions
+    * [LEMONLDAP-343] - Delete session in local Handler cache in portal logout
+      process
+    * [LEMONLDAP-345] - Open SSO session after successful password reset from
+      ppolicy
+    * [LEMONLDAP-346] - Possibility to configure XSLT used to display
+      notifications
+    * [LEMONLDAP-347] - Possibility to customize messages from the portal
+    * [LEMONLDAP-348] - Possibility to access menu tab with an URL
+
+lemonldap-ng (1.0.6) stable; urgency=low
+
+    * [LEMONLDAP-297] - LDAP attributes are not explicitely requested
+    * [LEMONLDAP-298] - Multi option with # not accepted in Manager
+    * [LEMONLDAP-304] - Cannot use spaces between values of Multi
+      authentication
+      parameter
+    * [LEMONLDAP-305] - Parameters are not overridden in the first Multi module
+    * [LEMONLDAP-307] - Base64 encoded IDs can contain more than one "/", but
+      only the first is escaped
+
+lemonldap-ng (1.0.5) stable; urgency=low
+
+    * [LEMONLDAP-292] - Application menu is not well displayed with multiple
+      users having differents rights
+    * [LEMONLDAP-294] - Subroutines can not be overridden in lemonldap-ng.ini
+    * [LEMONLDAP-293] - Password Manager - Sending Mail
+
+lemonldap-ng (1.0.4) stable; urgency=low
+
+    * [LEMONLDAP-285] - Macro are not always recalculated
+    * [LEMONLDAP-286] - CPAN Testers report
+    * [LEMONLDAP-289] - Dark skin seems broken, but it is just "art"
+
+lemonldap-ng (1.0.3) stable; urgency=low
+
+    * [LEMONLDAP-282] - Class::Inspector is needed to build RPM
+    * [LEMONLDAP-283] - CPAN Testers report
+    * [LEMONLDAP-284] - Applications with 'display auto' are always hidden in
+      Menu
+
+lemonldap-ng (1.0.2) stable; urgency=low
+
+    * [LEMONLDAP-263] - Common::Apache::Session uses wrong serialization
+      algorithm with Postgres
+    * [LEMONLDAP-264] - sessions explorer is not protected by LemonLDAP
+    * [LEMONLDAP-265] - authenticationLevel not honored
+    * [LEMONLDAP-266] - logout_app in rules break the manager
+    * [LEMONLDAP-267] - portalOpenLinkInNewWindow has no effect
+    * [LEMONLDAP-268] - logout_app and logout_app_sso does not work with
+      Lemonldap::NG::Handler::Proxy
+    * [LEMONLDAP-269] - Reset password feature does not work with AuthChoice
+    * [LEMONLDAP-270] - Safe.pm 2.27 restrict the usage of custom functions
+    * [LEMONLDAP-271] - Portal configuration cache not reset after
+      configuration change in Manager
+    * [LEMONLDAP-272] - DBI authentication level not honored
+    * [LEMONLDAP-274] - Redirection URL is not good in Handler::CGI::_uri
+      function
+    * [LEMONLDAP-277] - Debian packaging requires libnet-ldap-perl >=1:0.38
+    * [LEMONLDAP-278] - Pb in Debian package liblemonldap-ng-conf-perl
+    * [LEMONLDAP-279] - handler-apache2.conf not shipped with Debian
+    * [LEMONLDAP-280] - Empty menu categories are not hidden
+    * [LEMONLDAP-281] - [Debian bug #612719] Package description outdated
+    * [LEMONLDAP-273] - Require jQuery 1.4+ in Debian packaging
+    * [LEMONLDAP-275] - use $ENV{SCRIPT_FILENAME} instead of
+      $ENV{DOCUMENT_ROOT} to referer to different htdocs directories
+
+lemonldap-ng (1.0.1) stable; urgency=low
+
+    * [LEMONLDAP-258] - Portal with $vhost in Handler does not work
+    * [LEMONLDAP-261] - Session explorer does not work with LDAP backend
+    * [LEMONLDAP-262] - Sessions not purged with Apache::Session::File
+    * [LEMONLDAP-263] - Common::Apache::Session uses wrong serialization
+      algorithm with Postgres
+    * [LEMONLDAP-257] - Integrate manager access directly in portal
+    * [LEMONLDAP-240] - Translation framework for doc
+
+lemonldap-ng (1.0) stable; urgency=low
+
+    * [LEMONLDAP-1] - ldapGroupAttributeNameSearch not well Serialized by
+      Manager
+    * [LEMONLDAP-11] - Manager is not working with jQuery 1.4
+    * [LEMONLDAP-17] - reloadAuthParams function can destroy configuration
+      values
+    * [LEMONLDAP-45] - logout_app_sso not accepted by Manager
+    * [LEMONLDAP-63] - Error when selecting a deleted session in Sessions
+      Explorer
+    * [LEMONLDAP-65] - Cannot set empty values in textarea in Manager
+    * [LEMONLDAP-92] - Cannot change password from menu
+    * [LEMONLDAP-93] - LDAP connection error on high load
+    * [LEMONLDAP-99] - Special UTF-8 characters cannot be sent in HTTP-BASIC
+    * [LEMONLDAP-117] - Invalid use of Safe to access APR::Table module
+      (LL::NG not working on RHEL5.5)
+    * [LEMONLDAP-118] - Cannot store configuration in Postgresql DB
+    * [LEMONLDAP-125] - SAML request is lost in portal user interaction
+      (remove other sessions for example)
+    * [LEMONLDAP-127] - Can not set samlStorageOptions from Manager
+    * [LEMONLDAP-128] - LemonLDAP::NG not compatible with perl-LDAP 0.4001
+    * [LEMONLDAP-132] - Can't refuse SAML federation
+    * [LEMONLDAP-133] - SAML sessions are displayed as "other sessions"
+    * [LEMONLDAP-134] - Sessions created by AuthSAML are not displayed in
+      sessions explorer
+    * [LEMONLDAP-136] - Metadatas bad displayed in manager
+    * [LEMONLDAP-137] - Portal value is not used to fill default values in
+      Manager
+    * [LEMONLDAP-138] - Password of a private key is not erased when
+      generating a new key without password
+    * [LEMONLDAP-142] - Sessions explorer hides password value stored in
+      sessions datas
+    * [LEMONLDAP-143] - Invalid message with artefact POST from SP to IDP
+    * [LEMONLDAP-144] - Signature verification fail on SP side received
+      artifact message
+    * [LEMONLDAP-145] - Double utf-8 encoding in SOAP requests
+    * [LEMONLDAP-150] - Error code: 200, SyntaxError: JSON.parse with value
+      with spaces
+    * [LEMONLDAP-156] - confirm parameter is not secured
+    * [LEMONLDAP-161] - RelayState value given by SP is HTML reencoded
+    * [LEMONLDAP-167] - Bug with trunk installed from scratch
+    * [LEMONLDAP-169] - IssuerDB CAS : ticket is added 2 times in URL with a
+      service URL containing parameters
+    * [LEMONLDAP-170] - SAML: artifact resolution URL is not in authForce
+      method
+    * [LEMONLDAP-172] - Google Apps SSO not working with Lasso 2.3.2
+    * [LEMONLDAP-177] - OpenID provider cache login/password information:
+      cannot login after bad password
+    * [LEMONLDAP-179] - OpenID provider does not honor SREG request if only
+      optional attributes
+    * [LEMONLDAP-182] - Pages displayed by confirm return a 500 error under
+      cgi-script
+    * [LEMONLDAP-187] - lmAttrOrMacro test in Manager is not suitable for
+      OpenID SREG attributes
+    * [LEMONLDAP-189] - Cleanup process slows down considerably the Apache
+      server
+    * [LEMONLDAP-190] - Display must display the menu when process() returns
+      an eror but user is authenticated
+    * [LEMONLDAP-198] - Cross domain does not work anymore
+    * [LEMONLDAP-200] - Restore persistent session does not work if
+      whatToTrace is a macro
+    * [LEMONLDAP-201] - OpenID tests are not correctly skipped if no OpenID
+      module
+    * [LEMONLDAP-202] - searchOn no working with SAML and
+      Apache::Session::File
+    * [LEMONLDAP-207] - Confirm stamp is not used everywhere in SAML IDP
+      selection
+    * [LEMONLDAP-214] - Auth choice is not working with several authentication
+      forms
+    * [LEMONLDAP-215] - DBI authentication not working with prepared
+      statements
+    * [LEMONLDAP-216] - getLocalConf called without 2nd argument
+    * [LEMONLDAP-223] - Offline doc css referer to unexistant directory /lib/
+    * [LEMONLDAP-224] - Manager window size is bigger than screen
+    * [LEMONLDAP-228] - Apache::Session::Browseable searchOn functions broken
+      by new Apache::Session wrapper
+    * [LEMONLDAP-229] - Multi not useable on Manager
+    * [LEMONLDAP-230] - SOAP config backend broken
+    * [LEMONLDAP-232] - Cannot configure several LDAP servers in Manager
+    * [LEMONLDAP-233] - Debian manager broken with jquery-ui 1.8.6
+    * [LEMONLDAP-235] - Session creation test in Manager does not work with
+      SOAP session backend
+    * [LEMONLDAP-237] - Single logout broken by AuthChoice
+    * [LEMONLDAP-239] - key type of portalDisplayAppList must be boolean
+    * [LEMONLDAP-242] - CAS proxy ticket is always asked with CAS
+      authentication
+    * [LEMONLDAP-16] - Use parameterized statements in DBI to prevent SQL
+      injection
+    * [LEMONLDAP-58] - Catch ENV variables to fill session for all UserDB
+      modules
+    * [LEMONLDAP-97] - Add configuration parameters for private keys passwords
+    * [LEMONLDAP-103] - String encoding in sessions
+    * [LEMONLDAP-120] - Force UTF-8 in File backend
+    * [LEMONLDAP-130] - Create a "reload" vhost independent from test
+      applications
+    * [LEMONLDAP-131] - SAML documentation
+    * [LEMONLDAP-147] - Add an activation parameter for each IssuerDB
+    * [LEMONLDAP-148] - Register SSO session_id in SAML sessions
+    * [LEMONLDAP-149] - Add auhtForce, authFinish and authLogout methods in
+      all authentication modules
+    * [LEMONLDAP-152] - Configure authenticationLevel for authentication
+      backends
+    * [LEMONLDAP-154] - Work on session manager eyecandy
+    * [LEMONLDAP-157] - Warning messages in make test
+    * [LEMONLDAP-160] - Display lib for portal
+    * [LEMONLDAP-168] - Delete local session when logout URL is cached
+    * [LEMONLDAP-178] - Use same Apache conf files for default and Debian
+      install
+    * [LEMONLDAP-180] - Explain messages displayed in error.log (except debug)
+    * [LEMONLDAP-181] - Manager must warn when portal is not in "domain"
+    * [LEMONLDAP-186] - CAS Issuer parameters in Manager
+    * [LEMONLDAP-188] - Use autoloader to reduce handler size
+    * [LEMONLDAP-191] - Use persistent storage for SAML persistent NameID
+    * [LEMONLDAP-194] - Delete AuthLA
+    * [LEMONLDAP-195] - Anti-frame
+    * [LEMONLDAP-196] - Remove .sql files for Conf::DBI
+    * [LEMONLDAP-199] - Require Lasso 2.3.0 for SAML
+    * [LEMONLDAP-204] - abort() instead of die in handlers
+    * [LEMONLDAP-211] - Debian : use packaged jquery-ui
+    * [LEMONLDAP-212] - Use jquery-ui style popup to display errors and upload
+      result
+    * [LEMONLDAP-213] - Network errors are not catched by "error" target oj
+      jQuery.ajax() function
+    * [LEMONLDAP-218] - Upgrade to jquery-ui 1.8 and use dialog for Manager
+      popup
+    * [LEMONLDAP-221] - Allow to set a custom portal skin from Manager
+    * [LEMONLDAP-225] - /favicon.ico is missing for new web site
+    * [LEMONLDAP-234] - Tree style image transparency problem with obsur theme
+    * [LEMONLDAP-5] - Configure use of HTTPS and redirection port per virtual
+      host
+    * [LEMONLDAP-6] - Change 403 error into 302 error for ungranted access
+    * [LEMONLDAP-12] - Zimbra authentication
+    * [LEMONLDAP-18] - [SAML] Common domain cookie support
+    * [LEMONLDAP-19] - Select authentication module on authentication portal
+    * [LEMONLDAP-22] - Session explorer should use the new Manager elements
+      (i18n, templates, etc.)
+    * [LEMONLDAP-25] - Provide authorized application trough SOAP
+    * [LEMONLDAP-27] - OpenID provider
+    * [LEMONLDAP-28] - Read user information from OpenID provider
+    * [LEMONLDAP-29] - Improve application menu configuration
+    * [LEMONLDAP-57] - Local Handler macros
+    * [LEMONLDAP-101] - CAS Provider (IssuerDBCAS)
+    * [LEMONLDAP-102] - IssuerDB contextual selection
+    * [LEMONLDAP-121] - Fake SLO process for standard applications
+    * [LEMONLDAP-123] - Store Lasso Identity Dump in UserDB
+    * [LEMONLDAP-129] - LDAP timeout configuration
+    * [LEMONLDAP-135] - Propagate domain change to all keys
+    * [LEMONLDAP-139] - Use default values for SAML URL if they are not
+      defined in configuration
+    * [LEMONLDAP-141] - Disable timer on IDP list
+    * [LEMONLDAP-146] - Request PGT in AuthCAS
+    * [LEMONLDAP-159] - Manage comment in rule regexp
+    * [LEMONLDAP-174] - Configure auto POST in Manager
+    * [LEMONLDAP-210] - Ajax request in menu to check if session is always
+      available
+    * [LEMONLDAP-4] - Documentation for POST Handler functionnality
+    * [LEMONLDAP-7] - Doxygen Portal/MailReset.pm
+    * [LEMONLDAP-13] - Check that authLogout is well managed in AuthMulti
+    * [LEMONLDAP-30] - [SAML] Unit tests
+    * [LEMONLDAP-162] - Replace help system by offline doc
+    * [LEMONLDAP-171] - Documentation for version 1.0 on new wiki
+    * [LEMONLDAP-192] - Use the new wiki to generate offline documentation
+    * [LEMONLDAP-206] - Upgrade spec file to build RPMs for 1.00
+    * [LEMONLDAP-209] - Update copyright and URLs in PODs
+    * [LEMONLDAP-231] - Tidy Manager skin directory
+    * [LEMONLDAP-164] - Trusted domains for OpenID
+    * [LEMONLDAP-165] - Manage extensions in is_trusted hook
+    * [LEMONLDAP-166] - Create a storage for agreements
+
+lemonldap-ng (1.0rc2) unstable; urgency=low
+
+    * Debian policy 3.9.1
+    * [LEMONLDAP-20] - Parameter remoteCookieName is not available in
+        Manager
+    * [LEMONLDAP-21] - Special characters from SAML attribute statement are
+      not well encoded
+    * [LEMONLDAP-41] - Lasso CRITICAL error in AuthSAML logout process
+    * [LEMONLDAP-42] - [SAML][SP] Attrubtes sent trought IDP initiated SSO are
+      not registered into session
+    * [LEMONLDAP-43] - [SAML][SP] IDP should not be read from IDP cookie, but
+      from SAML request or response
+    * [LEMONLDAP-50] - [SAML][SP] OneTimeUse flag should not reduce session
+      duration
+    * [LEMONLDAP-53] - [SAML][IDP] sendLogoutResponseAfterLogoutRequest method
+      does not exists
+    * [LEMONLDAP-54] - Handler parameters (https, port, etc.) are not taken
+      into account if only defined in Manager, and not in ini file
+    * [LEMONLDAP-62] - [SAML] samldate2timestamp is not returning correct
+      timestamp
+    * [LEMONLDAP-64] - SLO error with simpleSAMLphp
+    * [LEMONLDAP-68] - Failed to load signing key for
+      http://urlIDP/saml/metadata
+    * [LEMONLDAP-69] - domain cannot contain "-" in Manager
+    * [LEMONLDAP-71] - samlIDPSSODescriptorArtifactResolutionServiceArtifact
+      wrong binding in Manager
+    * [LEMONLDAP-72] - [SAML] UTF-8 encoded attributes are reencoded
+    * [LEMONLDAP-73] - [SAML] Initial URL is not kept when IDP is choosen in
+      AuthSAML
+    * [LEMONLDAP-74] - [error] Unable to open relaystate session
+    * [LEMONLDAP-75] - SSO HTTP-POST profile not declared in IDP metadata
+    * [LEMONLDAP-76] - [SAML] SOAP SLO denied on IDP
+    * [LEMONLDAP-77] - Error when no SessionNotOnOrAfter value in authn
+      statement
+    * [LEMONLDAP-78] - Request Denied on SOAP SLO request on IDP
+    * [LEMONLDAP-79] - Mandatory attributes are not requested
+    * [LEMONLDAP-81] - SessionNotOnOrAfter should be set explicitely
+    * [LEMONLDAP-82] - CDA always use secured cookie even if requested site is
+      a http one
+    * [LEMONLDAP-100] - Secondary SAML session should be destroyed when
+      primary session is deleted
+    * [LEMONLDAP-105] - Error on SLO request for already closed session
+    * [LEMONLDAP-109] - Do not send AttributeStatement when no attribute
+      should be sent
+    * [LEMONLDAP-112] - Handler/AuthBasic does not use local cache
+    * [LEMONLDAP-113] - Lemonldap::NG is not compatible with the use of a LDAP
+      server using a different encoding than UTF-8 for storing passwords
+    * [LEMONLDAP-114] - Bad usage of Apache::Session::searchOn() on portal
+    * [LEMONLDAP-115] - In info page, when clicking on "Continue", we are not
+      redirected to urldc
+    * [LEMONLDAP-119] - Special UTF-8 characters raise error in metadata
+    * [LEMONLDAP-122] - Secondary SAML session are not deleted on local IDP
+      logout
+    * [LEMONLDAP-124] - Stop info/confirm timer at 0
+    * [LEMONLDAP-37] - [SAML] Proxy restriction should include all known IDP,
+      and not only target IDP
+    * [LEMONLDAP-44] - [SAML][SP] IDP list when unknown IDP in IDP cookie
+    * [LEMONLDAP-46] - [logout] verify referer into logout process
+    * [LEMONLDAP-47] - [SAML] RequestedAuthnContext should always be
+      translated into authenticationLevel
+    * [LEMONLDAP-51] - [SAML][IDP] SAML sessionIndex value should be a crypted
+      value of LL::NG session_id
+    * [LEMONLDAP-55] - Distribute SympaAutoLogin Handler
+    * [LEMONLDAP-70] - Do not throw error if no SP or no IDP configured
+    * [LEMONLDAP-80] - POST fields should be hidden
+    * [LEMONLDAP-87] - Attribute format selection in Manager
+    * [LEMONLDAP-89] - Security keys in service metadata
+    * [LEMONLDAP-90] - Group IDP and SP options
+    * [LEMONLDAP-91] - SOAP configuration parameter is not needed in SAML
+    * [LEMONLDAP-98] - Add option to disable SAML conditions checks
+    * [LEMONLDAP-104] - Store entities metadata in raw format
+    * [LEMONLDAP-106] - Display OK or ERROR icons on HTTP REDIRECT and HTTP
+      POST SLO iframes
+    * [LEMONLDAP-107] - Manage asynchronous SLO request on closed SSO session
+      (SAML IDP)
+    * [LEMONLDAP-126] - Put SAML parameters in Manager
+    * [LEMONLDAP-2] - [SAML] Attribute authority
+    * [LEMONLDAP-10] - [SAML] Manage certificate in service metadata
+    * [LEMONLDAP-31] - [SAML] Proxy IDP
+    * [LEMONLDAP-32] - [SAML] Manage Artifact methods for SAML messages
+      emission in SP
+    * [LEMONLDAP-33] - [SAML] Check "Destination" attribute
+    * [LEMONLDAP-35] - [SAML] Manage SLO trough SOAP
+    * [LEMONLDAP-36] - [SAML] Check dates and other conditions in SLO requests
+    * [LEMONLDAP-40] - [SAML] Dedicated portal errors code for SAML errors
+    * [LEMONLDAP-49] - [SAML][IDP] Manage encrypted NameID
+    * [LEMONLDAP-52] - IssuerDB activation rule
+    * [LEMONLDAP-56] - [SAML][IDP] SLO trough HTTP-POST
+    * [LEMONLDAP-66] - [SAMl][IDP] Options to check message signatures
+    * [LEMONLDAP-67] - [SAML][IDP] Map NameID Format to local session keys
+    * [LEMONLDAP-86] - Do not parse metadata on each authentication
+    * [LEMONLDAP-88] - Better signature management
+    * [LEMONLDAP-108] - NameID unspecified format should use the default
+      NameID format
+    * [LEMONLDAP-110] - Store SAML token in session
+    * [LEMONLDAP-111] - Build SLO response request with other SLO request
+      status
+    * [LEMONLDAP-116] - Allow metadata edition in Manager
+    * [LEMONLDAP-3] - [SAML] Attribute authority declaration in metadata
+    * [LEMONLDAP-83] - Set NameID in attribute request
+    * [LEMONLDAP-84] - Check format and friendly name of requested attribute
+    * [LEMONLDAP-85] - Check requested attribute values
+    * [LEMONLDAP-96] - Add encryptionkey in Attribute Authority metadata
+    * Upgrade to JQuery-1.4.2
+
+lemonldap-ng (1.0rc1) unstable; urgency=low
+
+  * Little Debian changes (see 0.9.4.1-2 Debian changelog)
+  * AuthCAS: URL redirection and module load test
+  * Change multiple configuration files into lemonldap-ng.ini
+  * New manager
+  * New conf storage modules : CDBI and RDBI
+  * DBI conf storage module is deprecated
+  * convertConfig and lmMigrateConfFiles2ini tools
+  * childInit() is called only 1 time
+  * Update JQuery to 1.3 and JQueri-UI 1.7.2 (Closes: #314394)
+  * New authentication and userDB modules :
+    - DBI
+    - Proxy
+    - Env (UserDB only)
+    - SAML
+    - OpenID
+    - Twitter
+  * Portal index.pl use lemonldap-ng.ini to get parameters
+  * CSS and Javascript minification capability
+  * Apache configuration splitted into portal/manager/handler
+  * XML Menu is deprecated
+  * LDAP: recursive groups
+  * unprotect target in rules
+  * Force authentication parameter
+  * Store in user session Auth/UserDB/PasswordDB/IssuerDB used module
+  * Use a confirmation token and HTML templates for password reset by mail
+  * SOAP: isAuthorizedUri Web Service
+  * Confirm and Info stages in Portal
+  * Possibility to define a rule to grant session
+  * Configuration parameters for portal customization (skin, ...)
+  * Possibility to set cookie expiration
+  * LDAP: option to modify password as user
+  * Correct bugs in Handler::Proxy
+  * New portal skin: impact
+
+ -- Xavier Guimard <x.guimard@free.fr>  Wed, 24 Mar 2010 23:00:00 +0100
+
+lemonldap-ng (0.9.4.1) unstable; urgency=low
+
+  * Safe jail update
+  * Many little bugs in Handler/CGI.pm
+  * Apache::Session::LDAP was not usable with session explorer
+  * syslog facility was not taken in account in Common/CGI.pm
+  * require failed in _Multi.pm
+  * doc update
+  * russian debconf translation (Closes: #550552 / bugs.debian.org)
+
+ -- Xavier Guimard <x.guimard@free.fr>  Sun, 11 Oct 2009 09:36:35 +0200
+
+lemonldap-ng (0.9.4) unstable; urgency=low
+
+  * Bugs :
+    - ldap+tls uri was not working (Closes: #312418)
+    - Session timeout is in seconds and not in minutes in Manager/Help.pm
+      (Closes: #312339)
+    - Missing dependency in Debian package (Closes: #521959 / bugs.debian.org)
+  * Logs :
+    - CGI's log subroutine : now if a CGI runs under ModPerl::Registry, it
+      stores it's log using Apache2::Log
+    - handler logs written in PerlLogHandler
+  * SOAP :
+    - New SOAP architecture : the portal serves now all webservices and the
+      security is based on Apache system (different locations)
+    - WSDL generation
+  * New features :
+    - LDAP backend for configuration and sessions storage
+    - portal can be a Perl expression in handlers
+    - POST requests generation in handler (used to post login/password in non
+      compatible applications)
+    - Sympa auto login handler
+    - New auth and userDB modules for the portal : Multi, Remote, Null (for
+      UserDB only)
+    - New module system for passwords
+    - Notification system
+    - Double session mechanism (1 secured and the other not)
+    - New fonctions for rules (stored in
+      lemonldap-ng-common/lib/Lemonldap/NG/Common/Safelib.pm) :
+       * checkLogonHours
+       * checkDate
+  * Other :
+    - Pre-compilation in Apache's configuration files
+    - Cross-domain now included in core
+    - handler AuthBasic now uses SOAP
+
+ -- Xavier Guimard <x.guimard@free.fr>  Mon, 29 Jun 2009 10:28:09 +0200
+
+lemonldap-ng (0.9.3.4) unstable; urgency=low
+
+  * Security bug fix (macros and groups can be evaluated for an other user in
+    multi-thread environment). Closes: #312627
+  * XSS filter can now accept URL with a port. Closes: #312625
+
+ -- Xavier Guimard <x.guimard@free.fr>  Thu, 05 Feb 2009 16:12:55 +0100
+
+lemonldap-ng (0.9.3.3) unstable; urgency=low
+
+  * ldap+tls uri was not working (Closes: #312418)
+  * Session timeout is in seconds and not in minutes in Manager/Help.pm
+    (Closes: #312339)
+
+ -- Xavier Guimard <x.guimard@free.fr>  Thu, 22 Jan 2009 11:00:10 +0100
+
+lemonldap-ng (0.9.3.2) unstable; urgency=low
+
+  * Debian install failed (Closes: #510562, Closes: #510563 / bugs.debian.org)
+
+ -- Xavier Guimard <x.guimard@free.fr>  Sat, 03 Jan 2009 09:47:21 +0100
+
+lemonldap-ng (0.9.3.1) unstable; urgency=low
+
+  * Bug in Debian build
+
+ -- Xavier Guimard <x.guimard@free.fr>  Wed, 31 Dec 2008 14:16:06 +0100
+
+lemonldap-ng (0.9.3) unstable; urgency=low
+
+  [ Security ]
+  * XSS protection
+
+  [ Clement Oudot ]
+  * New menu and skin (pastel). Menu calculates rights before displaying URL
+
+  [ Xavier Guimard ]
+  * Authentication and UserDB separation
+  * New session explorer system
+  * Backport of debian storage.conf file to normal installation
+  * Errors are now displayed in the browser for portal and manager
+  * Custom functions for rules, macros, headers and groups
+  * Manager protection
+  * New configuration access with local cache system
+  * AuthBasic handler
+  * MRTG scripts to read LmNG status
+  * UserDB mechanism : LDAP is not required now
+  * Portal SOAP functions
+
+ -- Xavier Guimard <x.guimard@free.fr>  Wed, 31 Dec 2008 11:55:57 +0100
+
+lemonldap-ng (0.9.2.2) unstable; urgency=low
+
+  * Bug in default rule (Closes: #310938)
+
+ -- Xavier Guimard <x.guimard@free.fr>  Mon, 25 Aug 2008 22:08:58 +0200
+
+lemonldap-ng (0.9.2.1) unstable; urgency=low
+
+  * New documentation page on advanced access rules
+
+ -- Xavier Guimard <x.guimard@free.fr>  Fri, 04 Jul 2008 11:54:57 +0200
+
+lemonldap-ng (0.9.2) unstable; urgency=low
+
+  * New css in manager
+  * cleaning Handler code
+  * Status system for Lemonldap::NG::Handler and for the portal
+  * Debian Czech translation for debconf (Closes: #483301 / bugs.debian.org)
+  * Debian Swedish translation for debconf (Closes: #487713 / bugs.debian.org)
+  * Romanian translation for portal
+  * Distinct Liberty-Alliance SP installation
+  * Password policy included now
+  * Bugs in redirections
+  * Perl 5.10 check-in
+  * More tests in "test" target
+  * Bug in purgeCentralCache (DBI only): datas where never purged
+
+ -- Xavier Guimard <x.guimard@free.fr>  Tue, 24 Jun 2008 15:07:04 +0200
+
+lemonldap-ng (0.9.1) unstable; urgency=low
+
+  * logout bug : logout_sso target was not running (Closes: #308856)
+  * javascript update : the manager was not running with MSIE7 (Closes:
+    #308775)
+  * Debian corrections issued from lintian (full)
+  * 2 Net::LDAP password policy controls in the portal:
+    - account locked
+    - password expired
+
+ -- Xavier Guimard <x.guimard@free.fr>  Mon, 07 Apr 2008 11:13:06 +0200
+
+lemonldap-ng (0.9) unstable; urgency=low
+
+  * Liberty Alliance module issued of the FederID project is now included.
+
+ -- Xavier Guimard <x.guimard@free.fr>  Mon, 25 Feb 2008 15:05:08 +0100
+
+lemonldap-ng (0.8.3.2) unstable; urgency=low
+
+  * purgeCentralCache was not correctly installed in Debian (Closes: #461572 /
+    bugs.debian.org)
+  * debconf translation for german and portuguese (Closes: #451820 and #462807
+    bugs.debian.org)
+  * HTML documentation update
+  * Option +ExecCGI was missing in
+    lemonldap-ng-handler/example/lmH-apache2.conf (Closes: #307891)
+  * Local overload was not taken in account in handlers
+  * Sessions could not be stored in SOAPServer (Closes: #308181)
+  * Attributes could not be deleted in SOAP session client (Closes: #308214)
+  * Sessions timeout can now be managed by the Manager
+  * AuthSSL doesn't work without SSLvar parameter
+
+ -- Xavier Guimard <x.guimard@free.fr>  Fri, 08 Feb 2008 17:27:15 +0100
+
+lemonldap-ng (0.8.3.1) unstable; urgency=low
+
+  * New feature: LDAP groups are now available in $groups
+
+ -- Xavier Guimard <x.guimard@free.fr>  Wed, 07 Nov 2007 16:41:07 +0100
+
+lemonldap-ng (0.8.3) unstable; urgency=high
+
+  * Syntax errors in configuration are now displayed
+  * Security fix: authentication could be replayed with another uid
+  * Debian package uses po-debconf
+  * TLS is now supported in LDAP connections (thanks to Baptiste Grenier)
+  * New logout system: logout urls can be now intercepted in Manager
+  * Documentation
+
+ -- Xavier Guimard <x.guimard@free.fr>  Fri, 07 Sep 2007 07:14:35 +0200
+
+lemonldap-ng (0.8.2.4) unstable; urgency=low
+
+  * Bug in manager javascript.
+
+ -- Xavier Guimard <x.guimard@free.fr>  Tue, 19 Jun 2007 22:25:10 +0200
+
+lemonldap-ng (0.8.2.3) unstable; urgency=low
+
+  * Change configuration storage format (Storable bug).
+    Closes: #307173/objectweb.org
+  * CDA little bug correction
+  * Documentation update
+
+ -- Xavier Guimard <x.guimard@free.fr>  Wed, 13 Jun 2007 15:33:56 +0200
+
+lemonldap-ng (0.8.2.2) unstable; urgency=low
+
+  * Debian packages modifications due to Lintian control.
+  * New Debian package: lemonldap-ng-doc
+  * Little bug correction in Portal/CDA.pm
+  * Bug between Handler dependencies and Debian organization:
+    Lemonldap::NG::Handler::SharedConf must not depend from
+    Lemonldap::NG::Manager but Lemonldap::NG::Manager::Conf
+
+ -- Xavier Guimard <x.guimard@free.fr>  Tue, 01 June 2007 07:18:43 +0200
+
+lemonldap-ng (0.8.2.1) unstable; urgency=low
+
+  * More documentation
+  * Virtual host names control
+  * Portal can now use more than one LDAP server
+
+ -- Xavier Guimard <x.guimard@free.fr>  Mon, 14 May 2007 07:14:10 +0200
+
+lemonldap-ng (0.8.2) unstable; urgency=low
+
+  * Little bug fix if whatToTrace parameter is not defined and display it in
+    Manager interface
+  * New: port is now checked in portal redirection
+  * Different configurations can now be used on the same server at the same
+    time
+  * Help in english
+  * New debian structure: lemonldap-ng is splitted in 5 packages, default
+    configuration file has moved to /var/lib/lemonldap-ng/conf/ and first
+    configuration file is managed by debconf
+  * Buttons to manage configurations in manager (next, previous, last,
+    delete). Closes: #306566 / forge.lemonldap.org.
+  * SOAP: HTTP basic authentication and little bug correction in 'sessions'
+    mode
+
+ -- Xavier Guimard <x.guimard@free.fr>  Mon, 07 May 2007 19:06:52 +0200
+
+lemonldap-ng (0.8.1.1) unstable; urgency=low
+
+  * Little bug fix in test
+
+ -- Xavier Guimard <x.guimard@free.fr>  Fri, 20 Apr 2007 08:57:40 +0200
+
+lemonldap-ng (0.8.1) unstable; urgency=low
+
+  * New features :
+    - Logout system
+    - Configuration check before saving in Manager
+
+ -- Xavier Guimard <x.guimard@free.fr>  Sun, 15 Apr 2007 19:18:29 +0200
+
+lemonldap-ng (0.8.0.7) unstable; urgency=low
+
+  * Bug fix in manager javascript (Closes: #306776 ?)
+  * Display bug fix in manager
+
+ -- Xavier Guimard <x.guimard@free.fr>  Sun, 15 Apr 2007 13:21:43 +0200
+
+lemonldap-ng (0.8.0.6) unstable; urgency=low
+
+  * Little bug fix in unprotect function
+  * Bug fix in authentication scheme different than default
+
+ -- Xavier Guimard <x.guimard@free.fr>  Thu, 12 Apr 2007 07:03:51 +0200
+
+lemonldap-ng (0.8.0.5) unstable; urgency=low
+
+  * i18n bug: Lemonldap::NG works does not fall in english but creates a bug
+
+ -- Xavier Guimard <x.guimard@free.fr>  Wed, 28 Mar 2007 21:26:16 +0200
+
+lemonldap-ng (0.8.0.4) unstable; urgency=low
+
+  * Multi-valued attributes in HTTP headers (Closes: #306792 /
+    forge.objectweb.org)
+  * Warning in Manager/Conf.pm: the same type of storage has to be used for
+    all Lemonldap::NG parts in a same server.
+  * Apache-1.3 configuration reload (Closes: #306761 / forge.objectweb.org)
+
+ -- Xavier Guimard <x.guimard@free.fr>  Thu, 22 Mar 2007 22:42:23 +0100
+
+lemonldap-ng (0.8.0.3) unstable; urgency=low
+
+  * New feature in Manager : "Delete VHost" button (Closes: #306761)
+  * Typo correction in Makefile : (Closes: #306775)
+  * Correction of build-depends : (Closes: #306773)
+  * Bug correction : existingSessions was not called in Portal.pm
+
+ -- Xavier Guimard <x.guimard@free.fr>  Tue, 13 Mar 2007 07:55:42 +0100
+
+lemonldap-ng (0.8.0.2) unstable; urgency=low
+
+  * Bug correction: lock doesn't work with File.pm (Closes: #306760 /
+    forge.objectweb.org)
+
+ -- Xavier Guimard <x.guimard@free.fr>  Sun, 11 Mar 2007 21:08:38 +0100
+
+lemonldap-ng (0.8.0.1) unstable; urgency=medium
+
+  * Closes: #306756 / forge.objectweb.org
+
+ -- Xavier Guimard <x.guimard@free.fr>  Fri,  10 Mar 2007 08:49:01 +0100
+
+lemonldap-ng (0.8) unstable; urgency=low
+
+  * Release 0.8:
+    - corrects differents little bugs issued from test in real life.
+    - on line documentation in english
+
+ -- Xavier Guimard <x.guimard@free.fr>  Fri,  9 Mar 2007 20:29:01 +0100
+
+lemonldap-ng (0.7b12) unstable; urgency=low
+
+  * New features:
+    - session access via SOAP
+    - authentication via CAS
+    - 'apply changes' button in Manager used to reload configuration in
+      handlers (by calling reload sub via HTTP) (Closes: #306565 /
+      forge.objectweb.org)
+    - i18n module in portal (for displaying errors)
+    - lock in DBI configuration system (NOT YET TESTED)
+
+ -- Xavier Guimard <x.guimard@free.fr>  Sun,  4 Mar 2007 15:50:38 +0100
+
+lemonldap-ng (0.7b11) unstable; urgency=low
+
+  * New features:
+    - Cross Domain Authentication
+    - SOAP configuration access
+    - READMEs and documentation update
+
+ -- Xavier Guimard <x.guimard@free.fr>  Tue, 27 Feb 2007 15:01:09 +0100
+
+lemonldap-ng (0.7b10) unstable; urgency=low
+
+  * Corrections in Manager issued from the first test in real life:
+    - Close #306573 / forge.objectweb.org
+    - Close #306574 / forge.objectweb.org
+
+ -- Xavier Guimard <x.guimard@free.fr>  Wed, 17 Jan 2007 20:57:33 +0100
+
+lemonldap-ng (0.7b9) unstable; urgency=low
+
+  * Internationalization of javascripts (close #306564 / forge.objectweb.org)
+  * Help in "General Parameters"
+
+ -- Xavier Guimard <x.guimard@free.fr>  Sun, 14 Jan 2007 21:50:39 +0100
+
+lemonldap-ng (0.7b8) unstable; urgency=low
+
+  * Correction of the use of Safe in portal: &share doesn't work with a
+    variable declared with my.
+  * New system in the configuration: 'macro' section can be used to add
+    custom exported variables. So configuration is more simple in heavy case.
+
+ -- Xavier Guimard <x.guimard@free.fr>  Sat, 13 Jan 2007 20:19:19 +0100
+
+lemonldap-ng (0.7b7) unstable; urgency=low
+
+  * Correction of a bug in internal redirections: now internal
+    redirections are not examined: for example,http://test.example.com/ is
+    internaly redirected to /index.pl, but only the first request (/) is
+    tested.
+  * Help in french
+
+ -- Xavier Guimard <x.guimard@free.fr>  Fri,  5 Jan 2007 18:22:32 +0100
+
+lemonldap-ng (0.7b6) unstable; urgency=low
+
+  * Help system skeleton
+
+ -- Xavier Guimard <x.guimard@free.fr>  Thu,  4 Jan 2007 09:04:05 +0100
+
+lemonldap-ng (0.7b5) unstable; urgency=low
+
+  * Localization in Manager interface (only fr and en)
+
+ -- Xavier Guimard <x.guimard@free.fr>  Sun, 31 Dec 2006 16:39:06 +0100
+
+lemonldap-ng (0.7b4) unstable; urgency=low
+
+  * Safe jail runs now
+  * example runs now
+
+ -- Xavier Guimard <x.guimard@free.fr>  Sun, 31 Dec 2006 14:00:08 +0100
+
+lemonldap-ng (0.7b3) unstable; urgency=low
+
+  * Replacement of eval by Safe for external expressions
+
+ -- Xavier Guimard <x.guimard@free.fr>  Sat, 30 Dec 2006 22:23:22 +0100
+
+lemonldap-ng (0.7b) unstable; urgency=low
+
+  * Corrections in example
+  * Example installation in debian
+  * Revision in documentation
+
+ -- Xavier Guimard <x.guimard@free.fr>  Sun, 17 Dec 2006 18:37:39 +0100
+
+lemonldap-ng (0.6) unstable; urgency=low
+
+  * Initial release built starting from the three modules of the CPAN.
+
+ -- Xavier Guimard <x.guimard@free.fr>  Sun, 17 Dec 2006 17:46:47 +0100
+

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}{{ flower.name }} - Flower Details{% endblock %}
+
+        
+{% block content %}
+
+    <center>
+        <h1>{{ flower.name }}</h1>
+    </center>
+    <div class="flower-details">
+        <img class="flower-image" src="{{ flower.flower_url }}" alt="{{ flower.name }}">
+        <center style="font-size: x-large;">
+            <b><p>{{ flower.description }}</p></b>
+        </center>
+    </div>
+
+{% endblock %}

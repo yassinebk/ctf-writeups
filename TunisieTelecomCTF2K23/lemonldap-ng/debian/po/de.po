@@ -1,0 +1,144 @@
+# Copyright (C) Helge Kreutzmann <debian@helgefjell.de>, 2008, 2010.
+# This file is distributed under the same license as the lemonldap-ng package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lemonldap-ng 1.0-1\n"
+"Report-Msgid-Bugs-To: lemonldap-ng@packages.debian.org\n"
+"POT-Creation-Date: 2010-12-04 23:10+0100\n"
+"PO-Revision-Date: 2008-01-23 23:12+0100\n"
+"Last-Translator: Helge Kreutzmann &lt;debian@helgefjell.de&gt;\n"
+"Language-Team: de &lt;debian-l10n-german@lists.debian.org&gt;\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: string
+#. Description
+#: ../liblemonldap-ng-common-perl.templates:1001
+msgid "LDAP server:"
+msgstr "LDAP-Server:"
+
+#. Type: string
+#. Description
+#: ../liblemonldap-ng-common-perl.templates:1001
+msgid ""
+"Set here name or IP address of the LDAP server that has to be used by "
+"Lemonldap::NG. You can modify this value later using the Lemonldap::NG "
+"manager."
+msgstr ""
+"Setzen Sie hier den Namen oder die IP-Adresse des LDAP-Servers, der von "
+"Lemonldap::NG verwendet werden muss. Sie können diesen Wert später mit dem "
+"Lemonldap::NG-Manager verändern."
+
+#. Type: string
+#. Description
+#: ../liblemonldap-ng-common-perl.templates:2001
+msgid "Lemonldap::NG DNS domain:"
+msgstr "Lemonldap::NG DNS-Domain:"
+
+#. Type: string
+#. Description
+#: ../liblemonldap-ng-common-perl.templates:2001
+msgid ""
+"Set here the main domain protected by Lemonldap::NG. You can modify this "
+"value later using the Lemonldap::NG manager."
+msgstr ""
+"Setzen Sie hier die Haupt-Domain, die von Lemonldap::NG geschützt wird. Sie "
+"können diesen Wert später mit dem Lemonldap::NG-Manager verändern."
+
+#. Type: string
+#. Description
+#: ../liblemonldap-ng-common-perl.templates:3001
+msgid "Lemonldap::NG portal:"
+msgstr "Lemonldap::NG-Portal:"
+
+#. Type: string
+#. Description
+#: ../liblemonldap-ng-common-perl.templates:3001
+msgid ""
+"Set here the Lemonldap::NG portal URL. You can modify this value later using "
+"the Lemonldap::NG manager."
+msgstr ""
+"Setzen Sie hier die Portal-URL von Lemonldap::NG. Sie können diesen Wert "
+"später mit dem Lemonldap::NG-Manager verändern."
+
+#. Type: string
+#. Description
+#: ../liblemonldap-ng-common-perl.templates:4001
+msgid "LDAP server port:"
+msgstr "Port des LDAP-Servers:"
+
+#. Type: string
+#. Description
+#: ../liblemonldap-ng-common-perl.templates:4001
+msgid ""
+"Set here the port used by the LDAP server. You can modify this value later "
+"using the Lemonldap::NG manager."
+msgstr ""
+"Setzen Sie hier den Port des LDAP-Servers. Sie können diesen Wert später mit "
+"dem Lemonldap::NG-Manager verändern."
+
+#. Type: string
+#. Description
+#: ../liblemonldap-ng-common-perl.templates:5001
+msgid "LDAP search base:"
+msgstr "LDAP-Suchbasis:"
+
+#. Type: string
+#. Description
+#: ../liblemonldap-ng-common-perl.templates:5001
+msgid ""
+"Set here the search base to use in LDAP queries. You can modify this value "
+"later using the Lemonldap::NG manager."
+msgstr ""
+"Setzen Sie hier die Suchbasis für LDAP-Abfragen. Sie können diesen Wert "
+"später mit dem Lemonldap::NG-Manager verändern."
+
+#. Type: string
+#. Description
+#: ../liblemonldap-ng-common-perl.templates:6001
+msgid "LDAP account:"
+msgstr "LDAP-Konto:"
+
+#. Type: string
+#. Description
+#: ../liblemonldap-ng-common-perl.templates:6001
+msgid ""
+"Set here the account that Lemonldap::NG has to use for its LDAP requests. "
+"Leaving it blank causes Lemonldap::NG to use anonymous connections. You can "
+"modify this value later using the Lemonldap::NG manager."
+msgstr ""
+"Setzen Sie hier das Konto, das Lemonldap::NG für seine LDAP-Anfragen "
+"verwenden muss. Bleibt dieses Feld leer, verwendet Lemonldap::NG anonyme "
+"Verbindungen. Sie können diesen Wert später mit dem Lemonldap::NG-Manager "
+"verändern."
+
+#. Type: string
+#. Description
+#: ../liblemonldap-ng-common-perl.templates:7001
+msgid "LDAP password:"
+msgstr "LDAP-Passwort:"
+
+#. Type: string
+#. Description
+#: ../liblemonldap-ng-common-perl.templates:7001
+msgid ""
+"Set here the password for the Lemonldap::NG LDAP account. You can modify "
+"this value later using the Lemonldap::NG manager."
+msgstr ""
+"Setzen Sie hier das Passwort für das LDAP-Konto von Lemonldap::NG. Sie "
+"können diesen Wert später mit dem Lemonldap::NG-Manager verändern."
+
+#. Type: boolean
+#. Description
+#: ../liblemonldap-ng-common-perl.templates:8001
+msgid ""
+"Lemonldap::NG configuration files have changed, try to migrate your files?"
+msgstr ""
+"Lemonldap::NG-Konfigurationsdateien wurden geändert, soll versucht werden, "
+"die Dateien zu migrieren?"
+
+#~ msgid "Lemonldap::NG migration:"
+#~ msgstr "Lemonldap::NG-Migration:"

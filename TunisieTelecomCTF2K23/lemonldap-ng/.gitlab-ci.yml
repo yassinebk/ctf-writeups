@@ -1,0 +1,141 @@
+.build_job:
+  stage: build
+  retry: 1
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - result/*
+  except:
+    variables:
+      - $SONARJOB == "1"
+
+.debian_build_job:
+  extends: .build_job
+  script:
+     - apt-get update --allow-releaseinfo-change && apt-get -y dist-upgrade
+     - DEBIAN_FRONTEND=noninteractive apt-get -y install tzdata
+     - ci-build-pkg
+  before_script:
+     - env | grep ^CI_
+     # Converting to native package...
+     - sed -i "1{s/-1) /$suffix) /}" debian/changelog
+     - sed -i "1{s/-2) /$suffix) /}" debian/changelog
+     - sed -i 's/3.0 (quilt)/3.0 (native)/' debian/source/format
+
+stages:
+- build
+- sign
+- deploy
+
+before_script:
+  - env | grep ^CI_
+
+build_buster:
+  extends: .debian_build_job
+  image: buildpkg/debian:buster
+
+build_bullseye:
+  extends: .debian_build_job
+  image: buildpkg/debian:bullseye
+
+#build_xenial:
+#  extends: .debian_build_job
+#  image: buildpkg/ubuntu:xenial
+#  <<: *job_build
+
+build_bionic:
+  extends: .debian_build_job
+  image: buildpkg/ubuntu:bionic
+
+build_centos_7:
+  extends: .build_job
+  image: buildpkg/centos:7
+  script:
+     - rm -f /etc/yum.repos.d/CentOS-Sources.repo
+     - yum -y install epel-release
+     - scripts/ci-install-lasso-centos
+     - make dist
+     - ci-build-pkg
+
+build_centos_8:
+  extends: .build_job
+  image: buildpkg/centos:8
+  script:
+     - sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+     - sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+     - yum-config-manager --enable PowerTools
+     - yum-config-manager --enable AppStream
+     - yum -y install epel-release
+     - scripts/ci-install-lasso-centos
+     - make dist
+     - ci-build-pkg
+
+sign:
+  image: buildpkg/debian:bullseye
+  stage: sign
+#  variables:
+#    SIGN_USER: firstname.lastname@orange.com
+#    GPG_PRIVATE_KEY:
+  script:
+    - cd $CI_PROJECT_DIR
+    - ci-sign-pkg
+  dependencies:
+    - build_buster
+    - build_bullseye
+#    - build_xenial
+    - build_bionic
+    - build_centos_7
+    - build_centos_8
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - result/*
+  only:
+    - master
+
+pages:
+  image: buildpkg/debian:bullseye
+  stage: deploy
+  variables:
+    # Default page dir
+    # PAGES_DIR: public
+    PAGES_HOST: ow2.io
+  environment:
+    name: PPA
+    url: http://${CI_PROJECT_NAMESPACE}.${PAGES_HOST}/${CI_PROJECT_NAME}
+  script:
+    - cd $CI_PROJECT_DIR
+    - ci-pages-ppa
+    - ci-pages-home
+    - ci-pages-tree
+  dependencies:
+    - sign
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - public
+  only:
+    - master
+
+sonar-inspect:
+  image: buildpkg/debian:buster
+  stage: build
+  script:
+        - scripts/sonar
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - lemonldap-ng-*/cover_db/sonar_generic.xml
+      - lemonldap-ng-*/perlcritic_report.txt
+  only:
+    variables:
+      - $SONARJOB == "1"
+
+sonar-upload:
+  stage: deploy
+  image: sonarsource/sonar-scanner-cli
+  script:
+      - /usr/bin/entrypoint.sh
+  only:
+    variables:
+      - $SONARJOB == "1"

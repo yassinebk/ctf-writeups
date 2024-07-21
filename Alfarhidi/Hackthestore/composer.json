@@ -1,0 +1,20 @@
+{
+    "name": "askee/hackthestore",
+    "autoload": {
+        "psr-4": {
+            "Askee\\Hackthestore\\": "./",
+            "MyApp": "./src/MyApp"
+        }
+    },
+    "authors": [
+        {
+            "name": "yassinebk",
+            "email": "yassinebk23@gmail.com"
+        }
+    ],
+    "require": {
+        "doctrine/orm": "*",
+        "symfony/cache": "*",
+        "doctrine/annotations": "*"
+    }
+}

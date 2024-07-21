@@ -1,0 +1,322 @@
+#!/usr/bin/perl
+
+use Plack::Runner;
+use strict;
+use warnings;
+use POSIX;
+use Getopt::Long;
+use Lemonldap::NG::Handler::Main::Reload;
+
+our $VERSION = '2.0.15';
+
+our (
+    $foreground,  $engine,              $nproc,  $pidFile,
+    $socket,      $user,                $listen, $group,
+    $procmanager, $customFunctionsFile, %plackOptions
+);
+my %_apps;
+
+$SIG{'PIPE'} = 'IGNORE';
+$ENV{LLNG_DEFAULTLOGGER} ||= 'Lemonldap::NG::Common::Logger::Syslog';
+
+$foreground = 0;
+$engine  ||= $ENV{ENGINE} || 'FCGI';
+$nproc   ||= $ENV{NPROC}  || 7;
+$pidFile ||= $ENV{PID}    || '__FASTCGISOCKDIR__/llng-fastcgi.pid';
+$socket  ||= $ENV{SOCKET} || '__FASTCGISOCKDIR__/llng-fastcgi.sock';
+$listen  ||= $ENV{LISTEN} || undef;
+$user    ||= $ENV{USER};
+$group   ||= $ENV{GROUP};
+$customFunctionsFile ||= $ENV{CUSTOM_FUNCTIONS_FILE};
+
+# If the user specified any PM_ constrains, run under ::Constrained
+$procmanager = "FCGI::ProcManager::Constrained" if grep /^PM_/, keys %ENV;
+
+#Getopt::Long::Configure ("bundling_values");
+GetOptions(
+    'foreground'              => \$foreground,
+    'engine|e=s'              => \$engine,
+    'proc|n=s'                => \$nproc,
+    'pid|p=s'                 => \$pidFile,
+    'socket|s=s'              => \$socket,
+    'listen|l=s'              => \$listen,
+    'user|u=s'                => \$user,
+    'group|g=s'               => \$group,
+    'customFunctionsFile|f=s' => \$customFunctionsFile,
+    'plackOptions=s'          => \%plackOptions,
+);
+
+if ($group) {
+    my $grp = getgrnam($group) or die "Can't change gid to $group";
+    POSIX::setgid($grp) or die "setgid: $!";
+}
+
+if ($user) {
+    my $uid = getpwnam($user) or die "Can't change uid to $user";
+    POSIX::setuid($uid) or die "setuid: $!";
+}
+
+unless ($>) {
+    die "Refuse to run as root. Aborting";
+}
+
+if ($customFunctionsFile) {
+    eval { require $customFunctionsFile };
+    die $@ if ($@);
+}
+
+my %builder = (
+    reload => sub {
+        return Lemonldap::NG::Handler::Server::Nginx->reload();
+    },
+    status => sub {
+        return Lemonldap::NG::Handler::Server::Nginx->status();
+    },
+    manager => sub {
+        require Lemonldap::NG::Manager;
+        return Lemonldap::NG::Manager->run( {} );
+    },
+    portal => sub {
+        require Lemonldap::NG::Portal;
+        return Lemonldap::NG::Portal->run( {} );
+    },
+    cgi => sub {
+        require CGI::Emulate::PSGI;
+        require CGI::Compile;
+        return sub {
+            my $script = $_[0]->{SCRIPT_FILENAME};
+            return $_apps{$script}->(@_) if ( $_apps{$script} );
+            $_apps{$script} =
+              CGI::Emulate::PSGI->handler( CGI::Compile->compile($script) );
+            return $_apps{$script}->(@_);
+        };
+    },
+    psgi => sub {
+        return sub {
+            my $script = $_[0]->{SCRIPT_FILENAME};
+            return $_apps{$script}->(@_) if ( $_apps{$script} );
+            $_apps{$script} = do $script;
+            unless ( $_apps{$script} and ref $_apps{$script} ) {
+                die "Unable to load $_[0]->{SCRIPT_FILENAME}";
+            }
+            return $_apps{$script}->(@_);
+        }
+    },
+);
+
+require Lemonldap::NG::Handler::Server::Nginx;
+$_apps{handler} = Lemonldap::NG::Handler::Server::Nginx->run( {} );
+
+my $app = sub {
+    $SIG{'PIPE'} = sub {
+        print STDERR "Got a PIPE signal";
+    };
+    my $type = $_[0]->{LLTYPE} || 'handler';
+    return $_apps{$type}->(@_) if ( defined $_apps{$type} );
+    if ( defined $builder{$type} ) {
+        $_apps{$type} = $builder{$type}->();
+        return $_apps{$type}->(@_);
+    }
+    die "Unknown PSGI type $type";
+};
+
+# Hook for customFunctions initialization
+Lemonldap::NG::Handler::Main->onReload(
+    bless( {}, 'Lemonldap::NG::Handler::FastCGI::Loader' ),
+    'loadCustomHandlers' );
+
+my $server = Plack::Runner->new();
+$server->parse_options(
+    '-s'       => $engine,
+    '-E'       => 'deployment',
+    '--pid'    => $pidFile,
+    '--nproc'  => $nproc,
+    '--socket' => $socket,
+    ( $listen ? ( '--listen', $listen ) : () ),
+    '--proc-title' => 'llng-fastcgi-server',
+    ( $foreground ? () : '--daemonize' ),
+    '--no-default-middleware',
+    ( $procmanager ? ( '--manager', $procmanager ) : () ),
+    %plackOptions,
+);
+
+$server->run($app);
+
+package Lemonldap::NG::Handler::FastCGI::Loader;
+
+# Load configuration and look if custom handlers have been defined
+sub loadCustomHandlers {
+    my ( $obj, $conf ) = @_;
+    foreach my $lltype ( keys %{ $conf->{nginxCustomHandlers} || {} } ) {
+        my $v = $conf->{nginxCustomHandlers}->{$lltype};
+        if ( $v =~ m#[/\\\.]# ) {
+            eval { require $v; };
+        }
+        else {
+            eval "use $v";
+        }
+        if ($@) {
+            print STDERR "Unable to load $v, skipping: $@\n";
+            next;
+        }
+        $builder{$lltype} = sub {
+            require $v;
+            return $v->run( {} );
+        };
+    }
+    return 1;
+}
+__END__
+
+=head1 NAME
+
+=encoding utf8
+
+llng-fastcgi-server - FastCGI server used for providing LemonLDAP::NG services.
+
+=head1 SYNOPSIS
+
+  # Start server listening to /run/llng.sock with 10 workers
+  llng-fastcgi-server -u nobody -g nobody -s /run/llng.sock -n 10
+
+=head1 DESCRIPTION
+
+llng-fastcgi-server has been designed to provide LemonLDAP::NG services to Nginx
+or DevOps Handler.
+Portal, Manager and Handler will be compiled just-in-time. So this FastCGI
+server can be used on every LemonLDAP::NG server even if it needs only some
+parts (isolated handlers, portal,...).
+
+=head1 PARAMETERS
+
+Each parameter can be set by using options or environment variables.
+
+=over
+
+=item --pid    -p ($ENV{PID}):
+
+pid file
+
+=item --user   -u ($ENV{USER}):
+
+user
+
+=item --group  -g ($ENV{GROUP}):
+
+group
+
+=item --proc   -n ($ENV{NPROC}):
+
+Number of processus for FCGI
+
+=item --socket -s ($ENV{SOCKET}):
+
+Unix socket
+
+=item --listen -l ($ENV{LISTEN}):
+
+Listening address (HOST:PORT, :PORT, or PATH)
+
+=item --customFunctionsFile -f ($ENV{CUSTOM_FUNCTIONS_FILE}):
+
+file to load for custom functions
+
+=item --engine -e ($ENV{ENGINE}):
+
+Plack::Handler engine, default to FCGI (see below)
+
+=item --plackOptions:
+
+To pass other options to the Plack handler. This multi-valued parameter must
+have "key=value" values.
+
+See Plack::Handler::FCGI to find out list of available options for default FCGI engine
+
+=back
+
+=head1 ENGINES
+
+By default, llng-fastcgi-server uses FCGI (= L<Plack::Handler::FCGI>).
+Some other engines can be used:
+
+=head2 FCGI (default)
+
+It uses L<FCGI::ProcManager> as manager. Other managers:
+
+=over
+
+=item L<FCGI::ProcManager::Dynamic>
+
+  llng-fastcgi-server -u nobody -g nobody -s /run/llng.sock -e FCGI -n 10 \
+                      --plackOptions manager=FCGI::ProcManager::Dynamic
+
+=back
+
+=head2 Other FCGI::ProcManager style engines
+
+=over
+
+=item FCGI::Engine
+
+=back
+
+=head2 Event engines
+
+=over
+
+=item AnyEvent::FCGI
+
+=item FCGI::Async
+
+=item FCGI::EV
+
+=back
+
+=head1 SEE ALSO
+
+L<http://lemonldap-ng.org/>
+
+=head1 AUTHORS
+
+=over
+
+=item Clement Oudot, E<lt>clem.oudot@gmail.comE<gt>
+
+=item Xavier Guimard, E<lt>x.guimard@free.frE<gt>
+
+=back
+
+=head1 BUG REPORT
+
+Use OW2 system to report bug or ask for features:
+L<https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng/issues>
+
+=head1 DOWNLOAD
+
+Lemonldap::NG is available at
+L<https://lemonldap-ng.org/download>
+
+=head1 COPYRIGHT AND LICENSE
+
+=over
+
+=item Copyright (C) 2008-2016 by Xavier Guimard, E<lt>x.guimard@free.frE<gt>
+
+=item Copyright (C) 2008-2016 by Clément Oudot, E<lt>clem.oudot@gmail.comE<gt>
+
+=back
+
+This library is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2, or (at your option)
+any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see L<http://www.gnu.org/licenses/>.
+
+=cut

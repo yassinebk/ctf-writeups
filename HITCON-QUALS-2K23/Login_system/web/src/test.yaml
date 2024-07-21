@@ -1,0 +1,10 @@
+{
+"#test": null,
+"username":"file.yaml\u0000\u000A",
+"privilegeLevel":"user",
+"password":"12345670",
+"__proto__":{
+"admin":true
+}
+
+}

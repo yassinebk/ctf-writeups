@@ -1,0 +1,9 @@
+version: '3'
+services:
+  trustparser:
+    build: .
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    environment:
+      - BASE_URL=${BASE_URL-http://127.0.0.1:5000}

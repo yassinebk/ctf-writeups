@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e9305e2c-8439-4311-ab25-7cd1c711957a" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/Hackthestore/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php">
+    <include_path>
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/symfony/cache" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/symfony/cache-contracts" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/composer" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/Hackthestore/vendor/symfony/var-exporter" />
+    </include_path>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2YnxPWSvqMNWCWdt6tX96afxdnj" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/askee/Documents/CTFS/Alfarhidi&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration default="true" type="ComposerRunConfigurationType" factoryName="Composer Script">
+      <option name="pathToComposerJson" value="$PROJECT_DIR$/Hackthestore/composer.json" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e9305e2c-8439-4311-ab25-7cd1c711957a" name="Changes" comment="" />
+      <created>1701175122157</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1701175122157</updated>
+      <workItem from="1701175125174" duration="285000" />
+      <workItem from="1701176698662" duration="2756000" />
+      <workItem from="1701719469026" duration="434000" />
+      <workItem from="1701748805429" duration="1348000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="executable:docker" />
+    <option featureType="dependencySupport" implementationName="executable:kubectl" />
+  </component>
+</project>

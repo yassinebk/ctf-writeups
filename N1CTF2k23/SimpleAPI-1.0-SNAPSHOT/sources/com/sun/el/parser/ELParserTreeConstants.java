@@ -1,0 +1,47 @@
+package com.sun.el.parser;
+/* loaded from: SimpleAPI-1.0-SNAPSHOT.jar:BOOT-INF/lib/jakarta.el-3.0.3.jar:com/sun/el/parser/ELParserTreeConstants.class */
+public interface ELParserTreeConstants {
+    public static final int JJTCOMPOSITEEXPRESSION = 0;
+    public static final int JJTLITERALEXPRESSION = 1;
+    public static final int JJTDEFERREDEXPRESSION = 2;
+    public static final int JJTDYNAMICEXPRESSION = 3;
+    public static final int JJTVOID = 4;
+    public static final int JJTSEMICOLON = 5;
+    public static final int JJTASSIGN = 6;
+    public static final int JJTLAMBDAEXPRESSION = 7;
+    public static final int JJTLAMBDAPARAMETERS = 8;
+    public static final int JJTCHOICE = 9;
+    public static final int JJTOR = 10;
+    public static final int JJTAND = 11;
+    public static final int JJTEQUAL = 12;
+    public static final int JJTNOTEQUAL = 13;
+    public static final int JJTLESSTHAN = 14;
+    public static final int JJTGREATERTHAN = 15;
+    public static final int JJTLESSTHANEQUAL = 16;
+    public static final int JJTGREATERTHANEQUAL = 17;
+    public static final int JJTCONCAT = 18;
+    public static final int JJTPLUS = 19;
+    public static final int JJTMINUS = 20;
+    public static final int JJTMULT = 21;
+    public static final int JJTDIV = 22;
+    public static final int JJTMOD = 23;
+    public static final int JJTNEGATIVE = 24;
+    public static final int JJTNOT = 25;
+    public static final int JJTEMPTY = 26;
+    public static final int JJTVALUE = 27;
+    public static final int JJTDOTSUFFIX = 28;
+    public static final int JJTBRACKETSUFFIX = 29;
+    public static final int JJTMETHODARGUMENTS = 30;
+    public static final int JJTMAPDATA = 31;
+    public static final int JJTMAPENTRY = 32;
+    public static final int JJTLISTDATA = 33;
+    public static final int JJTIDENTIFIER = 34;
+    public static final int JJTFUNCTION = 35;
+    public static final int JJTTRUE = 36;
+    public static final int JJTFALSE = 37;
+    public static final int JJTFLOATINGPOINT = 38;
+    public static final int JJTINTEGER = 39;
+    public static final int JJTSTRING = 40;
+    public static final int JJTNULL = 41;
+    public static final String[] jjtNodeName = {"CompositeExpression", "LiteralExpression", "DeferredExpression", "DynamicExpression", "void", "SemiColon", "Assign", "LambdaExpression", "LambdaParameters", "Choice", "Or", "And", "Equal", "NotEqual", "LessThan", "GreaterThan", "LessThanEqual", "GreaterThanEqual", "Concat", "Plus", "Minus", "Mult", "Div", "Mod", "Negative", "Not", "Empty", "Value", "DotSuffix", "BracketSuffix", "MethodArguments", "MapData", "MapEntry", "ListData", "Identifier", "Function", "True", "False", "FloatingPoint", "Integer", "String", "Null"};
+}

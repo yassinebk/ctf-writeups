@@ -1,0 +1,9 @@
+POST /wp-login.php HTTP/1.1
+Host: langmon.htb
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 97
+Origin: http://langmon.htb
+Connection: close
+Cookie: wordpress_test_cookie=WP%20Cookie%20check
+
+log=admin&pwd=FUZZ&wp-submit=Log+In&redirect_to=http%3A%2F%2Flangmon.htb%2Fwp-admin%2F&testcookie=1

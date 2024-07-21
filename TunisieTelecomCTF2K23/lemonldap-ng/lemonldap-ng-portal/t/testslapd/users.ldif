@@ -1,0 +1,174 @@
+dn: dc=example,dc=com
+objectClass: top
+objectClass: organization
+objectClass: dcObject
+dc: example
+o: Example
+
+dn: ou=dsa,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: dsa
+
+dn: cn=lemonldapng,ou=dsa,dc=example,dc=com
+objectClass: top
+objectClass: organizationalRole
+objectClass: simpleSecurityObject
+cn: lemonldapng
+userPassword: lemonldapng
+
+dn: ou=users,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: users
+
+dn: uid=dwho,ou=users,dc=example,dc=com
+objectClass: inetOrgPerson
+uid: dwho
+cn: Dr Who
+sn: Who
+mail: dwho@badwolf.org
+userPassword: dwho
+roomNumber: 0
+
+dn: uid=rtyler,ou=users,dc=example,dc=com
+objectClass: inetOrgPerson
+uid: rtyler
+cn: Rose Tyler
+sn: Rtyler
+mail: rtyler@badwolf.org
+userPassword: rtyler
+roomNumber: 1
+
+dn: uid=french,ou=users,dc=example,dc=com
+objectClass: inetOrgPerson
+uid: french
+cn:: RnLDqWTDqXJpYyBBY2NlbnRz
+sn: Accents
+mail: french@badwolf.org
+userPassword: french
+displayName:: RnLDqWTDqXJpYyBBY2NlbnRz
+roomNumber: 0
+
+dn: uid=russian,ou=users,dc=example,dc=com
+objectClass: inetOrgPerson
+uid: russian
+cn:: 0KDRg9GB0YHQutC40Lk=
+sn:: 0KDRg9GB0YHQutC40Lk=
+mail: russian@badwolf.org
+userPassword: russian
+roomNumber: 0
+
+dn: uid=reset,ou=users,dc=example,dc=com
+objectClass: inetOrgPerson
+uid: reset
+cn: reset
+sn: reset
+mail: reset@badwolf.org
+userPassword: reset
+pwdPolicySubentry: cn=passwordreset,ou=ppolicies,dc=example,dc=com
+pwdReset: TRUE
+roomNumber: 0
+
+dn: uid=expire,ou=users,dc=example,dc=com
+objectClass: inetOrgPerson
+uid: expire
+cn: expire
+sn: expire
+mail: expire@badwolf.org
+userPassword: expire
+pwdPolicySubentry: cn=passwordexpire,ou=ppolicies,dc=example,dc=com
+pwdChangedTime: 20190101000000Z
+
+dn: uid=lock,ou=users,dc=example,dc=com
+objectClass: inetOrgPerson
+uid: lock
+cn: lock
+sn: lock
+mail: lock@badwolf.org
+userPassword: lock
+pwdPolicySubentry: cn=passwordlock,ou=ppolicies,dc=example,dc=com
+pwdAccountLockedTime: 20190101000000Z
+pwdFailureTime: 20181231000000.000000Z
+
+dn: uid=short,ou=users,dc=example,dc=com
+objectClass: inetOrgPerson
+uid: short
+cn: short
+sn: short
+mail: short@badwolf.org
+userPassword: passwordnottooshort
+pwdPolicySubentry: cn=passwordshort,ou=ppolicies,dc=example,dc=com
+
+dn: uid=grace,ou=users,dc=example,dc=com
+objectClass: inetOrgPerson
+uid: grace
+cn: grace
+sn: grace
+mail: grace@badwolf.org
+userPassword: grace
+pwdPolicySubentry: cn=passwordgrace,ou=ppolicies,dc=example,dc=com
+pwdChangedTime: 20190101000000Z
+
+dn: ou=ppolicies,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: ppolicies
+
+dn: cn=passwordreset,ou=ppolicies,dc=example,dc=com
+objectClass: device
+objectClass: pwdPolicy
+cn: passwordreset
+pwdAttribute: userPassword
+pwdAllowUserChange: TRUE
+pwdCheckQuality: 0
+pwdMustChange: TRUE
+
+dn: cn=passwordexpire,ou=ppolicies,dc=example,dc=com
+objectClass: device
+objectClass: pwdPolicy
+cn: passwordexpire
+pwdAttribute: userPassword
+pwdAllowUserChange: TRUE
+pwdCheckQuality: 0
+pwdMaxAge: 5
+
+dn: cn=passwordlock,ou=ppolicies,dc=example,dc=com
+objectClass: device
+objectClass: pwdPolicy
+cn: passwordlock
+pwdAttribute: userPassword
+pwdAllowUserChange: TRUE
+pwdCheckQuality: 0
+pwdLockout: TRUE
+pwdMaxFailure: 1
+
+dn: cn=passwordshort,ou=ppolicies,dc=example,dc=com
+objectClass: device
+objectClass: pwdPolicy
+cn: passwordshort
+pwdAttribute: userPassword
+pwdAllowUserChange: TRUE
+pwdCheckQuality: 2
+pwdMinLength: 6
+
+dn: cn=passwordgrace,ou=ppolicies,dc=example,dc=com
+objectClass: device
+objectClass: pwdPolicy
+cn: passwordgrace
+pwdAttribute: userPassword
+pwdAllowUserChange: TRUE
+pwdCheckQuality: 0
+pwdMaxAge: 5
+pwdGraceAuthnLimit: 2
+
+dn: ou=groups,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: groups
+
+dn: cn=mygroup,ou=groups,dc=example,dc=com
+objectClass: groupOfNames
+objectClass: top
+cn: mygroup
+member: uid=dwho,ou=users,dc=example,dc=com

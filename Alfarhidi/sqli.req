@@ -1,0 +1,11 @@
+GET /dashboard.php?productId=234 HTTP/1.1
+Host: 15.236.204.60:21000
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5414.75 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://15.236.204.60:21000/dashboard.php
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Cookie: PHPSESSID=f63c8e9c2ccd39fcfb171fe411430c17
+Connection: close
+

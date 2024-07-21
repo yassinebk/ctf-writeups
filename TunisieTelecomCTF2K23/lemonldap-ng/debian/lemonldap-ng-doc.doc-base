@@ -1,0 +1,11 @@
+Document: lemonldap-ng-doc
+Title: Lemonldap::NG documentation
+Author: Clément Oudot
+Abstract: Those HTML documents contains all Lemonldap::NG documentation
+ imported from https://lemonldap-ng.org
+Section: Web Development
+
+Format: HTML
+Index: /usr/share/doc/lemonldap-ng-doc/index.html
+Files: /usr/share/doc/lemonldap-ng-doc/*.html
+

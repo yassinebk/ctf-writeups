@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  operation:
+    container_name: Operation_Cyber_Breach
+    build:
+      dockerfile: ./Dockerfile
+      context: .  # Update the context to point to the correct directory
+    ports:
+      - "9229:9229"

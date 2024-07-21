@@ -1,0 +1,59 @@
+---
+abstract: 'Common files for Lemonldap::NG infrastructure'
+author:
+  - 'Xavier Guimard <x.guimard@free.fr>, Clement Oudot <clement@oodo.net>, Christophe Maudoux <chrmdx@gmail.com>, Maxime Besson <maxime.besson@worteks.com>'
+build_requires:
+  IO::String: '0'
+  MIME::Entity: '0'
+  Net::LDAP: '0'
+  String::Random: '0'
+  Test::Output: '0'
+  Test::Pod: '1'
+configure_requires:
+  ExtUtils::MakeMaker: '0'
+dynamic_config: 1
+generated_by: 'ExtUtils::MakeMaker version 7.62, CPAN::Meta::Converter version 2.150010'
+license: open_source
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: '1.4'
+name: Lemonldap-NG-Common
+no_index:
+  directory:
+    - t
+    - inc
+recommends:
+  Apache::Session::Browseable: v1.3.9
+  Convert::Base32: '0'
+  Cookie::Baker::XS: '0'
+  Crypt::URandom: '0'
+  DBI: '0'
+  Date::Parse: '0'
+  LWP::Protocol::https: '0'
+  Net::LDAP: '0'
+  SOAP::Lite: '0'
+  String::Random: '0'
+requires:
+  Apache::Session: '0'
+  Cache::Cache: '0'
+  Config::IniFiles: '0'
+  Crypt::OpenSSL::Bignum: '0'
+  Crypt::OpenSSL::RSA: '0'
+  Crypt::OpenSSL::X509: '0'
+  Crypt::Rijndael: '0'
+  Crypt::URandom: '0'
+  Digest::SHA: '0'
+  HTML::Template: '0'
+  JSON: '0'
+  JSON::XS: '0'
+  Mouse: '0'
+  Plack: '0'
+  URI: '0'
+resources:
+  MailingList: mailto:lemonldap-ng-dev@ow2.org
+  X_twitter: https://twitter.com/lemonldapng
+  bugtracker: https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng/issues
+  homepage: https://lemonldap-ng.org/
+  license: http://opensource.org/licenses/GPL-2.0
+version: v2.0.15.1
+x_serialization_backend: 'CPAN::Meta::YAML version 0.018'

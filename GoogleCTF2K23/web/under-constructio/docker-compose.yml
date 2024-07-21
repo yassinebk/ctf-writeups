@@ -1,0 +1,13 @@
+# cat docker-compose.yml
+version: '3.3'
+services:
+### MySQL Container
+  mysql:
+    image: mysql:latest
+    environment:
+        - MYSQL_DATABASE=google_task
+        - MYSQL_USER=user
+        - MYSQL_PASSWORD=my-secret-pw
+        - MYSQL_ROOT_PASSWORD=my-secret-pw
+    ports:
+      - "3306:3306"

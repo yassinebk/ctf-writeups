@@ -1,0 +1,38 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+
+<script src="/static/js/implant.js"></script>
+<div id="loadingSection" class="loading-container">
+    <img class="loading-img" src="/static/images/star.png">
+</div>
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="stats-container">
+                <div class="row">
+                    <div class="col-5">
+                        <h2>Information</h2>
+                        <hr>
+                        <p><b>IP: </b>{{ implant_data['ip_address'] | safe }}</p>
+                        <p><b>Region: </b>{{ implant_data['region'] | safe }}</p>
+                        <p><b>Version: </b>{{ implant_data['version'] | safe }}</p>
+                        <p><b>AV: </b>{{ implant_data['antivirus'] | safe }}</p>
+                        <p><b>Architecture: </b>{{ implant_data['arch'] | safe }}</p>
+                        <p><b>OS: </b>{{ implant_data['platform'] | safe }}</p>
+                        <p><b>Hostname: </b>{{ implant_data['hostname'] | safe }}</p>
+                        <p><b>Privileges: </b>{{ implant_data['rights'] | safe }}</p>
+                        <p><b>Last seen: </b>{{ implant_data['last_login'] | safe }}</p>
+                        <p><b>Installed on: </b>{{ implant_data['installation_date'] | safe }}</p>
+                    </div>
+                    <div class="col-7">
+                        <h2>Screenshot</h2>
+                        <hr>
+                        <img class="img-fluid" src="{{ implant_data['image_url'] }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

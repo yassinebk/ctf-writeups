@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Create New Flower{% endblock %}
+
+{% block content %}
+    <!-- Flower creation form -->
+    <div class="container">
+        <h1>Filter Flower API</h1>
+        <form action="/filter_flower" method="post">
+            <div class="form-group">
+                <label for="flower_url">Image URL:</label>
+                <input type="text" id="flower_url" name="flower_url" required>
+            </div>
+            <input type="submit" value="Check if is Flower">
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,101 @@
+FIRST CONFIGURATION STEPS
+
+1 - Change default DNS domain
+-----------------------------
+
+By default, DNS domain is example.com. You can change using dpkg-reconfigure or
+with a quick sed command. For example, we change it to ow2.org:
+
+  sed -i 's/example\.com/ow2.org/g' /etc/lemonldap-ng/* \
+         /var/lib/lemonldap-ng/conf/lmConf-1.js /var/lib/lemonldap-ng/test/index.pl
+
+2 - Enable LL::NG sites
+-----------------------
+
+2.1 - Apache
+
+Enable installed components:
+
+  # Portal
+  a2ensite portal-apache2.conf
+
+  # Manager
+  a2ensite manager-apache2.conf
+
+  # Handler
+  a2ensite handler-apache2.conf
+  a2ensite test-apache2.conf
+
+customize them and enable mod_perl if not already loaded:
+
+  a2enmod perl
+
+Then restart Apache:
+
+  apache2ctl configtest
+  apache2ctl restart
+
+2.2 - Nginx
+
+Enable installed components:
+
+  cd /etc/nginx/sites-enabled
+
+  # Portal
+  ln -s ../sites-available/portal-nginx.conf
+
+  # Manager
+  ln -s ../sites-available/manager-nginx.conf
+
+  # Handler
+  # Warning: if no site is protected (see example files for this), the
+  # $lmremote_user variable will not be set. So you can't load this file since
+  # it includes /etc/lemonldap/nginx-lmlog.conf that requires at least one
+  # protected virtual host.
+  ln -s ../sites-available/handler-nginx.conf
+
+  # Test site
+  ln -s ../site-available/test-nginx.conf
+
+Customize them, then reload nginx
+
+  nginx -s reload
+
+3 - Check your DNS
+------------------
+
+Be sure that your browser can reach (adapt it with your domain):
+- auth.example.com    : Authentication portal
+- manager.example.com : Configuration interface
+
+4 - Connect to the manager
+--------------------------
+
+Go to http://manager.example.com/, you'll be redirected to the portal. Then
+enjoy!
+
+5 - Default accounts
+--------------------
+
+By default, LemonLDAP::NG use "Demo" authentication backend, so you can use the
+following accounts:
+
+  Login  Password    Role
+  rtyler  rtyler     user
+  msmith  msmith     user
+   dwho    dwho  administrator
+
+6 - Base configuration file
+---------------------------
+
+Configuration is managed by the Manager except some basic parameters
+such as storage type configuration. These parameters are defined
+in /etc/lemonldap-ng/lemonldap-ng.ini file.
+
+This file can also be used to override the global configuration locally
+
+6 - See more
+------------
+
+https://lemonldap-ng.org/
+

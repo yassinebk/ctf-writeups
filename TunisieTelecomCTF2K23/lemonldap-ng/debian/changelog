@@ -1,0 +1,408 @@
+lemonldap-ng (2.0.15.1-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Thu, 15 Sep 2022 22:00:00 +0100
+
+lemonldap-ng (2.0.15-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Fri, 09 Sep 2022 22:00:00 +0100
+
+lemonldap-ng (2.0.14-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Sat, 19 Feb 2022 22:00:00 +0100
+
+lemonldap-ng (2.0.13-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Fri, 20 Aug 2021 22:00:00 +0100
+
+lemonldap-ng (2.0.12-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Thu, 22 Jul 2021 22:00:00 +0100
+
+lemonldap-ng (2.0.11-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Sat, 30 Jan 2021 22:00:00 +0100
+
+lemonldap-ng (2.0.10-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Sun, 17 Jan 2021 22:00:00 +0100
+
+lemonldap-ng (2.0.9-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Sun, 06 Sep 2020 22:00:00 +0100
+
+lemonldap-ng (2.0.8-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Tue, 05 May 2020 16:00:00 +0100
+
+lemonldap-ng (2.0.7-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Sat, 21 Dec 2019 17:00:00 +0100
+
+lemonldap-ng (2.0.6-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Tue, 24 Sep 2019 14:00:00 +0100
+
+lemonldap-ng (2.0.5-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Sat, 29 Jun 2019 22:00:00 +0100
+
+lemonldap-ng (2.0.4-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Sun, 12 May 2019 16:00:00 +0100
+
+lemonldap-ng (1.9.19-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Sun, 12 May 2019 12:00:00 +0100
+
+lemonldap-ng (2.0.3-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Thu, 11 Apr 2019 12:00:00 +0100
+
+lemonldap-ng (2.0.2-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Tue, 12 Feb 2019 12:00:00 +0100
+
+lemonldap-ng (2.0.1-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Fri, 21 Dec 2018 12:00:00 +0100
+
+lemonldap-ng (2.0.0-2) unstable; urgency=medium
+
+  * Fix warnings in Manager
+
+ -- Clement OUDOT <clement@oodo.net>  Sat, 01 Dec 2018 12:00:00 +0100
+
+lemonldap-ng (2.0.0-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Fri, 30 Nov 2018 12:00:00 +0100
+
+lemonldap-ng (1.9.18-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Fri, 05 Oct 2018 12:00:00 +0100
+
+lemonldap-ng (2.0.0~beta1-1) unstable; urgency=medium
+
+  * Beta release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Fri, 20 Jul 2018 12:00:00 +0100
+
+lemonldap-ng (1.9.17-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Fri, 15 Jun 2018 12:00:00 +0100
+
+lemonldap-ng (1.9.16-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Fri, 16 Mar 2018 12:00:00 +0100
+
+lemonldap-ng (2.0.0~alpha3-1) unstable; urgency=medium
+
+  * Alpha release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Fri, 26 Jan 2018 12:00:00 +0100
+
+lemonldap-ng (2.0.0~alpha2-1) unstable; urgency=medium
+
+  * Alpha release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Thu, 14 Sep 2017 12:00:00 +0100
+
+lemonldap-ng (2.0.0~alpha1-1) unstable; urgency=medium
+
+  * Alpha release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Mon, 10 Jul 2017 12:00:00 +0100
+
+lemonldap-ng (1.9.15-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Tue, 23 Jan 2018 12:00:00 +0100
+
+lemonldap-ng (1.9.14-1) stable; urgency=high
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Fri, 7 Dec 2017 12:00:00 +0100
+
+lemonldap-ng (1.9.13-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Fri, 29 Sep 2017 12:00:00 +0100
+
+lemonldap-ng (1.9.12-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Tue, 12 Sep 2017 12:00:00 +0100
+
+lemonldap-ng (1.9.11-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Fri, 01 Sep 2017 12:00:00 +0100
+
+lemonldap-ng (1.9.10-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Fri, 19 May 2017 12:00:00 +0100
+
+lemonldap-ng (1.9.9-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <x.guimard@free.fr>  Thu, 16 Mar 2017 18:28:03 +0100
+
+lemonldap-ng (1.9.8-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oodo.net>  Thu, 02 Mar 2017 12:00:00 +0200
+
+lemonldap-ng (1.9.7-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oudot.me>  Mon, 12 Dec 2016 12:11:31 +0200
+
+lemonldap-ng (1.9.6-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clement OUDOT <clement@oudot.me>  Fri, 14 Oct 2016 12:11:31 +0200
+
+lemonldap-ng (1.4.11-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément OUDOT <clement@oudot.me>  Mon, 10 Oct 2016 12:00:00 +0200
+
+lemonldap-ng (1.9.5-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément OUDOT <clement@oudot.me>  Wed, 13 Jul 2016 14:33:46 +0200
+
+lemonldap-ng (1.4.10-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément OUDOT <clement@oudot.me>  Wed, 13 Jul 2016 12:00:00 +0200
+
+lemonldap-ng (1.9.4-1) unstable; urgency=high
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Xavier Guimard <x.guimard@free.fr>  Tue, 14 Jun 2016 15:41:55 +0200
+
+lemonldap-ng (1.9.3-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément OUDOT <clement@oudot.me>  Tue, 07 Jun 2016 17:33:45 +0200
+
+lemonldap-ng (1.4.9-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément OUDOT <clement@oudot.me>  Fri, 03 Jun 2016 15:13:12 +0200
+
+lemonldap-ng (1.9.2-1) unstable; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément OUDOT <clement@oudot.me>  Sun, 01 May 2016 21:16:30 +0200
+ 
+lemonldap-ng (1.4.8-1) unstable; urgency=low
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément OUDOT <clement@oudot.me>  Wed, 27 Apr 2016 15:47:12 +0100
+
+lemonldap-ng (1.9.1-1) wily; urgency=medium
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément OUDOT <clement@oudot.me>  Tue, 05 Apr 2016 17:50:19 +0200
+
+lemonldap-ng (1.4.7-1) unstable; urgency=low
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément OUDOT <clement@oudot.me>  Thu, 17 Mar 2016 12:00:00 +0100
+
+lemonldap-ng (1.9.0-1) wily; urgency=low
+
+  [ Clément Oudot ]
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément OUDOT <clement@oudot.me>  Wed, 02 Mar 2016 10:34:19 +0100
+
+lemonldap-ng (1.4.6-1) unstable; urgency=low
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément Oudot <clem.oudot@gmail.com>  Wed, 09 Oct 2015 12:00:00 +0100
+
+lemonldap-ng (1.4.5-1) unstable; urgency=low
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément Oudot <clem.oudot@gmail.com>  Mon, 11 May 2015 12:00:00 +0100
+
+lemonldap-ng (1.4.4-1) unstable; urgency=low
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément Oudot <clem.oudot@gmail.com>  Wed, 15 Apr 2015 12:00:00 +0100
+
+lemonldap-ng (1.4.3-1) unstable; urgency=low
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément Oudot <clem.oudot@gmail.com>  Thu, 18 Dec 2014 12:00:00 +0100
+
+lemonldap-ng (1.4.2-1) unstable; urgency=low
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément Oudot <clem.oudot@gmail.com>  Wed, 5 Nov 2014 12:00:00 +0100
+
+lemonldap-ng (1.4.1-1) unstable; urgency=low
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément Oudot <clem.oudot@gmail.com>  Fri, 25 Jul 2014 12:00:00 +0100
+
+lemonldap-ng (1.4.0-1) unstable; urgency=low
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément Oudot <clem.oudot@gmail.com>  Sun, 03 Nov 2013 06:59:37 +0100
+
+lemonldap-ng (1.3.3-1) unstable; urgency=low
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément Oudot <clem.oudot@gmail.com>  Fri, 07 Mar 2014 18:50:11 +0200
+
+
+lemonldap-ng (1.3.2-1) unstable; urgency=low
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément Oudot <clem.oudot@gmail.com>  Thu, 23 Jan 2014 18:50:11 +0200
+
+
+lemonldap-ng (1.3.1-1) unstable; urgency=low
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément Oudot <clem.oudot@gmail.com>  Mon, 11 Nov 2013 18:50:11 +0200
+
+
+lemonldap-ng (1.3.0-1) unstable; urgency=low
+
+  * New release. See changes on our website:
+    https://gitlab.ow2.org/lemonldap-ng/lemonldap-ng
+
+ -- Clément Oudot <clem.oudot@gmail.com>  Sun, 24 Jun 2012 18:50:11 +0200

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Welcome to the Dashboard, {{ session.username }}</h2>
+    {% if flag %}
+        <p>Here's your flag {{ flag }}</p>
+    {% else %}
+        <p>This is a protected area only accessible after login.</p>
+    {% endif %}
+</body>
+</html>

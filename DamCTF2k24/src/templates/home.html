@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Flower Gallery{% endblock %}
+
+
+{% block content %}
+    <center>
+        <h1>Welcome to Flower Gallery</h1>
+        <p>Enjoy the beauty of nature with our collection of flowers!</p>
+    </center>
+    
+    <div class="flower-container">
+        {% for flower in flowers %}
+            <a href="/flower/{{ flower.id }}"> <!-- Add a link to each flower page -->
+                <div class="flower-card">
+                    <img class="flower-image" src="{{ flower.flower_url }}" alt="{{ flower.name }}">
+                    <h3>{{ flower.name }}</h3>
+                    <p>{{ flower.description }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

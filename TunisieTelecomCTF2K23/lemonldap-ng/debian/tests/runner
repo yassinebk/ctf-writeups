@@ -1,0 +1,58 @@
+#!/bin/sh
+
+BASE=/usr/share/pkg-perl-autopkgtest
+
+TYPE=$1
+[ -n "$TYPE" ] || exit 1
+
+TESTDIR=${BASE}/${TYPE}.d
+[ -d "$TESTDIR" ] || exit 1
+
+LLSOURCEDIR=`pwd`
+
+LIST=$2
+
+test "$LIST" = "" 2>/dev/null && LIST=lemonldap-ng-*
+
+EXITCODE=0
+for LLLIB in $LIST; do
+    mkdir -p $LLSOURCEDIR/$LLLIB/debian/tests/pkg-perl
+    for llfile in debian/tests/pkg-perl/${LLLIB}*; do
+        if [ -r $llfile ]; then
+            dest=${llfile#*$LLLIB.}
+            cp -v $llfile $LLSOURCEDIR/$LLLIB/debian/tests/pkg-perl/$dest
+        fi
+    done
+    cd $LLSOURCEDIR/$LLLIB
+    cp .proverc .proverc.$$
+    echo '--state=slow' >> $LLSOURCEDIR/$LLLIB/.proverc
+    echo '--j 8' >> $LLSOURCEDIR/$LLLIB/.proverc
+
+    SKIPLIST=debian/tests/pkg-perl/SKIP
+    SKIPTMP=$(mktemp)
+    if [ -f "$SKIPLIST" ]; then
+        grep -v '^ *#' "$SKIPLIST" |grep -v '^ *$' > "$SKIPTMP"
+    fi
+
+    for T in $(run-parts --list --regex '(^[a-z0-9.]+$)' ${TESTDIR} | \
+               grep -v -F -f "$SKIPTMP") ; do
+        if echo "$T" | grep -q '\.t$'
+        then
+            prove --norc -v "$T"
+            RET=$?
+            if [ $EXITCODE = 0 ]; then EXITCODE=$RET; fi
+        else
+            "$T"
+            RET=$?
+            if [ $EXITCODE = 0 ]; then EXITCODE=$RET; fi
+        fi
+    done
+    cd $LLSOURCEDIR/$LLLIB
+    pwd
+    mv -f .proverc.$$ .proverc
+
+    cd $LLSOURCEDIR
+    rm -rf $LLSOURCEDIR/$LLLIB/debian
+done
+rm -f "$SKIPTMP"
+exit $EXITCODE

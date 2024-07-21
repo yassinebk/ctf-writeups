@@ -1,0 +1,150 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+
+<script src="/static/js/leaflet.js"></script>
+<script src="/static/js/home.js"></script>
+<div id="loadingSection" class="loading-container">
+    <img class="loading-img" src="/static/images/star.png">
+</div>
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-3">
+            <div class="stats-container">
+                <div class="stats-header">Statistics</div>
+                <div class="statistics-field">
+                    <div class="mt-2">
+                        <span class="mt-2">Total implants:</span><span id="totalImplants" style="float: right !important;">{{ statistics["total_implants"] }}</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mt-2">Implants online:</span><span style="float: right !important;">{{ statistics["implants_online"] }}</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mt-2">Implants online (3h):</span><span style="float: right !important;">{{ statistics["implants_online_3h"] }}</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mt-2">Implants online (24h):</span><span style="float: right !important;">{{ statistics["implants_online_24h"] }}</span>
+                    </div>
+                    <div class="mt-2">
+                        <span>Implants online (7 days):</span><span style="float: right !important;">{{ statistics["implants_online_7d"] }}</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mt-2">Implants offline:</span><span style="float: right !important;">{{ statistics["implants_offline"] }}</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mt-2">Regions:</span><span style="float: right !important;">{{ statistics["total_regions"] }}</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mt-2">Windows systems:</span><span style="float: right !important;">{{ statistics["windows_systems"] }}</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mt-2">Linux systems:</span><span style="float: right !important;">{{ statistics["linux_systems"] }}</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mt-2">OSX systems:</span><span style="float: right !important;">{{ statistics["osx_systems"] }}</span>
+                    </div>
+                </div>
+                <div class="stats-header mt-3">Permissions</div>
+                <div class="statistics-field">
+                    <div class="mt-2">
+                        <span class="mt-2">User:</span><span style="float: right !important;">{{ statistics["users"] }}%</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mt-2">Admin:</span><span style="float: right !important;">{{ statistics["admins"] }}%</span>
+                    </div>
+                </div>
+                <div class="stats-header mt-3">Server information</div>
+                <div class="statistics-field">
+                    <div class="mt-2">
+                        <span class="mt-2">Operating system:</span><span style="float: right !important;">{{ server_info["os"] }}</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mt-2">Hostname:</span><span style="float: right !important;">{{ server_info["hostname"] }}</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="mt-2">Machine:</span><span style="float: right !important;">{{ server_info["machine"] }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="stats-container">
+                <div class="row">
+                    <div class="col-4">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                              <tr>
+                                <th>Region</th>
+                                <th>#</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% for org in statistics["region_data"] %}
+                                    <tr>
+                                        <th>{{ org["region"] }}</th>
+                                        <td>{{ org["count"] }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-8">
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3 mb-5">
+        <div class="offset-3 col-9">
+            <div class="stats-container">
+                <span>Filter:</span>
+                <form action="" method="post">
+                    <input name="query_eq" type="text">
+                    <select name="field">
+                        <option value="identifier">identifier</option>
+                        <option value="region">region</option>
+                        <option value="platform">platform</option>
+                        <option value="hostname">hostname</option>
+                        <option value="installation_date">installation_date</option>
+                        <option value="version">version</option>
+                        <option value="antivirus">antivirus</option>
+                      </select>
+                    <button type="submit" class="search-btn">Search</button>
+                </form>
+                <hr>
+                    {% if not implant_data %}
+                        <span>No implants found</span>
+                    {% else %}
+                            <table class="table table-sm table-responsive table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Identifier</th>
+                                        <th>Region</th>
+                                        <th>OS</th>
+                                        <th>Hostname</th>
+                                        <th>Date installed</th>
+                                        <th>Version</th>
+                                        <th>Antivirus</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for implant in implant_data %}
+                                        <tr>
+                                            <th><a href="/panel/implant/{{ implant['identifier'] }}">{{ implant["identifier"] }}</a></th>
+                                            <th>{{ implant["region"] }}</th>
+                                            <th>{{ implant["platform"] }}</th>
+                                            <th>{{ implant["hostname"] }}</th>
+                                            <th>{{ implant["installation_date"] }}</th>
+                                            <th>{{ implant["version"] }}</th>
+                                            <th>{{ implant["antivirus"] }}</th>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

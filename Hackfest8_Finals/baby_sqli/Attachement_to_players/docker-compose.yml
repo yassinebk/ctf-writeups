@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  web4:
+    build: .
+    ports:
+      - "8086:80"
+  mysql4:
+    image: mariadb:10.3
+    container_name: db
+    volumes:
+      - ./db/db.sql:/docker-entrypoint-initdb.d/dump.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: random_random
+      MYSQL_DATABASE: task
+      MYSQL_USER: random_random
+      MYSQL_PASSWORD: random_random

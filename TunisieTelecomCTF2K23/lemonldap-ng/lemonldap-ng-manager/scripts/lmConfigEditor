@@ -1,0 +1,125 @@
+#!/usr/bin/perl
+
+use Lemonldap::NG::Common::Conf;
+use Lemonldap::NG::Common::Conf::Constants;
+use Lemonldap::NG::Manager::Conf::Parser;
+use Lemonldap::NG::Handler::Main::Jail;
+use Lemonldap::NG::Manager::Cli::Lib;
+use Data::Dumper;
+use English qw(-no_match_vars);
+use File::Temp;
+use POSIX qw(setuid setgid);
+use Safe;
+use Getopt::Long;
+use strict;
+
+my $cli = Lemonldap::NG::Manager::Cli::Lib->new;
+
+our $opt_user  = '__APACHEUSER__';
+our $opt_group = '__APACHEGROUP__';
+
+GetOptions(
+    "user=s"  => \$opt_user,
+    "group=s" => \$opt_group
+) or die("Error in command line arguments\n");
+
+eval {
+    setgid( ( getgrnam($opt_group) )[2] );
+    setuid( ( getpwnam($opt_user) )[2] );
+    print STDERR "Running as uid $EUID and gid $EGID\n";
+};
+
+my $conf = Lemonldap::NG::Common::Conf->new();
+
+unless ($conf) {
+    print STDERR $Lemonldap::NG::Common::Conf::msg;
+    exit 1;
+}
+
+my $refConf = $conf->getConf( { raw => 1, noCache => 1 } );
+delete $refConf->{reVHosts};
+delete $refConf->{cipher};
+delete $refConf->{cfgAuthor};
+delete $refConf->{cfgAuthorIP};
+delete $refConf->{cfgDate};
+$refConf->{cfgLog} = '';
+
+# Sort keys
+$Data::Dumper::Sortkeys = 1;
+$Data::Dumper::Useperl  = 1;
+my $tmp = Dumper($refConf);
+
+my $refFile  = File::Temp->new( UNLINK => 1 );
+my $editFile = File::Temp->new( UNLINK => 1 );
+print $refFile $tmp;
+print $editFile $tmp;
+close $refFile;
+close $editFile;
+
+my $editor = $ENV{EDITOR} || 'editor';
+
+system "$editor $editFile";
+
+if (`diff $refFile $editFile`) {
+    my $VAR1;
+    my $buf;
+
+    # Check if the new configuration hash is valid
+    open F1, $editFile->filename();
+    while (<F1>) {
+        $buf .= $_;
+    }
+    eval $buf;
+    die $EVAL_ERROR if $EVAL_ERROR;
+
+    # Update author and date
+    $VAR1->{cfgAuthor} = $ENV{SUDO_USER} || $ENV{LOGNAME} || "lmConfigEditor";
+    $VAR1->{cfgAuthorIP} = $ENV{SSH_CONNECTION} || "localhost";
+    $VAR1->{cfgDate}     = time();
+    $VAR1->{cfgLog} ||= 'Edited by lmConfigEditor';
+
+    # Test new configuration
+    my $parser = Lemonldap::NG::Manager::Conf::Parser->new( {
+            refConf => $refConf,
+            newConf => $VAR1,
+            req     => 1,
+        }
+    );
+    unless ( $parser->testNewConf( $cli->mgr ) ) {
+        print STDERR "Configuration seems to have some errors:\n ";
+        print STDERR Dumper(
+            { errors => $parser->errors, warnings => $parser->warnings } );
+        print STDERR "Are you sure you want to write it ? (yes/no) ";
+        my $resp = <STDIN>;
+        die "Aborted" unless $resp =~ /^yes$/i;
+    }
+    undef $parser;
+
+    # Store new configuration
+    my $res = $conf->saveConf($VAR1);
+    if ( $res > 0 ) {
+        print STDERR "Configuration $res saved\n";
+    }
+    else {
+        print STDERR "Configuration was not saved:\n  ";
+        if ( $res == CONFIG_WAS_CHANGED ) {
+            print STDERR "Configuration has changed\n";
+        }
+        elsif ( $res == DATABASE_LOCKED ) {
+            print STDERR "Configuration database is or can not be locked\n";
+        }
+        elsif ( $res == UPLOAD_DENIED ) {
+            print STDERR "You're not authorized to save this configuration\n";
+        }
+        elsif ( $res == SYNTAX_ERROR ) {
+            print STDERR "Syntax error in your configuration\n";
+        }
+        elsif ( $res == UNKNOWN_ERROR ) {
+            print STDERR "Unknown error\n";
+        }
+    }
+}
+else {
+    print STDERR "Configuration not changed\n";
+}
+

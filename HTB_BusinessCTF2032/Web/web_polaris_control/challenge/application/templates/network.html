@@ -1,0 +1,51 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+
+<script src="/static/js/vis-network.min.js"></script>
+<script src="/static/js/network.js"></script>
+<script>
+    let connections = [
+      {% for implant in implant_data %}
+      {
+        id: "{{ implant.identifier }}",
+        label: "{{ implant.identifier }}",
+        group: "implants",
+        shape: "dot"
+      },
+      {% endfor %}
+    ];
+
+    let edges = [
+      {% for connection in connections %}
+      {
+        from: "{{ connection.identifier1 }}",
+        to: "{{ connection.identifier2 }}"
+      },
+      {% endfor %}
+    ];
+</script>
+<div id="loadingSection" class="loading-container">
+    <img class="loading-img" src="/static/images/star.png">
+</div>
+<div class="container-fluid">
+    <div class="row mt-5">
+      <div class="col">
+        <div class="stats-container">
+          <span>Filter by identifier:</span>
+          <form action="" method="post">
+              <input name="query" type="text">
+              <button type="submit" class="search-btn">Search</button>
+          </form>
+          <p class="mt-3">Connections: {{ connections|length }}</p>
+          <hr>
+          {% if connections|length > 0 %}
+            <div id="network"></div>
+          {% else %}
+            <span>No connections found</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

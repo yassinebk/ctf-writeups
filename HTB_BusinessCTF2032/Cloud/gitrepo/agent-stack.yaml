@@ -1,0 +1,56 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Resources:
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: [ ec2.amazonaws.com ]
+            Action: [ sts:AssumeRole ]
+      Path: /
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: s3:*
+                Resource: "*"
+  MyLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Role: !GetAtt LambdaRole.Arn
+      Runtime: python3.9
+      Handler: index.lambda_handler
+      code:
+        ZipFile: |
+          def lambda_handler(event, context):
+            return "Runtime!"  # Todo
+      Tags:
+        - Key: Lambda
+          Value: Payload-Deployment
+  IAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: [ lambda.amazonaws.com ]
+            Action: [ sts:AssumeRole ]
+      Description: Role to provide access to S3
+      Policies:
+        - PolicyName: EmbeddedInlinePolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: cloudformation:*
+                Resource: "*"
+      ManagedPolicyArns: [ arn:aws:iam::aws:policy/AmazonS3FullAccess ]
+      RoleName: maximus-agent

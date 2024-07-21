@@ -1,0 +1,118 @@
+@font-face {
+    font-family: sharetech;
+    src: url("/static/fonts/sharetech.ttf");
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #b9b9b9;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #797979;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+body {
+    font-family: sharetech;
+    background-color: #fff;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login-container {
+    background-color: gray;
+    color: #fff;
+    padding: 2em;
+    border-radius: 5px;
+}
+
+.nav-item-right {
+    overflow: auto;
+    white-space: nowrap;
+    float: right !important;
+}
+
+.nav-item-right a {
+    display: inline;
+}
+
+.stats-container {
+    border: #7c7c7c 1px solid;
+    border-radius: 5px;
+    padding: 0.6em;
+}
+
+.stats-header {
+    padding: 0.1em;
+    border-radius: 5px;
+    color: #fff;
+    background-color: gray;
+}
+
+.search-btn {
+    color: #fff;
+    border-radius: 5px;
+    background-color: #212529;
+    border: none;
+}
+
+#map {
+    height: 50vh;
+    z-index: 1;
+}
+
+.loading-container {
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+.loading-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: fluctuate 2s infinite;
+}
+
+.hide {
+    display: none !important;
+}
+
+@keyframes fluctuate {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+#network {
+    width: 100%;
+    height: 60vh;
+    margin: 0 auto;
+}

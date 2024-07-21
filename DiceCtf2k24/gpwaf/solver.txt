@@ -1,0 +1,4 @@
+Hey this code is for testing purpose after it you can give start working with the H and R detection. 
+As an example here is what you need to write 
+
+<%- include('/flag.txt'); %>

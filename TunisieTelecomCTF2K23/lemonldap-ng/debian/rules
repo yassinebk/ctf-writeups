@@ -1,0 +1,88 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+LMSHAREDIR=/usr/share/lemonldap-ng
+LMVARDIR  =/var/lib/lemonldap-ng
+LMCACHEDIR  =/var/cache/lemonldap-ng
+TMP       = $(CURDIR)/debian/tmp
+
+CONFDIR=/etc/lemonldap-ng
+SESSIONSDIR=$(LMVARDIR)/sessions
+PSESSIONSDIR=$(LMVARDIR)/psessions
+NOTIFICATIONSDIR=$(LMVARDIR)/notifications
+CONFSTORAGEDIR=$(LMVARDIR)/conf
+FIRSTCONFFILE=$(CONFSTORAGEDIR)/lmConf-1.json
+LMINIFILE=$(CONFDIR)/lemonldap-ng.ini
+CAPTCHADIR=$(LMVARDIR)/captcha
+
+%:
+	dh $@ --with systemd
+
+override_dh_auto_configure:
+	$(MAKE) configure STORAGECONFFILE=/etc/lemonldap-ng/lemonldap-ng.ini \
+		DATADIR=$(LMVARDIR) \
+		CACHEDIR=$(LMCACHEDIR) \
+		PERLOPTIONS="INSTALLDIRS=vendor"
+
+override_dh_auto_build:
+	$(MAKE) all
+
+override_dh_auto_install:
+	$(MAKE) install \
+			CHOWN=true \
+			DESTDIR=$(CURDIR)/debian/tmp \
+			PREFIX=/usr \
+			LMPREFIX=/usr/share/lemonldap-ng \
+			BINDIR=$(LMSHAREDIR)/bin \
+			SBINDIR=/usr/sbin \
+			FASTCGISOCKDIR=/var/run/llng-fastcgi-server \
+			DOCUMENTROOT=$(LMVARDIR) \
+			EXAMPLESDIR=/examples \
+			HANDLERDIR=$(LMVARDIR)/handler \
+			MANAGERDIR=$(LMSHAREDIR)/manager \
+			PORTALDIR=$(LMSHAREDIR)/portal \
+			STORAGECONFFILE=/etc/lemonldap-ng/lemonldap-ng.ini \
+			TOOLSDIR=$(LMSHAREDIR)/ressources \
+			CONFDIR=/etc/lemonldap-ng \
+			CRONDIR=/etc/cron.d \
+			DATADIR=$(LMVARDIR) \
+			CACHEDIR=$(LMCACHEDIR) \
+			APACHEUSER=www-data \
+			APACHEGROUP=www-data \
+			DEFDOCDIR=/usr/share/doc/lemonldap-ng-doc \
+			UWSGIYAMLDIR=/etc/uwsgi/apps-available \
+			PROD=yes
+	for i in handler portal manager api test; do \
+		mv $(TMP)/etc/lemonldap-ng/$$i-apache2.X.conf $(TMP)/etc/lemonldap-ng/$$i-apache2.conf; \
+	done
+
+override_dh_compress:
+	dh_compress -X favicon.ico -X .woff2 -X .ttf
+
+# Fix lemonldap-ng dirs permissions and owner since dh_fixperms change them:
+#  * global configuration dirs must be writable by www-data but not readable
+#    by all (also sessions, captcha,... dirs)
+#  * lemonldap-ng.ini must not be readable by all
+override_dh_fixperms:
+	dh_fixperms
+	chown www-data:www-data \
+		debian/*/$(SESSIONSDIR) \
+		debian/*/$(SESSIONSDIR)/lock \
+		debian/*/$(PSESSIONSDIR) \
+		debian/*/$(PSESSIONSDIR)/lock \
+		debian/*/$(NOTIFICATIONSDIR) \
+		debian/liblemonldap-ng-common-perl/$(CONFSTORAGEDIR) \
+		debian/liblemonldap-ng-common-perl/$(LMCACHEDIR) \
+		debian/liblemonldap-ng-portal-perl/$(CAPTCHADIR)
+	chgrp www-data debian/liblemonldap-ng-common-perl/$(LMINIFILE) \
+		debian/liblemonldap-ng-common-perl/$(FIRSTCONFFILE)
+	chmod 770 debian/*/$(SESSIONSDIR) debian/*/$(SESSIONSDIR)/lock \
+	        debian/*/$(PSESSIONSDIR) debian/*/$(PSESSIONSDIR)/lock \
+		debian/*/$(NOTIFICATIONSDIR) \
+		debian/liblemonldap-ng-portal-perl/$(CAPTCHADIR)
+	chmod 750 debian/liblemonldap-ng-common-perl/$(CONFSTORAGEDIR) \
+		debian/liblemonldap-ng-common-perl/$(LMCACHEDIR)
+	chmod 640 debian/liblemonldap-ng-common-perl/$(FIRSTCONFFILE) \
+		debian/liblemonldap-ng-common-perl/$(LMINIFILE)

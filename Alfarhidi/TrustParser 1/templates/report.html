@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %}Report Abuse{% endblock %}
+{% block body %}
+<section class="section">
+  <div class="container text-center">
+    <h1 class="title">Report Abuse</h1>
+    <p>Share/Report your note with us! .</p>
+    {% if message %}
+      <div class="alert alert-warning" role="alert">
+        {{ message }}
+      </div>
+    {% endif %}
+
+    <form action="/report" method="POST" class="form-signin">
+      <div class="form-group">
+        <label for="inputId" class="sr-only">ID</label>
+        <input type="text" id="inputId" name="id" class="form-control" placeholder="ID to report" required autofocus style="max-width: 20rem; margin: auto;">
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" style="max-width: 20rem; margin: auto;" type="submit">Submit</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
