@@ -1,2 +1,2 @@
-mercurial==1.8.3
+mercurial==4.9
 argparse==1.2.1
